@@ -174,13 +174,13 @@ h1 {
 		coverID.classList.add("hidden");
 	}
 
-	function request() {
-		var reqID = document.getElementById("request");
-		var coverID = document.getElementById("cover");
-		reqID.classList.remove("hidden");
-		coverID.classList.remove("hidden");
-
-	}
+	//function request() {
+	//	var reqID = document.getElementById("request");
+	//	var coverID = document.getElementById("cover");
+	//	reqID.classList.remove("hidden");
+	//	coverID.classList.remove("hidden");
+	//
+	//}
 
 	function onHallDetail() {
 		var hallDetailID = document.getElementById("hallDetail");
@@ -236,6 +236,7 @@ h1 {
 				<button style="margin-left: 10px">Create</button>
 			</div>
 		</div>
+		
 		<div id="request" class="model hidden" style="width: 40%">
 
 			<div>
@@ -344,7 +345,6 @@ h1 {
 
 		<div class="TabSelect">
 			<a href="adminDashboard.jsp"><button class="tab active">Company</button></a>
-			<a href="adminMovie.jsp"><button class="tab">Movie</button></a>
 		</div>
 
 		<div class="bottomContainer"
@@ -352,8 +352,6 @@ h1 {
 			<div class="row"
 				style="display: flex; flex-direction: row; justify-content: flex-end; margin-right: 20px">
 				<button onclick="addBranch()">Add Branch</button>
-				<button onclick="request()" style="margin-left: 10px">Request
-					List</button>
 			</div>
 			<div class="cinemaContainer">
 				<%!int noCinema = 2;%>

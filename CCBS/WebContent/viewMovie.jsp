@@ -25,6 +25,10 @@
 	font-family: 'Poppins', sans-serif;
 }
 
+body {
+	margin: auto;
+}
+
 p, span, small, h1, h2, h3, h4, h5 {
 	color: white;
 }
