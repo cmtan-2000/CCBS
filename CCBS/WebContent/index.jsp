@@ -52,38 +52,39 @@
 
 	<div class="company__movietab hidden_contents" id="movietab_desc">
 
-		<button type="button"
-			class="btn btn-primary font-weight-bold rounded-pill right"
-			onclick="toggleDialog('insertMovieDialog')">
-			<i class="fas fa-plus"></i> Add Movie
-		</button>
+		<div
+			style="justify-content: flex-end; display: flex; flex-direction: row;">
+
+			<button type="button"
+				class="btn btn-primary font-weight-bold rounded-pill right"
+				onclick="toggleDialog('insertMovieDialog')">
+				<i class="fas fa-plus"></i> Add Movie
+			</button>
+
+			<!-- <a target="_blank" href="./movie-history.jsp">
+				<button type="button" class="btn btn-primary font-weight-bold rounded-pill ">
+				<i class="fas fa-plus"></i> History</button>
+			</a> -->
+		</div>
 		<br>
 		<!--poster after click, will open up add movie history -->
 		<div class="container mt-lg-5">
 			<div class="row">
 				<div class="col">
-					<a href="movie-history.jsp" target="_blank"><img
-						src="./images/Mechamato-poster.jpg" class="movie__poster" /></a>
+					<a id="movie1" target="_blank" href="./movieDetail.jsp"> <img
+						src="images/Mechamato-poster.jpg" class="movie__poster" /></a>
 				</div>
-
 				<div class="col">
-					<a href="movie-history.jsp" target="_blank"><img
-						src="./images/SAO-poster.jpeg" class="movie__poster" /></a>
+					<a id="movie2" target="_blank" href="./movieDetail.jsp"> <img
+						src="images/SAO-poster.jpeg" class="movie__poster" /></a>
 				</div>
-
 				<div class="col">
-					<a href="movie-history.jsp" target="_blank"><img
-						src="./images/Wakanda-poster.jpg" class="movie__poster" /></a>
+					<a id="movie3" target="_blank" href="./movieDetail.jsp"> <img
+						src="images/Wakanda-poster.jpg" class="movie__poster" /></a>
 				</div>
-
 				<div class="col">
-					<a href="movie-history.jsp" target="_blank"><img
-						src="./images/black-adam-poster.jpg" class="movie__poster" /></a>
-				</div>
-
-				<div class="col">
-					<a href="movie-history.jsp" target="_blank"><img
-						src="./images/black-adam-poster.jpg" class="movie__poster" /></a>
+					<a id="movie4" target="_blank" href="./movieDetail.jsp"> <img
+						src="images/black-adam-poster.jpg" class="movie__poster" /></a>
 				</div>
 			</div>
 		</div>
@@ -128,7 +129,7 @@
 					for (int i = 0; i < hall.length; i++) {
 						out.println("<tr>" + "<td>" + hall[i] + "</td>" + "<td>" + status[i] + "</td>"
 								+ "<td width=\"15%\"><button class='btn btn-primary font-weight-bold rounded-pill' onclick='toggleDialog(\"manageSchedulDialog\")'>"
-								+ "<i class=\"fas fa-edit\"></i> Edit</button></td>"
+								+ "<i class=\"fas fa-edit\"></i> Manage</button></td>"
 								+ "<td><button class='btn btn-danger font-weight-bold rounded-pill' data-bs-toggle=\"modal\" data-bs-target=\"#deleteCfmModal\"><i class='fa-solid fa-trash-can'></i> Delete</button></td>"
 								+ "</tr>");
 					}
@@ -184,9 +185,11 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary font-weight-bold rounded-pill"
+					<button type="button"
+						class="btn btn-secondary font-weight-bold rounded-pill"
 						data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success font-weight-bold rounded-pill">Submit</button>
+					<button type="button"
+						class="btn btn-success font-weight-bold rounded-pill">Submit</button>
 				</div>
 			</div>
 		</div>
@@ -259,9 +262,11 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary font-weight-bold rounded-pill"
+					<button type="button"
+						class="btn btn-secondary font-weight-bold rounded-pill"
 						data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success font-weight-bold rounded-pill">Submit</button>
+					<button type="button"
+						class="btn btn-success font-weight-bold rounded-pill">Submit</button>
 				</div>
 			</div>
 		</div>

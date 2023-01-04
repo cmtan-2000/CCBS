@@ -22,10 +22,10 @@
 <title>MovieDetail Page</title>
 </head>
 <body>
-	<div class="d-flex flex-row justify-content-center align-items-center ">
-		<div class="d-flex flex-column col-md-3">
-			<img class="mb-3 rounded" alt="wakanda" src="images/Wakanda-poster.jpg" width="450px">
-			<button id="hall__btn" data-bs-toggle="modal" data-bs-target="#movieEditModal" type="button" class="btn btn-dark align-self-center col-md-6">Edit</button>
+	<div class="d-flex flex-row justify-content-center align-items-center mt-5">
+		<div class="d-flex flex-column me-4">
+			<img class="mb-3 rounded" alt="wakanda" src="images/Wakanda-poster.jpg" width="250px">
+			<button id="hall__btn" data-bs-toggle="modal" data-bs-target="#movieEditModal" type="button" class="btn btn-dark col-md-5 rounded-pill align-self-center">Edit</button>
 
 		</div>
 		<div class="d-flex flex-column col-md-6">
@@ -42,7 +42,7 @@
 							<option value="branchC">Branch C</option>
 							<option value="branchD">Branch D</option>
 						</select>
-						<button type="submit" class="btn btn-light mx-3 ">Search</button>
+						<button type="submit" class="btn btn-dark mx-3 rounded-pill">Search</button>
 					</div>
 				</div>
 			</form>
