@@ -6,7 +6,6 @@
 <meta charset="ISO-8859-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" type="text/css" href="./css/eunicestyle.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -117,7 +116,7 @@
 				</div>
 				<div class="modal-body">
 					<form action="" method="">
-						<h5 class="modal-title" id="movieEditModalLabel">Model Content Get from Joan</h5>
+						<jsp:include page="insertMovieModal.jsp"></jsp:include>
 					</form>
 				</div>
 				<div class="modal-footer">
