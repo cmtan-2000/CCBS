@@ -101,8 +101,7 @@
 	<div class="hidden_contents" id="halltab_desc">
 		<div class="right d-flex justify-content-between">
 			<!-- Add branch for cinema company -->
-			<button href="#"
-				class="btn btn-primary font-weight-bold rounded-pill"
+			<button class="btn btn-primary font-weight-bold rounded-pill"
 				style="margin-right: 8px;" data-bs-toggle="modal"
 				data-bs-target="#branchModal">
 				<i class="fas fa-plus"></i> Add Branch

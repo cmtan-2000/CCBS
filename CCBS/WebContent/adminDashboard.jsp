@@ -5,7 +5,6 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin_Dashboard</title>
-<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,11 +27,6 @@ body {
 	overflow: hidden;
 }
 
-h1 {
-	color: navy;
-	margin-left: 20px;
-}
-
 .company__header {
 	display: flex;
 	justify-content: space-between;
@@ -50,28 +44,7 @@ h1 {
 	overflow-y: scroll;
 	height: 90%;
 }
-/* 
-.cinemaContainer::-webkit-scrollbar{
-    width:2px;
-    background-color: grey
-}
-.cinemaContainer::-webkit-scrollbar-thumb{
-    background: black
-}
- */
-/* button {
-	background-color: white;
-	border: 0.2px;
-	color: black;
-	padding: 15px 32px;
-	text-align: center;
-	display: inline-block;
-	font-size: 16px;
-	border-radius: 5px;
-	box-shadow: 0 5px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 2px 0
-		rgba(0, 0, 0, 0.19);
-	font-weight: bolder;
-} */
+
 .TabSelect {
 	margin-left: 50px;
 }
@@ -193,15 +166,9 @@ h1 {
 
 </head>
 
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="header1.jsp"></jsp:include>
 
 <body>
-
-	<div class="company__header">
-		<h1>Admin</h1>		
-		<button>Generate Sales Report</button>
-
-	</div>
 
 	<div style="display: flex; flex-direction: column; padding: 20px">
 		<button onclick="onAddCompany()"

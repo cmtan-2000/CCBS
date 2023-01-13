@@ -5,11 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- <meta charset="ISO-8859-1"> -->
-<!-- <meta charset="UTF-8"> -->
-<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-<!-- <meta name="viewport" -->
-<!-- 	content="width=device-width, initial-scale=1.0,maximum-scale=1"> -->
+<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0,maximum-scale=1">
+	
 <!-- Font awesome -->
 <script src="https://kit.fontawesome.com/7b75b44b76.js"
 	crossorigin="anonymous"></script>
@@ -33,8 +34,10 @@
 		</div>
 		<nav class="main-navigation">
 			<ul class="menu">
-				<li class="menu-item current menu-item"><a href="login.jsp"
-					class="link">Log In</a></li>
+				<li class="menu-profile menu-item" style="color: white">ADMIN</li>
+				<li class="menu-item current menu-item"><a href="#"
+					class="link">Home</a></li>
+				<li class="menu-item"><a href="login.jsp" class="link">Sign Out</a></li>
 			</ul>
 		</nav>
 	</header>

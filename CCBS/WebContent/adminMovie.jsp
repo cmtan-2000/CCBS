@@ -5,7 +5,6 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin_Dashboard</title>
-<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -166,8 +165,7 @@ function onAddMovie(){
 
 </script>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
-
+	<jsp:include page="header1.jsp"></jsp:include>
 	<div class="company__header">
         <img src="images/GSC-Cinema-Logo.png" style="width: 210px;"'>
         <button>Generate Sales Report</button>
