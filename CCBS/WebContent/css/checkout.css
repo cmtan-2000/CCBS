@@ -97,7 +97,8 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    border:2px solid black;
+    cursor: pointer;
+    background-color: rgb(114, 145, 250);
 }
 
 

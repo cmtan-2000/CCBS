@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
 			}
 			else if((userName.equals("user")) && (password.equals("user"))) {
 				pw.println("RUN user");
-				RequestDispatcher userrd = request.getRequestDispatcher("/viewMovie.jsp");
+				RequestDispatcher userrd = request.getRequestDispatcher("/movieGridListView.jsp");
 				userrd.forward(request, response);
 			}
 			else if((userName.equals("company")) && (password.equals("company"))) {

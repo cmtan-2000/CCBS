@@ -5,6 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin_Dashboard</title>
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +45,28 @@ body {
 	overflow-y: scroll;
 	height: 90%;
 }
-
+/* 
+.cinemaContainer::-webkit-scrollbar{
+    width:2px;
+    background-color: grey
+}
+.cinemaContainer::-webkit-scrollbar-thumb{
+    background: black
+}
+ */
+/* button {
+	background-color: white;
+	border: 0.2px;
+	color: black;
+	padding: 15px 32px;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 5px;
+	box-shadow: 0 5px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 2px 0
+		rgba(0, 0, 0, 0.19);
+	font-weight: bolder;
+} */
 .TabSelect {
 	margin-left: 50px;
 }
@@ -147,13 +169,13 @@ body {
 		coverID.classList.add("hidden");
 	}
 
-	function request() {
-		var reqID = document.getElementById("request");
-		var coverID = document.getElementById("cover");
-		reqID.classList.remove("hidden");
-		coverID.classList.remove("hidden");
-
-	}
+	//function request() {
+	//	var reqID = document.getElementById("request");
+	//	var coverID = document.getElementById("cover");
+	//	reqID.classList.remove("hidden");
+	//	coverID.classList.remove("hidden");
+	//
+	//}
 
 	function onHallDetail() {
 		var hallDetailID = document.getElementById("hallDetail");
@@ -166,9 +188,15 @@ body {
 
 </head>
 
-	<jsp:include page="header1.jsp"></jsp:include>
+	
 
 <body>
+	<jsp:include page="header1.jsp"></jsp:include>
+	<div class="company__header">
+		<h1>Admin</h1>		
+		<button>Generate Sales Report</button>
+
+	</div>
 
 	<div style="display: flex; flex-direction: column; padding: 20px">
 		<button onclick="onAddCompany()"
@@ -203,6 +231,7 @@ body {
 				<button style="margin-left: 10px">Create</button>
 			</div>
 		</div>
+		
 		<div id="request" class="model hidden" style="width: 40%">
 
 			<div>
@@ -311,7 +340,6 @@ body {
 
 		<div class="TabSelect">
 			<a href="adminDashboard.jsp"><button class="tab active">Company</button></a>
-			<a href="adminMovie.jsp"><button class="tab">Movie</button></a>
 		</div>
 
 		<div class="bottomContainer"
@@ -319,8 +347,6 @@ body {
 			<div class="row"
 				style="display: flex; flex-direction: row; justify-content: flex-end; margin-right: 20px">
 				<button onclick="addBranch()">Add Branch</button>
-				<button onclick="request()" style="margin-left: 10px">Request
-					List</button>
 			</div>
 			<div class="cinemaContainer">
 				<%!int noCinema = 2;%>

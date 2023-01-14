@@ -56,9 +56,9 @@ input {
 <body>
 	<div
 		style="display: flex; flex-direction: row; justify-content: center">
-		<button style="margin-right: 20px; height: fit-content">Exit</button>
+		<button style="margin-right: 20px; margin-top:50px; height: fit-content" class="btn btn-secondary font-weight-bold mt-5">Exit</button>
 		<div
-			style="width: 70%; height: 100vh; padding: 20px 50px; background-color: #2a2a2a">
+			style="width: 70%; height: 100%; padding: 20px 50px; background-color: #2a2a2a">
 			<div class="foodBeverage">
 				Food And Beverage
 				<p class="combo">
@@ -149,7 +149,7 @@ input {
 			</div>
 			<div style="display: flex; flex-direction: row-reverse;">
 				<form action="./CheckoutController" method="post">
-					<input type="submit" value="Confirm"/>
+					<input type="submit" class="btn btn-success font-weight-bold" value="Confirm"/>
 				</form>
 			</div>
 

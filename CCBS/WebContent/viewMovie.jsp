@@ -25,6 +25,10 @@
 	font-family: 'Poppins', sans-serif;
 }
 
+body {
+	margin: auto;
+}
+
 p, span, small, h1, h2, h3, h4, h5 {
 	color: white;
 }
@@ -65,7 +69,7 @@ p, span, small, h1, h2, h3, h4, h5 {
 </head>
 
 <body style="background: black">
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="header3.jsp"></jsp:include>
 
 	<div class="container">
 	<a>

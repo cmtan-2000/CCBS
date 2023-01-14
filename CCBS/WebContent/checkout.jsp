@@ -28,7 +28,7 @@
         	RM4&nbsp&nbsp
             <input type="number" min="0" value="0" name="childQuantity" style="width: 40px">
         </div>
-        <div class="grid-item item8"><hr></div>
+        <div class="grid-item item	8"><hr></div>
         <div class="grid-item item9"><b style="font-size: 20px">&nbsp&nbsp&nbsp Total</b></div>
         <div class="grid-item item10">
         	RM 

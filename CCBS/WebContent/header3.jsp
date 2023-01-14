@@ -41,10 +41,10 @@
 		<nav class="main-navigation">
 			<ul class="menu">
 				<li class="menu-profile menu-item" style="color: white">CUSTOMER</li>
-				<li class="menu-item current menu-item"><a href="#"
+				<li class="menu-item current menu-item"><a href="movieGridListView.jsp"
 					class="link">Home</a></li>
-				<li class="menu-item "><a href="#" class="link"><i
-						class="fa-solid fa-cart-shopping"></i></a></li>
+				<li class="menu-item"><a href="topUpPage.jsp"
+					class="link">Top Up</a></li>
 				<li class="menu-item"><a href="login.jsp" class="link">Sign Out</a></li>
 			</ul>
 		</nav>
