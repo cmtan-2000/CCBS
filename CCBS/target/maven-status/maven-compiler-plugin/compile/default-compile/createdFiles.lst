@@ -1,0 +1,10 @@
+controller\LoginController.class
+model\Auth.class
+controller\Authenticaion.class
+controller\CheckoutController.class
+controller\FoodBeverageController.class
+controller\PaymentController.class
+bdUtil\DBConnect.class
+controller\BasicController.class
+controller\MovieController.class
+model\User.class
