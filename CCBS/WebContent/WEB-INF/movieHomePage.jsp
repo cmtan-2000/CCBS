@@ -155,7 +155,7 @@ label {
 					}
 				%>
 			</p>
-			<img height="100%" width="420px"
+			<img height="100%" width="250px"
 				src="https://m.media-amazon.com/images/M/MV5BNTM4NjIxNmEtYWE5NS00NDczLTkyNWQtYThhNmQyZGQzMjM0XkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg">
 
 			<button class="btn watch-movie-button mt-3">
