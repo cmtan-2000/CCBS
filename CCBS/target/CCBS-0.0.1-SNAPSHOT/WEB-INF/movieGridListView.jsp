@@ -26,13 +26,14 @@
     </style>
 </head>
 
-<body style="background: black">
+<body style="background:">
 	<jsp:include page="header3.jsp"></jsp:include>
     <div class="gridshow_movie">
-        <a href=""><img src="images/Mechamato-poster.jpg" /></a>
+        <a href=""><img src="/images/Mechamato-poster.jpg" /></a>
         <a href=""><img src="images/SAO-poster.jpeg" /></a>
         <a href="viewMovie.jsp"><img src="images/Wakanda-poster.jpg" /></a>
         <a href=""><img src="images/black-adam-poster.jpg" /></a>
+        <p>${movieList }</p>
     </div>
 
 

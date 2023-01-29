@@ -1,0 +1,11 @@
+controller\LoginController.class
+model\Auth.class
+controller\CheckoutController.class
+controller\FoodBeverageController.class
+controller\PaymentController.class
+bdUtil\DBConnect.class
+controller\BasicController.class
+controller\MovieController.class
+model\Movie.class
+model\User.class
+bdUtil\MovieDAO.class

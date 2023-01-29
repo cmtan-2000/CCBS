@@ -17,7 +17,7 @@ import bdUtil.DBConnect;
 public class BasicController {
 	Connection conn = DBConnect.openconnection();
 
-	@RequestMapping("/")
+	@RequestMapping("/login")
 	protected ModelAndView getloginForm() {
 //Example on how to get data from database (refer)
 		try {
@@ -52,12 +52,6 @@ public class BasicController {
 		
 		ModelAndView model = new ModelAndView("");
 		model.addObject("YourDATA", "yourValue");
-		return model;
-	}
-	
-	@RequestMapping("/admin")
-	protected ModelAndView redirectAdminPage() {
-		ModelAndView model = new ModelAndView("adminDashboard");
 		return model;
 	}
 }
