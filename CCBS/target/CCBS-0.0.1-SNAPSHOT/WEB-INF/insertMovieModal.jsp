@@ -1,16 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-	<form class="container p-5" style="background: white;" action=""
-		method="POST">
+	<form action="/CCBS/company/movie/create" method="POST">
 		<span class="float-end times-button"
-			onclick="closeDialog('insertMovieDialog')" style="cursor:pointer;"><i
+			onclick="closeDialog('insertMovieDialog')" style="cursor: pointer;"><i
 			class="fas fa-times"></i></span>
 		<h2>
 			<b>Insert Movie</b>
@@ -105,7 +95,8 @@
 						<td><b>Screenplay by</b></td>
 						<!-- <td><span class="badge-style badge-white">James Cameron</span>	<span class="badge-style badge-white">Rick Jaffa</span>	<span class="badge-style badge-white">Amanda Silver</span> <br></td> -->
 						<td><textarea type="text" class="form-control"
-								name="screenplay" placeholder="Enter Screenplay and seperate using coma (,)"></textarea></td>
+								name="screenplay"
+								placeholder="Enter Screenplay and seperate using coma (,)"></textarea></td>
 					</tr>
 					<tr>
 						<td><b>Story by</b></td>
@@ -118,14 +109,12 @@
 							%>	
 							</td> --%>
 						<td><textarea type="text" class="form-control"
-								placeholder="Enter Casts and seperate using coma (,)" name="cast"></textarea></td>
+								placeholder="Enter Casts and seperate using coma (,)"
+								name="cast"></textarea></td>
 					</tr>
 				</table>
 
-				<button class="btn btn-success float-right" type="submit">Insert</button>
+				<input class="btn btn-success float-right" type="submit" value="Insert"></button>
 			</div>
 		</div>
 	</form>
-
-</body>
-</html>

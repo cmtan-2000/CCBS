@@ -28,9 +28,8 @@
 
 		</div>
 		<div class="d-flex flex-column col-md-6">
-			
-			<h2>Black Panther: Wakanda Forever</h2>
-			<h6>Duration: 161min</h6>
+			<h2>${movieObject.getName()}</h2>
+			<h6>Duration: ${movieObject.getDuration()}</h6>
 			<form action="" method="">
 				<div class="form-group d-flex flex-row justify-content-between">
 					<label for="filterBranch" class="col-form-label">filter Branch: </label>
