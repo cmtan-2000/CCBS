@@ -494,8 +494,8 @@ body {
 			<div class="row">
 				<c:forEach items="${movieList}" var="movie" varStatus="loop">
 					<div class="col">
-						<a id="movie${loop.index+1}" target="_blank"
-							href="/CCBS/company/movie/${loop.index+1}"> <img
+						<a id="movie${movie.getMovie_id()}" target="_blank"
+							href="/CCBS/company/movie/${movie.getMovie_id()}"> <img
 							src="<c:url value="${movie.getPoster()}" />"
 							class="movie__poster" /></a>
 					</div>
@@ -692,7 +692,9 @@ body {
 	</div>
 
 	<div class="dialog" id="insertMovieDialog">
-		<jsp:include page="insertMovieModal.jsp"></jsp:include>
+		<jsp:include page="insertMovieModal.jsp">
+			<jsp:param name="formType" value="create"/>
+		</jsp:include>
 	</div>
 
 	<div class="dialog" id="manageSchedulDialog">

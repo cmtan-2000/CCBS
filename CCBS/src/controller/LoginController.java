@@ -72,6 +72,8 @@ public class LoginController extends HttpServlet {
 		MovieDAO movDAO = new MovieDAO();
 		List<Movie> movieList = movDAO.getAll();
 		mav.addObject("movieList", movieList);
+		mav.addObject("allTags", movDAO.getAllMovieTags());
+		mav.addObject("allGenres", movDAO.getAllMovieGenres());
 		return mav;
 	}
 
