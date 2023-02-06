@@ -104,12 +104,9 @@ public class MovieDAO {
 		}
 	}
 
-	public int delete(int id) {
-		String movSql = "delete from `movie` where movie_id =?";
-		String priceSql = "delete from `prices` where movie_id =?";
-		jdbct.update(priceSql, id);
-		int rowAffected = jdbct.update(movSql, id);
-		return rowAffected;
+	public void delete(int id) {
+		jdbct.update("delete from `prices` where movie_id =?", id);
+		jdbct.update("delete from `movie` where movie_id =?", id);
 	}
 
 	public String getMovieGenre(int genreId) {

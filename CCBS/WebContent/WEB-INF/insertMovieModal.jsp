@@ -12,19 +12,7 @@ label {
 	<span class="float-end times-button"
 		onclick="closeDialog('insertMovieDialog')" style="cursor: pointer;"><i
 		class="fas fa-times"></i></span>
-	<%--<%
-			String[] badges = new String[] { "2000", "PG-13", "311mins" };
-			for (int i = 0; i < badges.length; i++) {
-				out.println("<small><span class='badge-style badge-lime'>" + badges[i] + "</span></small>");
-			}
-
-			String[] tags = new String[] { "Action", "Drama", "Fantastic" };
-			for (int i = 0; i < tags.length; i++) {
-				out.println("<small><span class='badge-style badge-lightblue'>" + badges[i] + "</span></small>");
-			}
-		%> --%>
-
-
+		
 	<div class="row">
 		<div class="col-6">
 			<div class="card mt-3">
@@ -44,6 +32,7 @@ label {
 				</div>
 			</div>
 		</div>
+		
 		<div class="col-6">
 		<div class="card mt-3">
 			<div class="card-body">

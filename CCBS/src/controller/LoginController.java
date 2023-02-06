@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import bdUtil.FABDAO;
 import bdUtil.MovieDAO;
 import model.*;
 
@@ -70,10 +71,13 @@ public class LoginController extends HttpServlet {
 	public ModelAndView companyDashboard() {
 		ModelAndView mav = new ModelAndView("index");
 		MovieDAO movDAO = new MovieDAO();
-		List<Movie> movieList = movDAO.getAll();
-		mav.addObject("movieList", movieList);
+		mav.addObject("movieList", movDAO.getAll());
 		mav.addObject("allTags", movDAO.getAllMovieTags());
 		mav.addObject("allGenres", movDAO.getAllMovieGenres());
+
+		FABDAO fabDAO = new FABDAO();
+		Map<String, List<FAB>> fabList = fabDAO.getAllFAB();
+		mav.addObject("FABList", fabList);
 		return mav;
 	}
 

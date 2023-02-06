@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="model.FAB" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -507,7 +507,7 @@ body {
 
 	<!-- Snack tab -->
 	<div class="hidden_contents" id="snacktab_desc">
-		<jsp:include page="indexSnackTab.jsp" />
+		<jsp:include page="indexSnackTab.jsp"/>
 	</div>
 
 
@@ -688,7 +688,9 @@ body {
 	<div id="visible_contents"></div>
 
 	<div class="dialog" id="addFoodAndBeverageDialog">
-		<jsp:include page="addSnackModal.jsp"></jsp:include>
+		<jsp:include page="addSnackModal.jsp">
+			<jsp:param name="formType" value="create" />
+		</jsp:include>
 	</div>
 
 	<div class="dialog" id="insertMovieDialog">
