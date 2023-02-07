@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,8 +40,8 @@
 }
 
 .btn-primary, .btn-danger {
-/* 	padding: 1px 25px; */
-/* 	font-weight: bold; */
+	/* 	padding: 1px 25px; */
+	/* 	font-weight: bold; */
 	color: white;
 }
 
@@ -66,50 +67,44 @@ td[colspan='4'] {
 </head>
 <body>
 	<div style="color: #BBCFD0;">
-		<button class="btn btn-primary font-weight-bold rounded-pill right"
-			onclick="toggleDialog('addFoodAndBeverageDialog')"><i class="fas fa-plus"></i> Add Food and Beverage</button>
+		<button class="btn btn-primary font-weight-bold rounded-pill right" onclick="toggleDialog('addFoodAndBeverageDialog')">
+			<i class="fas fa-plus"></i> Add Food and Beverage
+		</button>
 		<br>
 		<div class="container mt-5">
 			<table class="table table-border">
 				<tr>
 					<td colspan="4"><b class="snack-title">Combo</b></td>
 				</tr>
-				<%
-					String[] combo = new String[]{"Signature Popcorn (Small) + 1x Regular Drink/Mineral Water",
-							"Big Depper + 1x Regular Drink / Mineral Water",
-							"Golden Horn Chips (Small) + 1x Regular Drink/ Mineral Water",
-							"5pcs Hot Minis + 1x RegularDrink / Mineral Water"};
-					double[] comboPrice = new double[]{9.9, 9.9, 9.9, 9.9};
-					for (int i = 0; i < combo.length; i++) {
-						out.println(String.format("<tr>" + "<td>" + combo[i] + "</td>" + "<td>RM %.2f</td>"
-								+ "<td><button class='btn btn-primary rounded-pill' onclick='toggleDialog(\"addFoodAndBeverageDialog\")'><i class='fas fa-edit'></i> Edit</button></td>"
-								+ "<td><button data-bs-toggle=\"modal\" data-bs-target=\"#deleteCfmModal\" class='btn btn-danger rounded-pill'><i class='fa-solid fa-trash-can'></i> Delete</button></td>" + "</tr>", comboPrice[i]));
-					}
-				%>
+				<c:forEach var="combo" items="${FABList.get('combo')}">
+					<tr>
+						<td><c:out value="${combo.getName()}" /></td>
+						<td><c:out value="RM ${combo.getPrice()}" /></td>
+						<td><a href="/CCBS/company/fab/edit/combo/${combo.getFab_id()}" target="_blank" class="btn btn-primary font-weight-bold rounded-pill"><i class="fas fa-edit"></i> Edit</a></td>
+						<td><button data-bs-toggle="modal" data-bs-target="#deleteCfmModal" class='btn btn-danger rounded-pill'><i class='fa-solid fa-trash-can'></i> Delete</button></td>
+					</tr>
+				</c:forEach>
 				<tr>
 					<td colspan="4"><b class="snack-title">Food</b></td>
-				</tr>
-				<%
-					String[] food = new String[]{"Large Size Onion Ring", "Medium PopCorn", "Medium PopCorn"};
-					double[] foodPrice = new double[]{9.9, 9.9, 9.9};
-					for (int i = 0; i < food.length; i++) {
-						out.println(String.format("<tr>" + "<td>" + food[i] + "</td>" + "<td>RM %.2f</td>"
-								+ "<td><button class='btn btn-primary rounded-pill' onclick='toggleDialog(\"addFoodAndBeverageDialog\")'><i class='fas fa-edit'></i> Edit</button></td>"
-								+ "<td><button data-bs-toggle=\"modal\" data-bs-target=\"#deleteCfmModal\" class='btn btn-danger rounded-pill'><i class='fa-solid fa-trash-can'></i> Delete</button></td>" + "</tr>", foodPrice[i]));
-					}
-				%>
+				</tr><c:forEach var="food" items="${FABList.get('food')}">
+					<tr>
+						<td><c:out value="${food.getName()}" /></td>
+						<td><c:out value="RM ${food.getPrice()}" /></td>
+						<td><a href="/CCBS/company/fab/edit/food/${food.getFab_id()}" target="_blank" class="btn btn-primary font-weight-bold rounded-pill"><i class="fas fa-edit"></i> Edit</a></td>
+						<td><button data-bs-toggle="modal" data-bs-target="#deleteCfmModal" class='btn btn-danger rounded-pill'><i class='fa-solid fa-trash-can'></i> Delete</button></td>
+					</tr>
+				</c:forEach>
 				<tr>
 					<td colspan="4"><b class="snack-title">Drink</b></td>
 				</tr>
-				<%
-					String[] drink = new String[]{"Sprite", "MountainDew"};
-					double[] drinkPrice = new double[]{4.9, 2.9};
-					for (int i = 0; i < drink.length; i++) {
-						out.println(String.format("<tr>" + "<td>" + drink[i] + "</td>" + "<td>RM %.2f</td>"
-								+ "<td><button class='btn btn-primary rounded-pill' onclick='toggleDialog(\"addFoodAndBeverageDialog\")'><i class='fas fa-edit'></i> Edit</button></td>"
-								+ "<td><button data-bs-toggle=\"modal\" data-bs-target=\"#deleteCfmModal\" class='btn btn-danger rounded-pill'><i class='fa-solid fa-trash-can'></i> Delete</button></td>" + "</tr>", drinkPrice[i]));
-					}
-				%>
+				<c:forEach var="drink" items="${FABList.get('drink')}">
+					<tr>
+						<td><c:out value="${drink.getName()}" /></td>
+						<td><c:out value="RM ${drink.getPrice()}" /></td>
+						<td><a href="/CCBS/company/fab/edit/drink/${drink.getFab_id()}" target="_blank" class="btn btn-primary font-weight-bold rounded-pill"><i class="fas fa-edit"></i> Edit</a></td>
+						<td><button data-bs-toggle="modal" data-bs-target="#deleteCfmModal" class='btn btn-danger rounded-pill'><i class='fa-solid fa-trash-can'></i> Delete</button></td>
+					</tr>
+				</c:forEach>
 
 			</table>
 		</div>

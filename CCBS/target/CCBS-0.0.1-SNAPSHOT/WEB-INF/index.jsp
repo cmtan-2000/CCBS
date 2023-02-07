@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	
+	pageEncoding="ISO-8859-1" import="model.FAB" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,76 +10,75 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style>
 body {
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
 }
 
 /* header */
 .site-container {
-  display: flex;
-  align-items: center;
-  color: wheat;
-  padding: 10px 0px;
-  margin-left: 30px;
+	display: flex;
+	align-items: center;
+	color: wheat;
+	padding: 10px 0px;
+	margin-left: 30px;
 }
 
 .site-title {
-  margin: 0px;
-  font-size: 20px;
-  text-transform: uppercase;
-  font-weight: bold;
+	margin: 0px;
+	font-size: 20px;
+	text-transform: uppercase;
+	font-weight: bold;
 }
 
 .cinema-logo {
-  padding: 10px;
+	padding: 10px;
 }
 
 .site-header {
-  background-color: #111113;
-  padding: 5px 0;
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	background-color: #111113;
+	padding: 5px 0;
+	margin-bottom: 30px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .main-navigation {
-  float: right;
-  margin-right: 30px;
+	float: right;
+	margin-right: 30px;
 }
 
 .main-navigation .menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 .main-navigation .menu-item {
-  display: inline-block;
-  padding: 0 10px;
+	display: inline-block;
+	padding: 0 10px;
 }
 
 .main-navigation .menu-item a {
-  padding: 10px 0;
-  border-bottom: 3px solid transparent;
-  font-size: 12px;
-  font-size: 0.75em;
-  text-transform: uppercase;
-  font-weight: 600;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
+	padding: 10px 0;
+	border-bottom: 3px solid transparent;
+	font-size: 12px;
+	font-size: 0.75em;
+	text-transform: uppercase;
+	font-weight: 600;
+	-webkit-transition: 0.3s ease;
+	transition: 0.3s ease;
 }
 
-.main-navigation .menu-item.current a,
-.main-navigation .menu-item:hover a {
-  border-bottom: 3px solid #ac8074;
-  color: #ac8074;
+.main-navigation .menu-item.current a, .main-navigation .menu-item:hover a
+	{
+	border-bottom: 3px solid #ac8074;
+	color: #ac8074;
 }
 
-a.link,
-a.link:hover {
-  text-decoration: none;
-  color: wheat;
+a.link, a.link:hover {
+	text-decoration: none;
+	color: wheat;
 }
 
 /* login */
@@ -112,15 +111,12 @@ a.link:hover {
 	font-weight: bolder
 }
 
-
-.username_input,
-.password_input {
+.username_input, .password_input {
 	position: relative;
 	margin: 20px 20px 20px;
 }
 
-.username_input input,
-.password_input input {
+.username_input input, .password_input input {
 	padding: 0px 5px;
 	border: none;
 	outline: none;
@@ -128,8 +124,7 @@ a.link:hover {
 	font-size: 17px;
 }
 
-.username_input label,
-.password_input label {
+.username_input label, .password_input label {
 	position: absolute;
 	top: 50%;
 	left: 5px;
@@ -139,33 +134,30 @@ a.link:hover {
 	font-size: 17px;
 }
 
-.username_input span::before,
-.password_input span::before {
+.username_input span::before, .password_input span::before {
 	content: '';
 	position: absolute;
 	top: 40px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: silver;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background: silver;
 }
 
-.username_input input:focus ~ label, 
-.username_input input:valid ~ label,
-.password_input input:focus ~ label,
-.password_input input:valid ~ label {
+.username_input input:focus ~ label, .username_input input:valid ~ label,
+	.password_input input:focus ~ label, .password_input input:valid ~
+	label {
 	top: -5px;
-    color: rgba(255, 0, 0, 0.6);
-    transition: .5s;
+	color: rgba(255, 0, 0, 0.6);
+	transition: .5s;
 }
 
-.username_input input:focus ~ span::before,
-.username_input input:valid ~ span::before,
-.password_input input:focus ~ span::before,
-.password_input input:valid ~ span::before {
-    width: 100%;
-    background: rgba(255, 0, 0, 0.6);
-    transition: .5s;
+.username_input input:focus ~ span::before, .username_input input:valid 
+	~ span::before, .password_input input:focus ~ span::before,
+	.password_input input:valid ~ span::before {
+	width: 100%;
+	background: rgba(255, 0, 0, 0.6);
+	transition: .5s;
 }
 
 .forgot_password {
@@ -176,73 +168,72 @@ a.link:hover {
 }
 
 .login_submit {
-    width: 100%;
+	width: 100%;
 }
 
 /*index.jsp*/
 .company__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .company__alltab {
-  margin: 0px -12px;
+	margin: 0px -12px;
 }
 
 .company__alltab ul li {
-  list-style: none;
-  display: inline;
-  padding: 1.05rem 3rem;
-  border-radius: 10px 10px 0px 0px !important;
-  background-color: #d4d4d4;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
+	list-style: none;
+	display: inline;
+	padding: 1.05rem 3rem;
+	border-radius: 10px 10px 0px 0px !important;
+	background-color: #d4d4d4;
+	color: black;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .company__alltab ul li.selected {
-  background-color: #bbcfd0;
+	background-color: #bbcfd0;
 }
 
-.company__movietab,
-.visible_contents {
-  position: relative;
+.company__movietab, .visible_contents {
+	position: relative;
 }
 
 /* add ".right" to generalize position of button */
 .right {
-  position: absolute;
-  right: 4rem;
+	position: absolute;
+	right: 4rem;
 }
 
 #visible_contents {
-  background-color: #bbcfd0;
-  border-radius: 0px 10px 10px 10px !important;
-  line-height: 1.6rem;
-  margin: 0px 40px 40px 40px;
-  padding: 50px 3rem;
+	background-color: #bbcfd0;
+	border-radius: 0px 10px 10px 10px !important;
+	line-height: 1.6rem;
+	margin: 0px 40px 40px 40px;
+	padding: 50px 3rem;
 }
 
 .hidden_contents {
-  display: none;
+	display: none;
 }
 
 .input-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 3rem 0 3rem 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 3rem 0 3rem 0;
 }
 
 /* all page add this as most outer container*/
 .outer__container {
-  padding: 0px 30px 120px 30px important!;
+	padding: 0px 30px 120px 30px important!;
 }
 
 .movie__poster {
-  width: 165px;
-  height: 248px;
+	width: 165px;
+	height: 248px;
 }
 
 td {
@@ -259,24 +250,23 @@ td[colspan='4'] {
 
 /* bootstrap open modal */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	display: none;
+	position: fixed;
+	z-index: 1;
+	padding-top: 100px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-body{
+body {
 	padding-right: 0 !important;
-    overflow: scroll !important;
+	overflow: scroll !important;
 }
-
 
 /* Delete confirmation modal */
 .modal-confirm {
@@ -378,7 +368,6 @@ body{
 	margin: 100px auto;
 }
 
-
 .modal-backdrop {
 	position: fixed;
 	top: 0;
@@ -401,15 +390,15 @@ body{
 	left: 50%;
 	min-width: 850px;
 	display: none;
-	z-index: 1050;    
+	z-index: 1050;
 	max-height: 500px;
-    overflow-y: auto;
+	overflow-y: auto;
 }
 
-.modal-content{
+.modal-content {
 	max-height: 500px;
-    overflow-y: auto;
-    margin-top: -50px;
+	overflow-y: auto;
+	margin-top: -50px;
 }
 
 .times-button {
@@ -421,10 +410,9 @@ body{
 	float: float-end;
 }
 
-
 .badge-style {
 	border-radius: 30px;
-	padding:2px 10px;
+	padding: 2px 10px;
 }
 
 .badge-style.badge-lightblue {
@@ -466,7 +454,8 @@ body{
 	<jsp:include page="header2.jsp"></jsp:include>
 	<div class="modal-backdrop" id="backdrop"></div>
 	<div class="company__header">
-		<img src="<c:url value="/resources/images/GSC-Cinema-Logo.png" />" style="width: 210px;">
+		<img src="<c:url value="/resources/images/GSC-Cinema-Logo.png" />"
+			style="width: 210px;">
 	</div>
 
 	<br>
@@ -503,22 +492,14 @@ body{
 		<!--poster after click, will open up add movie history -->
 		<div class="container mt-lg-5">
 			<div class="row">
-				<div class="col">
-					<a id="movie1" target="_blank" href="./movieDetail.jsp"> <img
-						src="<c:url value="/resources/images/Mechamato-poster.jpg" />" class="movie__poster" /></a>
-				</div>
-				<div class="col">
-					<a id="movie2" target="_blank" href="./movieDetail.jsp"> <img
-						src="<c:url value="/resources/images/SAO-poster.jpeg" />" class="movie__poster" /></a>
-				</div>
-				<div class="col">
-					<a id="movie3" target="_blank" href="./movieDetail.jsp"> <img
-						src="<c:url value="/resources/images/Wakanda-poster.jpg" />" class="movie__poster" /></a>
-				</div>
-				<div class="col">
-					<a id="movie4" target="_blank" href="./movieDetail.jsp"> <img
-						src="<c:url value="/resources/images/black-adam-poster.jpg" />" class="movie__poster" /></a>
-				</div>
+				<c:forEach items="${movieList}" var="movie" varStatus="loop">
+					<div class="col">
+						<a id="movie${movie.getMovie_id()}" target="_blank"
+							href="/CCBS/company/movie/${movie.getMovie_id()}"> <img
+							src="<c:url value="${movie.getPoster()}" />"
+							class="movie__poster" /></a>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>
@@ -526,7 +507,7 @@ body{
 
 	<!-- Snack tab -->
 	<div class="hidden_contents" id="snacktab_desc">
-		<jsp:include page="indexSnackTab.jsp" />
+		<jsp:include page="indexSnackTab.jsp"/>
 	</div>
 
 
@@ -707,11 +688,15 @@ body{
 	<div id="visible_contents"></div>
 
 	<div class="dialog" id="addFoodAndBeverageDialog">
-		<jsp:include page="addSnackModal.jsp"></jsp:include>
+		<jsp:include page="addSnackModal.jsp">
+			<jsp:param name="formType" value="create" />
+		</jsp:include>
 	</div>
 
 	<div class="dialog" id="insertMovieDialog">
-		<jsp:include page="insertMovieModal.jsp"></jsp:include>
+		<jsp:include page="insertMovieModal.jsp">
+			<jsp:param name="formType" value="create"/>
+		</jsp:include>
 	</div>
 
 	<div class="dialog" id="manageSchedulDialog">
