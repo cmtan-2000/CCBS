@@ -28,7 +28,6 @@ import bdUtil.MovieDAO;
 import model.Movie;
 
 @Controller
-//@RequestMapping("/movie")
 public class MovieController extends HttpServlet {
 
 	MovieDAO movDAO = new MovieDAO();
@@ -37,67 +36,62 @@ public class MovieController extends HttpServlet {
 		super();
 	}
 
-	@RequestMapping("/movie/index")
-	public ModelAndView index() {
-		ModelAndView mav = new ModelAndView("movieGridListView");
-		List<Movie> movieList = movDAO.getAll();
-		mav.addObject("movieList", movieList);
-		return mav;
-	}
+//	@RequestMapping("/movie/index")
+//	public ModelAndView index() {
+//		ModelAndView mav = new ModelAndView("movieGridListView");
+//		List<Movie> movieList = movDAO.getAll();
+//		mav.addObject("movieList", movieList);
+//		return mav;
+//	}
 
 	@RequestMapping("/movie/{id}")
 	public ModelAndView view(@PathVariable Map<String, String> pathV) {
 		ModelAndView mav = new ModelAndView("viewMovie");
 		int id = Integer.valueOf(pathV.get("id"));
 		Movie movieObject = movDAO.findById(id);
-		mav.addObject("movieObject", movieObject);
+		mav.addObject("movie", movieObject);
 		return mav;
 	}
 
-	@RequestMapping("/company/movie/index")
-	public ModelAndView cIndex() {
-		ModelAndView mav = new ModelAndView("movieGridListView");
-		List<Movie> movieList = movDAO.getAll();
-		mav.addObject("movieList", movieList);
+
+	@RequestMapping("/movie/{id}/view")
+	public ModelAndView cIndex(@PathVariable Map<String, String> pathV) {
+		ModelAndView mav = new ModelAndView("movieHomePage");
+		int id = Integer.valueOf(pathV.get("id"));
+		Movie movieObject = movDAO.findById(id);
+		mav.addObject("movie", movieObject);
 		return mav;
 	}
 
+	//home page for company is /company ->index.jsp
 	@RequestMapping("/company/movie/{id}")
 	public ModelAndView cView(@PathVariable Map<String, String> pathV) {
 		ModelAndView mav = new ModelAndView("movieDetail");
 		int id = Integer.valueOf(pathV.get("id"));
 		Movie movieObject = movDAO.findById(id);
-		mav.addObject("movieObject", movieObject);
+		mav.addObject("movie", movieObject);
+		mav.addObject("moviePrices", movDAO.getMoviePrices(id));
+		mav.addObject("allTags", movDAO.getAllMovieTags());
+		mav.addObject("allGenres", movDAO.getAllMovieGenres());
 		return mav;
 	}
 
-//	@PostMapping("/company/movie/create")
-	@RequestMapping(value = "/company/movie/create", method = RequestMethod.POST)
-	public void cCreate(@RequestParam Map<String, String> req) {
-		String name = req.get("name");
-		String tags = req.get("tags");
-		String poster = req.get("formFile");
-		String deluxePrice = req.get("deluxePrice");
-		String dualmaxPrice = req.get("dualmaxPrice");
-		String tdPrice = req.get("3dPrice");
-		String dadbPrice = req.get("dadbPrice");
-		String premiumPrice = req.get("premiumPrice");
-		String classicPrice = req.get("classicPrice");
-		String director = req.get("director");
-		String screenplay = req.get("screenplay");
-		String cast = req.get("cast");
-		System.out.print(tags);
-
-//		movDAO.add(inst);
-
-//		ModelAndView mav = new ModelAndView("viewMovie");
-//		return mav;
+	@PostMapping("/company/movie/create") //create+update in insertMovieModal.jsp
+	public String cCreate(@RequestParam Map<String, String> req) {
+		try {
+			if(req.get("formType").equals("create")) movDAO.add(req);
+			else movDAO.update(req, Integer.parseInt(req.get("id")));
+			return "redirect:/company";
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "an error occured";
 	}
 
 	@RequestMapping("/company/movie/delete/{id}")
 	public String cDelete(@PathVariable Map<String, String> pathV) {
 		movDAO.delete(Integer.valueOf(pathV.get("id")));
-		return "redirect:/company/movie/index";
+		return "redirect:/company";
 	}
 
 }

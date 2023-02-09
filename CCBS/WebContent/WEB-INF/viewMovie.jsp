@@ -69,13 +69,13 @@ p, span, small, h1, h2, h3, h4, h5 {
 </style>
 </head>
 
-<body style="background: black">
+<body style="background: ">
 	<jsp:include page="header3.jsp"></jsp:include>
 
 	<div class="container">
 		<a> </a>
 		<div class="float-right watch-movie-button mt-5">
-			<a href="./movieHomePage.jsp"> <span><i
+			<a href="/CCBS/movie/${movie.getMovie_id()}/view"> <span><i
 					class="fas fa-ticket-alt" aria-hidden="true"></i> Watch Now</span>
 			</a>
 
@@ -91,12 +91,11 @@ p, span, small, h1, h2, h3, h4, h5 {
 					<div class="row">
 						<h2 class="font-weight-bold pt-5">${movie.getName()}</h2>
 						<p>
-							<small>${movie.getYear()} [] PG-13 []
+							<small>${movie.getYear()} ${movie.getGenre()}
 								${movie.getDuration()}</small><br />
 						</p>
 						<p class="pl-3">
-							<c:forEach items="${movie.getTags_id()}" var="tag"
-								varStatus="loop">
+							<c:forEach items="${movie.getTags()}" var="tag" varStatus="loop">
 								<span class="movie-badge"><small>${tag}</small></span>
 							</c:forEach>
 						</p>
