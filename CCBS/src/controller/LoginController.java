@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import bdUtil.BranchDAO;
 import bdUtil.MovieDAO;
 import model.*;
 
@@ -70,8 +71,13 @@ public class LoginController extends HttpServlet {
 	public ModelAndView companyDashboard() {
 		ModelAndView mav = new ModelAndView("index");
 		MovieDAO movDAO = new MovieDAO();
+		BranchDAO brchDAO = new BranchDAO();
+		
 		List<Movie> movieList = movDAO.getAll();
+		List<Branch> brchList = brchDAO.getAll();
+		
 		mav.addObject("movieList", movieList);
+		mav.addObject("branchList", brchList);
 		return mav;
 	}
 
