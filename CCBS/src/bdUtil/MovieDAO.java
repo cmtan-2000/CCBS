@@ -24,6 +24,7 @@ import model.Movie;
 import model.Price;
 
 public class MovieDAO {
+	//inform joan if you want to change this file***************************
 	JdbcTemplate jdbct = new JdbcTemplate(getDataSource());
 
 	public List<Movie> getAll() {

@@ -3,7 +3,7 @@ package model;
 import bdUtil.FABDAO;
 
 public class FAB {
-
+	//inform joan if you want to change this file***************************
 	private int fab_id;
 	private int user_id;
 	private String name;

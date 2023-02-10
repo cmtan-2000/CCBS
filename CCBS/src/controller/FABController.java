@@ -51,4 +51,14 @@ public class FABController {
 		fabDAO.delete(pathV.get("package"), Integer.valueOf(pathV.get("id")));
 		return "redirect:/company";
 	}
+	
+	//joan:please move this to related controller, user in checkoutFoodBeverage.jsp
+	@RequestMapping("/movie/2/book")
+	public ModelAndView book(@PathVariable Map<String, String> pathV) {
+		ModelAndView mav = new ModelAndView("checkoutFoodBeverage");
+		FABDAO fabDAO = new FABDAO();
+		Map<String, List<FAB>> fabList = fabDAO.getAllFAB();
+		mav.addObject("FABList", fabList);
+		return mav;
+	}
 }
