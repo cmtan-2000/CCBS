@@ -27,19 +27,14 @@ img {
 </style>
 </head>
 
-<body style="background:">
+<body style="background: black;">
 	<jsp:include page="header3.jsp"></jsp:include>
 	<div class="gridshow_movie">
-		<!-- <a href=""><img src="/images/Mechamato-poster.jpg" /></a> <a href=""><img
-			src="images/SAO-poster.jpeg" /></a> <a href="viewMovie.jsp"><img
-			src="images/Wakanda-poster.jpg" /></a> <a href=""><img
-			src="images/black-adam-poster.jpg" /></a> -->
 		<c:forEach items="${movieList}" var="movie" varStatus="loop">
-			<a href="/CCBS/movie/${movie.getMovie_id()}"><img src="${movie.getPoster() }" /></a>
+			<a href="/CCBS/movie/${movie.getMovie_id()}">
+				<img src="${movie.getPoster() }" />
+			</a>
 		</c:forEach>
 	</div>
-
-
 </body>
-
 </html>

@@ -15,7 +15,7 @@
 	rel="stylesheet">
 
 <!-- CSS -->
-<link rel="stylesheet" href="css/modal.css">
+<link rel="stylesheet" href="resources/css/modal.css">
 
 <!-- Font awesome -->
 <script src="https://kit.fontawesome.com/6f995c3af2.js"

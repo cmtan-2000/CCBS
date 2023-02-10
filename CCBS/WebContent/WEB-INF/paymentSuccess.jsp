@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 	<title>Payment Result Page</title>
-	<link rel="stylesheet" type="text/css" href="css/paymentSuccess.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/paymentSuccess.css">
 </head>
 <body>
 	<div class="header">
