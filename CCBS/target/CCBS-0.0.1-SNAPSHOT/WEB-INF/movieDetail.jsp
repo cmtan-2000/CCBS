@@ -23,13 +23,16 @@
 <body>
 	<div class="d-flex flex-row justify-content-center align-items-center mt-5">
 		<div class="d-flex flex-column me-4">
-			<img class="mb-3 rounded" alt="wakanda" src="images/Wakanda-poster.jpg" width="250px">
-			<button id="hall__btn" data-bs-toggle="modal" data-bs-target="#movieEditModal" type="button" class="btn btn-dark col-md-5 rounded-pill align-self-center">Edit</button>
+			<img class="mb-3 rounded" src="${movie.getPoster()}" width="250px">
+			<div class="d-flex justify-content-evenly">
+				<button id="hall__btn" data-bs-toggle="modal" data-bs-target="#movieEditModal" type="button" class="btn btn-dark col-md-5 rounded-pill align-self-center">Edit</button>
+				<button type="submit" class="btn btn-dark col-md-5 rounded-pill align-self-center" onclick="deleteAlert(${movie.getMovie_id()})">Delete</button>
+			</div>
 
 		</div>
 		<div class="d-flex flex-column col-md-6">
-			<h2>${movieObject.getName()}</h2>
-			<h6>Duration: ${movieObject.getDuration()}</h6>
+			<h2>${movie.getName()}</h2>
+			<h6>Duration: ${movie.getDuration()}</h6>
 			<form action="" method="">
 				<div class="form-group d-flex flex-row justify-content-between">
 					<label for="filterBranch" class="col-form-label">filter Branch: </label>
@@ -114,9 +117,10 @@
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form action="" method="">
-						<jsp:include page="insertMovieModal.jsp"></jsp:include>
-					</form>
+					<jsp:include page="insertMovieModal.jsp">
+					    <jsp:param name="formType" value="edit"/>
+					    <jsp:param name="id" value="${movie.getMovie_id() }"/>
+				    </jsp:include>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -133,6 +137,13 @@
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
 		
+	<script>
+		function deleteAlert(id){
+			if (confirm('Are you sure you want to delete this thing into the database?')) {
+				  window.location.href="/CCBS/company/movie/delete/"+id;
+				} 
+		}
+	</script>
 		
 </body>
 </html>
