@@ -20,7 +20,8 @@ public class Seat {
 	public String seatJson = gson.toJson(seat);
 	
 	public String[][] seatMap = gson.fromJson(seatJson, String[][].class);
-
+	private int hall_id;
+	
 	public String getSeatJson() {
 		return seatJson;
 	}
@@ -35,6 +36,14 @@ public class Seat {
 
 	public void setSeatMap(String[][] seatMap) {
 		this.seatMap = seatMap;
+	}
+
+	public int getHall_id() {
+		return hall_id;
+	}
+
+	public void setHall_id(int hall_id) {
+		this.hall_id = hall_id;
 	}
 	
 }
