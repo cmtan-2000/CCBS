@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Login Page</title>
 <!-- CSS -->
-<link rel="stylesheet" type="text/css" href="css/style2.css">
+<link rel="stylesheet" type="text/css" href="resources/css/style2.css">
 
 <style>
 

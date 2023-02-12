@@ -24,6 +24,7 @@ import model.Movie;
 import model.Price;
 
 public class MovieDAO {
+	//inform joan if you want to change this file***************************
 	JdbcTemplate jdbct = new JdbcTemplate(getDataSource());
 
 	public List<Movie> getAll() {
@@ -62,8 +63,8 @@ public class MovieDAO {
 
 		// insert prices by of different movie type
 		Object priceArgList[] = { req.get("deluxePrice"), req.get("dualmaxPrice"),req.get("3dPrice"),
-				req.get("dadbPrice"), req.get("premiumPrice"), req.get("classicPrice") };
-		String[] movieTypes = { "Deluxe", "DualMax", "3D", "DA AB", "Premium", "Classic" };
+				req.get("2dPrice"), req.get("premiumPrice"), req.get("classicPrice") };
+		String[] movieTypes = { "Deluxe", "DualMax", "3D", "2D", "Premium", "Classic" };
 		int index = 0;
 		for (Object priceArgs : priceArgList) {
 			if (priceArgs != null || priceArgs != "") {
@@ -91,8 +92,8 @@ public class MovieDAO {
 
 		// insert prices by of different movie type
 		Object priceArgList[] = { req.get("deluxePrice"), req.get("dualmaxPrice"),req.get("3dPrice"),
-				req.get("dadbPrice"), req.get("premiumPrice"), req.get("classicPrice") };
-		String[] movieTypes = { "Deluxe", "DualMax", "3D", "DA AB", "Premium", "Classic" };
+				req.get("2dPrice"), req.get("premiumPrice"), req.get("classicPrice") };
+		String[] movieTypes = { "Deluxe", "DualMax", "3D", "2D", "Premium", "Classic" };
 		int index = 0;
 		for (Object priceArgs : priceArgList) {
 			if (priceArgs != null || priceArgs != "") {
@@ -121,7 +122,26 @@ public class MovieDAO {
 		for (Map<String, Object> row : rows) {
 			String movType = row.get("type").toString();
 			double movPrice = Double.parseDouble(row.get("movie_price").toString());
-			price.setTd(movPrice);
+			switch(movType) {
+			case "Deluxe":
+				price.setDeluxe(movPrice);
+				break;
+			case "3D":
+				price.setThreeD(movPrice);
+				break;
+			case "2D":
+				price.setTwoD(movPrice);
+				break;
+			case "Premium":
+				price.setPremium(movPrice);
+				break;
+			case "DualMax":
+				price.setDualMax(movPrice);
+				break;
+			case "Classic":
+				price.setClassic(movPrice);
+				break;
+			}
 		}
 		return price;
 	}

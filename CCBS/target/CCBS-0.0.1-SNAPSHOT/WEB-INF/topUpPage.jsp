@@ -19,7 +19,7 @@
 	}
 </style>	
 	
-	<link rel="stylesheet" href="css/style2.css">
+	<link rel="stylesheet" href="resources/css/style2.css">
 </head>
 
 <body style="background: black">

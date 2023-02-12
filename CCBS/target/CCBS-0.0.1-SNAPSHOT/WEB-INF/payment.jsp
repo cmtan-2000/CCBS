@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 	<title>Payment Page</title>
-	<link rel="stylesheet" type="text/css" href="css/payment.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/payment.css">
 </head>
 <body>
 	<div class="header">
