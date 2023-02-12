@@ -444,6 +444,7 @@ body{
 
 </style>
 
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style2.css"/>">
 
 <!-- Bootstrap -->
 <link

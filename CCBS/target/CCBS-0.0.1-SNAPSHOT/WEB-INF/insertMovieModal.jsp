@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	
 <style>
 label {
 	font-weight: bold;
+}
+.checkboxes {
+    display: inline-block;
+    margin-right: 15px;
+    min-width: 90px;
 }
 </style>
 
@@ -36,18 +40,18 @@ label {
 		<div class="col-6">
 		<div class="card mt-3">
 			<div class="card-body">
-				<label for="tags" class="form-label">Movie Tags</label> (multiple)
-				<select class="form-select" name="tags" multiple required>
-					<option disabled selected>Select Tags</option>
-					<c:forEach items="${allTags}" var="tags"
-						varStatus="loop"><option>${tags}</option>
-					</c:forEach>
-				</select>
+				<label for="tags" class="form-label">Movie Tags</label> (select multiple)<br>
+				<c:forEach items="${allTags}" var="tag" varStatus="loop">
+					<div class="checkboxes">
+						<input class="form-check-input" type="checkbox" name="${tag}" value="${tag}" <c:if test="${movie.getTags().contains(tag)}">checked</c:if> /> 
+						<label class="form-check-label" for="${tag}">${tag}</label>
+					</div>
+				</c:forEach>
 				<label for="genre" class="form-label mt-3">Movie Genre</label> 
 				<select class="form-select" name="genre" required>
 					<option disabled selected>Select Genre</option>
 					<c:forEach items="${allGenres}" var="genre"
-						varStatus="loop"><option value="${genre }">${genre}</option>
+						varStatus="loop"><option value="${genre}" <c:if test="${movie.getGenre().contains(genre)}">selected</c:if> >${genre}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -79,17 +83,17 @@ label {
 							<tr>
 								<td><b>Dual Max</b></td>
 								<td><input class="form-control form-control-sm"
-									type="number" name="dualmaxPrice"  value="${moviePrices.deluxe }" min="0" step="0.1" /></td>
+									type="number" name="dualmaxPrice"  value="${moviePrices.dualMax }" min="0" step="0.1" /></td>
 							</tr>
 							<tr>
 								<td><b>3D</b></td>
 								<td><input class="form-control form-control-sm"
-									type="number" name="3dPrice" value="${moviePrices.td }" min="0" step="0.1" /></td>
+									type="number" name="3dPrice" value="${moviePrices.threeD }" min="0" step="0.1" /></td>
 							</tr>
 							<tr>
-								<td><b>DA DB</b></td>
+								<td><b>2D</b></td>
 								<td><input class="form-control form-control-sm"
-									type="number" name="dadbPrice" value="${moviePrices.daab }" min="0" step="0.1" /></td>
+									type="number" name="2dPrice" value="${moviePrices.twoD }" min="0" step="0.1" /></td>
 							</tr>
 						</tbody>
 					</table>

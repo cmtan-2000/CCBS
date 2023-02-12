@@ -15,6 +15,7 @@
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/6f995c3af2.js"
 	crossorigin="anonymous"></script>
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
 <title>Movie Home Page</title>
 
 <style>

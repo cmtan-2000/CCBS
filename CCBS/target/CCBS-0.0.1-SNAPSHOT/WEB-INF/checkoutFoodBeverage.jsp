@@ -14,6 +14,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
 	rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
 
 <style>
 @import
