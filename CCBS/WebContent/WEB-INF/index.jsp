@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List" %>	
+<%@ page import="bdUtil.HallDAO" %>
+<%@ page import="model.Hall" %>
+	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -27,12 +31,10 @@
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous" />
 
-
 <title>Company Homepage</title>
 
 </head>
 <body>
-	
 	<jsp:include page="header2.jsp"></jsp:include>
 	<div class="modal-backdrop" id="backdrop"></div>
 	<div class="company__header">
@@ -111,14 +113,46 @@
 		</div>
 
 		<!-- the list, need to chg, insert data backend -->
+		<% 
+			
+		%>
+		
 		<div class="container mt-5">
 			<table class="table table-border">
-				<c:forEach items="${branchList}" var="branch" varStatus="loop">		
+				<c:forEach items="${ compBrchList }" var="branch" varStatus="loop">		
 					<tr>
-						<td colspan="4"><b class="snack-title"> <c:out value="${ branch.getBrch_name() }"></c:out> </b></td>
+						<td colspan="4"><b class="snack-title"> <c:out value="${ branch.getBrch_name() }"> </c:out> <c:out value="${branch.getBrch_id()}"></c:out></b></td>
 				
 					</tr>
-				<%
+					
+						<c:forEach items="${ hallList }" var="hall" varStatus="loop">
+							<c:if test="${branch.getBrch_id() == hall.getBrch_id() }">
+								<tr>
+									<td>Hall <c:out value="${ hall.getHall_id() }"></c:out></td>
+									<td>Status: <c:out value="${ hall.getHall_status() }"></c:out></td>
+									<td width="15%"><button class='btn btn-primary font-weight-bold rounded-pill' onclick='toggleDialog("manageSchedulDialog")'><i class="fas fa-edit"></i> Manage</button></td>
+									<td>
+									
+									<form action="hall/deleteHall" method="POST">
+										<input type="hidden" name="currentID" value="${hall.getHall_id()}"/>
+										<button type="submit" onclick="return confirm('Are you sure you want to delete this record?');" class='btn btn-danger font-weight-bold rounded-pill' data-bs-toggle="modal" data-bs-target="#deleteCfmModal"><i class='fa-solid fa-trash-can'></i> Delete</button>
+									</form>
+									
+									
+									<form>
+									
+									</form>
+									
+									</td>
+
+								</tr>
+							</c:if>
+						</c:forEach>
+						<c:if test="${empty hallList}">
+						  <p>The result is empty. There might be an issue with the calculation.</p>
+						</c:if>
+				<%-- <%
+					
 					String[] hall = new String[]{"Hall 13", "Hall 14", "Hall 15", "Hall 16"};
 					String[] status = new String[]{"Pending", "Pending", "Approved", "Pending"};
 					String dialog = "\"" + "manageSchedulDialog" + "\"";
@@ -130,7 +164,7 @@
 								+ "<td><button class='btn btn-danger font-weight-bold rounded-pill' data-bs-toggle=\"modal\" data-bs-target=\"#deleteCfmModal\"><i class='fa-solid fa-trash-can'></i> Delete</button></td>"
 								+ "</tr>");
 					}
-				%>
+				%> --%>
 				</c:forEach>
 			</table>
 		</div>
@@ -207,69 +241,88 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body">
-					<form action="" method="">
-						<div class="form-group">
-							<label for="branch" class="col-sm-5 col-form-label w-50">Branch</label>
-							<div class="col-sm-10">
-								<select id="branch" class="form-control">
-									<option selected value="L1">Location 1</option>
-									<option value="L2">Location 2</option>
-									<option value="L3">Location 3</option>
-									<option value="L4">Location 4</option>
-								</select>
+				<form action="hall/add" method="post" enctype="multipart/form-data">
+					<div class="modal-body">
+							<div class="form-group">
+								<label for="branch" class="col-sm-5 col-form-label w-50">Branch</label>
+								<div class="col-sm-10">
+									<select id="branch" class="form-control" required name="brchId">
+										<c:forEach items="${ compBrchList }" var="branch" varStatus="loop">
+											<option value="${branch.getBrch_id()}"><c:out value="${ branch.getBrch_name() }"></c:out></option>
+										</c:forEach>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="hallType" class="col-sm-5 col-form-label w-50">Hall
-								Type</label>
-							<div class="col-sm-10">
-								<select id="hallType" class="form-control">
-									<option selected value="2D">2D Hall</option>
-									<option value="DolbyAtmosHall">Dolby Atmos Hall</option>
-									<option value="IMAX">IMAX</option>
-									<option value="D-BOX">D-BOX</option>
-								</select>
+							<div class="form-group">
+								<label for="branch" class="col-sm-5 col-form-label w-50">Seat Type</label>
+								<div class="col-sm-10">
+									<select id="hallSeat" class="form-control" required name="hallSeat">
+										<option value="standardSeat" selected>Standard Seat</option>
+										<option value="beanieSeat">Beanie Seat</option>
+										<option value="coupleSeat">Couple Seat</option>
+										<option value="premiumSeat">Premium Seat</option>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="airConditioner" class="col-sm-5 col-form-label w-50">Air
-								Conditioner</label>
-							<div class="col-sm-10">
-								<select id="airConditioner" class="form-control">
-									<option selected value="taurus">Taurus Tech</option>
-									<option value="eurus">Eurus</option>
-									<option value="ocean">Ocean TechMe</option>
-									<option value="aquarius">AQUARIUS</option>
-								</select>
+							<div class="form-group">
+								<label for="hallType" class="col-sm-5 col-form-label w-50">Hall
+									Type</label>
+								<div class="col-sm-10">
+									<select id="hallType" class="form-control" name="hallType">
+										<option selected value="2D">2D Hall</option>
+										<option value="DolbyAtmosHall">Dolby Atmos Hall</option>
+										<option value="IMAX">IMAX</option>
+										<option value="D-BOX">D-BOX</option>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="soundSystem" class="col-sm-5 col-form-label w-50">Sound
-								system</label>
-							<div class="col-sm-10">
-								<select id="soundSystem" class="form-control">
-									<option selected value="DolbyAtmosSound">Dolby Atmos
-										Cinema Sound</option>
-								</select>
+							<div class="form-group">
+								<label for="airConditioner" class="col-sm-5 col-form-label w-50">Air
+									Conditioner</label>
+								<div class="col-sm-10">
+									<select id="airConditioner" class="form-control" name="hallAir">
+										<option selected value="taurus">Taurus Tech</option>
+										<option value="eurus">Eurus</option>
+										<option value="ocean">Ocean TechMe</option>
+										<option value="aquarius">AQUARIUS</option>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="hallPicture" class="col-sm-5 col-form-label w-50">Hall
-								picture</label>
-							<div class="col-sm-10">
-								<input type="file" class="form-control" id="hallPicture" />
+							<div class="form-group">
+								<label for="soundSystem" class="col-sm-5 col-form-label w-50">Sound
+									system</label>
+								<div class="col-sm-10">
+									<select id="soundSystem" class="form-control" name="hallSound">
+										<option selected value="DolbyAtmosSound">Dolby Atmos
+											Cinema Sound</option>
+									</select>
+								</div>
 							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button"
-						class="btn btn-secondary font-weight-bold rounded-pill"
-						data-bs-dismiss="modal">Close</button>
-					<button type="button"
-						class="btn btn-success font-weight-bold rounded-pill">Submit</button>
-				</div>
+							<div class="form-group">
+								<label for="hallPicture" class="col-sm-5 col-form-label w-50">Hall
+									picture</label>
+								<div class="col-sm-10">
+									<input type="file" class="form-control" id="hallPicture" name="file" accept="image/png, image/gif, image/jpeg" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="SeatNo" class="col-sm-5 col-form-label w-50">No. Seat</label>
+								<div class="col-sm-10">
+									<input type="number" class="form-control" id="SeatNo" name="SeatNo" readonly/>
+								</div>
+							</div>
+							
+					</div>
+	
+					<div class="modal-footer">
+						<button type="button"
+							class="btn btn-secondary font-weight-bold rounded-pill"
+							data-bs-dismiss="modal">Close</button>
+						<button type="submit"
+							class="btn btn-success font-weight-bold rounded-pill">Submit</button>
+					</div>
+				</form>
+					
 			</div>
 		</div>
 	</div>
@@ -299,6 +352,40 @@
 
 
 	<script>
+		const hallType = document.querySelector("#hallType");
+		const SeatNo = document.querySelector("#SeatNo");
+
+		hallSeat.addEventListener("change", function(){
+			System.out.println('TEST');
+		})
+		
+		document.getElementById("hallType").addEventListener("change", function() {
+			if(this.value == "2D") document.getElementById("SeatNo").value = 40;
+			else if(this.value == "DolbyAtmosHall") document.getElementById("SeatNo").value = 50; 
+			else if(this.value == "IMAX") document.getElementById("SeatNo").value = 60; 
+			else if(this.value == "D-BOX") document.getElementById("SeatNo").value = 70; 
+			else document.getElementById("SeatNo").value = 0; 
+		  });
+
+  	
+
+		function updateTownsNoSeat(state) {
+		    var towns = {
+		      "California": ["Los Angeles", "San Francisco", "San Diego"],
+		      "Texas": ["Houston", "Dallas", "Austin"],
+		      "New York": ["New York City", "Buffalo", "Rochester"],
+		    };
+		    var townSelect = document.getElementById("town");
+		    townSelect.innerHTML = "";
+		    for (var i = 0; i < towns[state].length; i++) {
+		      var townOption = document.createElement("option");
+		      townOption.value = towns[state][i];
+		      townOption.text = towns[state][i];
+		      townSelect.appendChild(townOption);
+		    }
+		  }
+
+	
 		// movie tab
 		document.getElementById("visible_contents").innerHTML = document
 				.getElementById("movietab_desc").innerHTML;

@@ -3,16 +3,20 @@ package controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.annotation.MultipartConfig;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import bdUtil.BranchDAO;
 import model.Branch;
 
 @Controller
+@MultipartConfig
 @RequestMapping("/branch")
 public class BranchController {
 

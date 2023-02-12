@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import bdUtil.BranchDAO;
+import bdUtil.HallDAO;
 import bdUtil.MovieDAO;
 import model.*;
 
@@ -67,17 +68,40 @@ public class LoginController extends HttpServlet {
 		return mav;
 	}
 
+	@SuppressWarnings({ "null", "unchecked", "unused", "rawtypes" })
 	@RequestMapping("/company")
 	public ModelAndView companyDashboard() {
 		ModelAndView mav = new ModelAndView("index");
 		MovieDAO movDAO = new MovieDAO();
 		BranchDAO brchDAO = new BranchDAO();
+		HallDAO hallDAO = new HallDAO();
 		
 		List<Movie> movieList = movDAO.getAll();
 		List<Branch> brchList = brchDAO.getAll();
+		List<Hall> hallList = hallDAO.getAll();
+		
+		
+//		TODO: need to define the company id
+//		System.out.println("This is what u want"+hallList);
+		int company_id = 10;
+		List<Branch> compBrchList = brchDAO.getCompanyBranch(company_id );
+				
+		/*
+		 * // need to searh each the branch listed here, and get the specific hall
+		 * for(Branch brch : compBrchList) { List BrchHallPack = null;
+		 * System.out.println(brch.getBrch_id()); List<Hall> hallList =
+		 * hallDAO.getBranchHall(brch.getBrch_id());
+		 * System.out.println(hallList.size());
+		 * 
+		 * BrchHallList.add(hallList); // find the specific branch id , and }
+		 * 
+		 * System.out.println(BrchHallList);
+		 */
 		
 		mav.addObject("movieList", movieList);
-		mav.addObject("branchList", brchList);
+//		mav.addObject("branchList", brchList);
+		mav.addObject("compBrchList", compBrchList);
+		mav.addObject("hallList", hallList);
 		return mav;
 	}
 
