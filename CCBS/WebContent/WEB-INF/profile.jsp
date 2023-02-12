@@ -1,29 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="model.User" %>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page import="org.apache.commons.io.IOUtils"%>
+<%@ page import="java.util.Base64"%>
+<%@ page import="model.User"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Top Up Page</title>
-
-<!-- Bootstrap -->
+<title>Profile</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous" />
+	crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
 	rel="stylesheet">
 
-
 <style>
-body {
-  font-family: "Poppins", sans-serif;
+body.background {
+	background-color: black;
+	font-family: 'Poppins', sans-serif;
+}
+
+.page-wrapper {
+	margin: 80px 300px;
+	color: white;
+}
+
+.title {
+	color: yellow;
 }
 
 .site-container {
@@ -99,8 +110,8 @@ a.link:hover {
 
 </head>
 
-<body style="background: black">
-	<header class="site-header .collapse.navbar-collapse">
+<body class="background">
+<header class="site-header .collapse.navbar-collapse">
 		<div class="site-container">
 			<a href="#" id="branding"></a><i
 				class="fa-solid fa-film fa-2x cinema-logo"></i>
@@ -110,37 +121,50 @@ a.link:hover {
 
 		<nav class="main-navigation">
 			<ul class="menu">
-				<li class="menu-profile menu-item" style="color: white"><a href="/CCBS/profile/${user.getUser_id()}"
+				<li class="menu-profile current menu-item" style="color: white"><a href="/CCBS/profile/${user.getUser_id()}"
 					class="link">CUSTOMER</a></li>
 				<li class="menu-item menu-item"><a href="<c:url value='/movie'/>"
 					class="link">Home</a></li>
-				<li class="menu-item current"><a href="/CCBS/wallet/${user.getUser_id()}"
+				<li class="menu-item"><a href="/CCBS/wallet/${user.getUser_id()}"
 					class="link">Top Up</a></li>
 				<li class="menu-item"><a href="<c:url value='/login'/>" class="link">Sign Out</a></li>
 			</ul>
 		</nav>
-	</header>
+	</header>	
 	
-	<jsp:useBean id="user" class="model.User" scope="session"/>
-	
-	<div class="container" style="margin: auto; color: white;">
-  		<div style="display: flex; justify-content: center; align-items: center; font-size: 50px;">
-  			<h1>Balance: </h1>
-        	<span style="color: yellow; font-size: 80px;">${user.amount}</span>
-        </div>
-        <br> <br>
-        
-		<form action="/CCBS/wallet/${user.getUser_id()}" method="post">
-			<div class="row">
-				<label for="topup" class="form-label">Amount to Top Up</label> <br>
-				<input type="text" class="form-control w-25" id="topupAmount" name="topupAmount">
-				<input type="hidden" name="update" value=true>
+	<div class="page-wrapper">
+		<div class="container">
+			<h1 class="title">Profile</h1>
+
+			<jsp:useBean id="user" class="model.User" scope="session" />
+			
+			<div>
+				<table>
+					<tr>
+						<td width="17%" colspan="3">Name</td>
+						<td width="60%"><c:out value="${user.name}" /></td>
+						<td rowspan="4"><c:set var="image1" value="${image1}" /> <c:set
+								var="imageBase64"
+								value="${Base64.getEncoder().encodeToString(IOUtils.toByteArray(image1))}" />
+							<img src="data:image/jpg;base64,${imageBase64}"
+							class="img-thumbnail" style="width: 200px"></td>
+					</tr>
+					<tr>
+						<td width="17%" colspan="3">Date of Birth</td>
+						<td width="60%"><c:out value="${user.dob}" /></td>
+					</tr>
+					<tr>
+						<td width="17%" colspan="3">Phone no</td>
+						<td width="60%"><c:out value="${user.phoneNo}" /></td>
+					</tr>
+					<tr>
+						<td width="17%" colspan="3">Address</td>
+						<td width="60%"><c:out value="${user.address}" /></td>
+					</tr>
+				</table>
 			</div>
-		
-			<br><br>
-			<button type="reset" class="btn btn-secondary font-weight-bold rounded-pill">Cancel</button>
-			<button type="submit" class="btn btn-success font-weight-bold rounded-pill ms-2">Update</button>
-		</form>
+
+		</div>
 	</div>
 </body>
 </html>

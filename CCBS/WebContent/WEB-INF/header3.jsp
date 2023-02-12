@@ -2,6 +2,8 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
+<%@ page import="model.User" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,10 +42,11 @@
 
 		<nav class="main-navigation">
 			<ul class="menu">
-				<li class="menu-profile menu-item" style="color: white">CUSTOMER</li>
+				<li class="menu-profile menu-item" style="color: white"><a href="/CCBS/profile/${user.getUser_id()}"
+					class="link">CUSTOMER</a></li>
 				<li class="menu-item current menu-item"><a href="movieGridListView.jsp"
 					class="link">Home</a></li>
-				<li class="menu-item"><a href="topUpPage.jsp"
+				<li class="menu-item"><a href="/CCBS/wallet/${user.getUser_id()}"
 					class="link">Top Up</a></li>
 				<li class="menu-item"><a href="login.jsp" class="link">Sign Out</a></li>
 			</ul>
