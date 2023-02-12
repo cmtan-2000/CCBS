@@ -8,6 +8,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
 <style>
 body {
 	box-sizing: border-box;
@@ -491,7 +492,7 @@ body {
 		<br>
 		<!--poster after click, will open up add movie history -->
 		<div class="container mt-lg-5">
-			<div class="row">
+			<div class="row gy-4">
 				<c:forEach items="${movieList}" var="movie" varStatus="loop">
 					<div class="col">
 						<a id="movie${movie.getMovie_id()}" target="_blank"

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,7 @@
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/6f995c3af2.js"
 	crossorigin="anonymous"></script>
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
 <title>Movie Home Page</title>
 
 <style>
@@ -135,38 +137,36 @@ label {
 </style>
 </head>
 
-<body>
+<body style="background: black;">
 	<jsp:include page="header3.jsp"></jsp:include>
-
-	<div
-		style="position: fixed; width: 33%; margin: auto; background: black; height: 100vh;">
+	
+	<div>
+		<div class="row">
+			<div class="col-4"><div
+		style="/* position: fixed; width: 33%; */ margin: auto; background: black; /* height: 100vh; */">
 		<div class="px-5">
-			<h5 class="font-weight-bold pt-5">Black Panther: Wakanda Forever</h5>
+			<h5 class="font-weight-bold pt-5">${movie.getName() }</h5>
 			<p>
-				<small>2022 [] PG-13 [] 161 mins</small>
+				<small>${movie.getYear()} 
+					<c:forEach
+						items="${movie.getGenre()}" var="genre" varStatus="loop">
+						<small>${genre}</small>
+					</c:forEach> ${movie.getDuration()}
+				</small>
 			</p>
 			<p>
-				<%
-					String[] labels = new String[] { "Action", "Adventure", "Drama" };
-					for (String label : labels) {
-				%>
-				<span class="movie-badge"><small><%=label%></small></span>
-				<%
-					}
-				%>
+				<c:forEach items="${movie.getTags()}" var="tag" varStatus="loop">
+					<span class="movie-badge"><small>${tag}</small></span>
+				</c:forEach>
 			</p>
-			<img height="100%" width="250px"
-				src="https://m.media-amazon.com/images/M/MV5BNTM4NjIxNmEtYWE5NS00NDczLTkyNWQtYThhNmQyZGQzMjM0XkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg">
+			<img height="100%" width="250px" src="${movie.getPoster()}">
 
 			<button class="btn watch-movie-button mt-3">
 				<span><i class="fas fa-ticket-alt" aria-hidden="true"></i>
 					Watch Now</span>
 			</button>
 		</div>
-	</div>
-	<div>
-		<div class="row">
-			<div class="col-4"></div>
+	</div></div>
 
 			<!-- selection -->
 			<div class="col-8">
@@ -255,8 +255,8 @@ label {
 											String[] colorClass = new String[] { "success", "warning", "danger" };
 											for (int i = 0; i < showtimes.length; i++) {
 												int randNum = (int) (Math.random() * (colorClass.length - 0));
-												out.println("<a href='movie-seat-booking.jsp'><button type='button' class='btn btn-" + colorClass[randNum] + " font-weight-bold'>"
-														+ showtimes[i] + "</button></a>");
+												out.println("<a href='movie-seat-booking.jsp'><button type='button' class='btn btn-"
+														+ colorClass[randNum] + " font-weight-bold'>" + showtimes[i] + "</button></a>");
 											}
 									%>
 								</div>

@@ -20,7 +20,7 @@
 	crossorigin="anonymous" />
 
 <!-- CSS -->
-<link rel="stylesheet" type="text/css" href="./css/style2.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/style2.css" />
 
 <!-- Font -->
 <link rel="stylesheet"
