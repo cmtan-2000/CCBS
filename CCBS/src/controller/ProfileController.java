@@ -60,6 +60,7 @@ public class ProfileController extends HttpServlet {
 			user.setDob(dob);
 			user.setPhoneNo(phoneNo);
 			user.setAddress(address);
+			user.setUser_id(userID);
 			
 			session.setAttribute("user", user);
 			
@@ -93,14 +94,13 @@ public class ProfileController extends HttpServlet {
 			while(rs.next()) {
 				amount = rs.getDouble("amount");
 			}
+			System.out.print(amount);
 			
-			System.out.println(request.getParameter("update"));
-
-			if(Boolean.parseBoolean(request.getParameter("update"))) {
+			if(Boolean.parseBoolean(request.getParameter("update")))
+			{
 				amount = amount + Double.parseDouble(request.getParameter("topupAmount"));
-//				System.out.println("yeshh" + amount);
 				ps2.setDouble(1, amount);
-				ps2.setDouble(2, userID);
+				ps2.setInt(2, userID);
 				ps2.executeUpdate();
 			}
 			

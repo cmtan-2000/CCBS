@@ -133,7 +133,7 @@ a.link:hover {
 		<form action="/CCBS/wallet/${user.getUser_id()}" method="post">
 			<div class="row">
 				<label for="topup" class="form-label">Amount to Top Up</label> <br>
-				<input type="text" class="form-control w-25" id="topupAmount" name="topupAmount">
+				<input type="text" class="form-control w-25" id="topupAmount" name="topupAmount" required>
 				<input type="hidden" name="update" value=true>
 			</div>
 		
