@@ -78,17 +78,17 @@ label {
 							<tr>
 								<td><b>Dual Max</b></td>
 								<td><input class="form-control form-control-sm"
-									type="number" name="dualmaxPrice"  value="${moviePrices.deluxe }" min="0" step="0.1" /></td>
+									type="number" name="dualmaxPrice"  value="${moviePrices.dualMax }" min="0" step="0.1" /></td>
 							</tr>
 							<tr>
 								<td><b>3D</b></td>
 								<td><input class="form-control form-control-sm"
-									type="number" name="3dPrice" value="${moviePrices.td }" min="0" step="0.1" /></td>
+									type="number" name="3dPrice" value="${moviePrices.threeD }" min="0" step="0.1" /></td>
 							</tr>
 							<tr>
-								<td><b>DA DB</b></td>
+								<td><b>2D</b></td>
 								<td><input class="form-control form-control-sm"
-									type="number" name="dadbPrice" value="${moviePrices.daab }" min="0" step="0.1" /></td>
+									type="number" name="2dPrice" value="${moviePrices.twoD }" min="0" step="0.1" /></td>
 							</tr>
 						</tbody>
 					</table>

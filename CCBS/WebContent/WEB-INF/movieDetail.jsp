@@ -19,7 +19,7 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous" />
-<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/images/CCBS.ico' /> ">
 <title>MovieDetail Page</title>
 </head>
 <body>
