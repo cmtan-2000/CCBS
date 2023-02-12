@@ -19,23 +19,33 @@ img {
 }
 
 .gridshow_movie {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	margin-top: 75px;
+    display: grid;
+    margin-top: 75px;
+    max-width: 80vw;
+    overflow-x: auto;
+    overflow-y: hidden;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 0 30px;
+    grid-auto-flow: column;
+    padding: 50px;
+}
+
+.gridshow_movie::-webkit-scrollbar {
+  display: none;
 }
 </style>
 </head>
 
 <body style="background: black;">
 	<jsp:include page="header3.jsp"></jsp:include>
-	<div class="gridshow_movie">
-		<c:forEach items="${movieList}" var="movie" varStatus="loop">
-			<a href="/CCBS/movie/${movie.getMovie_id()}">
-				<img src="${movie.getPoster() }" />
-			</a>
-		</c:forEach>
+	<div class="d-flex justify-content-center">
+		<div class="gridshow_movie">
+			<c:forEach items="${movieList}" var="movie" varStatus="loop">
+				<a href="/CCBS/movie/${movie.getMovie_id()}">
+					<img src="${movie.getPoster() }" />
+				</a>
+			</c:forEach>
+		</div>
 	</div>
 </body>
 </html>

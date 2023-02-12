@@ -492,7 +492,7 @@ body {
 		<br>
 		<!--poster after click, will open up add movie history -->
 		<div class="container mt-lg-5">
-			<div class="row">
+			<div class="row gy-4">
 				<c:forEach items="${movieList}" var="movie" varStatus="loop">
 					<div class="col">
 						<a id="movie${movie.getMovie_id()}" target="_blank"
