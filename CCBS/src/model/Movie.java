@@ -13,7 +13,7 @@ public class Movie {
 	private String director;
 	private String casts;
 	private String duration;
-	private int price_id;
+	private double movie_price;
 	private int genre_id;
 	private String tags_id;
 	private String story_by;
@@ -22,12 +22,12 @@ public class Movie {
 
 	MovieDAO movDAO = new MovieDAO();
 
-	Movie() {
+	public Movie() {
 
 	}
 
 	public Movie(int movie_id, int user_id, String name, String description, String director, String casts, String duration,
-			int price_id, int genre_id, String tags_id, String story_by, int year, String poster) {
+			double movie_price, int genre_id, String tags_id, String story_by, int year, String poster) {
 		this.movie_id = movie_id;
 		this.user_id = user_id;
 		this.name = name;
@@ -35,12 +35,20 @@ public class Movie {
 		this.director = director;
 		this.casts = casts;
 		this.duration = duration;
-//		this.price_id = price_id;
+		this.movie_price = movie_price;
 		this.genre_id = genre_id;
 		this.tags_id = tags_id;
 		this.story_by = story_by;
 		this.year = year;
 		this.poster = poster;
+	}
+
+	public double getMovie_price() {
+		return movie_price;
+	}
+
+	public void setMovie_price(double movie_price) {
+		this.movie_price = movie_price;
 	}
 
 	public int getMovie_id() {

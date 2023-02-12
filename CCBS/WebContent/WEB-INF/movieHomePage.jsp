@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> <!-- photos -->
+<%@ page import="org.apache.commons.io.IOUtils"%>
+<%@ page import="java.util.Base64"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,12 +142,11 @@ label {
 </head>
 
 <body>
-	<jsp:include page="header3.jsp"></jsp:include>
-
 	<div
+		<jsp:useBean id="movie" class="model.Movie" session="scope"/>
 		style="position: fixed; width: 33%; margin: auto; background: black; height: 100vh;">
 		<div class="px-5">
-			<h5 class="font-weight-bold pt-5">Black Panther: Wakanda Forever</h5>
+			<h5 class="font-weight-bold pt-5">${movieBean.name}</h5>
 			<p>
 				<small>2022 [] PG-13 [] 161 mins</small>
 			</p>
@@ -157,11 +162,6 @@ label {
 			</p>
 			<img height="100%" width="250px"
 				src="https://m.media-amazon.com/images/M/MV5BNTM4NjIxNmEtYWE5NS00NDczLTkyNWQtYThhNmQyZGQzMjM0XkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg">
-
-			<button class="btn watch-movie-button mt-3">
-				<span><i class="fas fa-ticket-alt" aria-hidden="true"></i>
-					Watch Now</span>
-			</button>
 		</div>
 	</div>
 	<div>
