@@ -7,7 +7,7 @@
 <meta charset="ISO-8859-1">
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
 <!-- CSS -->
-<link rel="stylesheet" href="css/modal.css">
+<link rel="stylesheet" href="resources/css/modal.css">
 
 <!-- Font awesome -->
 <script src="https://kit.fontawesome.com/6f995c3af2.js"

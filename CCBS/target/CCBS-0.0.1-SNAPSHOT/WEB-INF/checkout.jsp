@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 	<title>Checkout Page</title>
-	<link rel="stylesheet" type="text/css" href="css/checkout.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/checkout.css">
 </head>
 <body>
 	<div class="header">

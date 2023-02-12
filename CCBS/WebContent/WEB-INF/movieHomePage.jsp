@@ -15,6 +15,7 @@
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/6f995c3af2.js"
 	crossorigin="anonymous"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <title>Movie Home Page</title>
 
 <style>
