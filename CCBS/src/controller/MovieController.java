@@ -36,14 +36,6 @@ public class MovieController extends HttpServlet {
 		super();
 	}
 
-//	@RequestMapping("/movie/index")
-//	public ModelAndView index() {
-//		ModelAndView mav = new ModelAndView("movieGridListView");
-//		List<Movie> movieList = movDAO.getAll();
-//		mav.addObject("movieList", movieList);
-//		return mav;
-//	}
-
 	@RequestMapping("/movie/{id}")
 	public ModelAndView view(@PathVariable Map<String, String> pathV) {
 		ModelAndView mav = new ModelAndView("viewMovie");

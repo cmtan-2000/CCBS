@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
-<title>Movie Grid List</title>
+<title>Home Page</title>
 <style type="text/css">
 img:hover {
 	transform: scale(1.2);

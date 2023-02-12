@@ -30,17 +30,19 @@
 	crossorigin="anonymous" />
 
 
-<title>Company Homepage</title>
-
+<title>Home Page</title>
+<style>
+	.grid-display {
+		display: grid;
+	    grid-template-columns: repeat(6,1fr);
+	    grid-gap: 20px 0px;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="header2.jsp"></jsp:include>
 	<div class="modal-backdrop" id="backdrop"></div>
-	<div class="company__header">
-		<img src="<c:url value="/resources/images/GSC-Cinema-Logo.png" />"
-			style="width: 210px;">
-	</div>
-
+	
 	<br>
 	<br>
 	<!-- for users to navigate and click the tabs -->
@@ -74,9 +76,9 @@
 		<br>
 		<!--poster after click, will open up add movie history -->
 		<div class="container mt-lg-5">
-			<div class="row gy-4">
+			<div class="grid-display">
 				<c:forEach items="${movieList}" var="movie" varStatus="loop">
-					<div class="col">
+					<div>
 						<a id="movie${movie.getMovie_id()}" target="_blank"
 							href="/CCBS/company/movie/${movie.getMovie_id()}"> <img
 							src="<c:url value="${movie.getPoster()}" />"
