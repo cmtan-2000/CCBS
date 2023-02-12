@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" 
+	import="java.time.LocalDateTime, java.text.SimpleDateFormat, java.util.Date, java.time.format.DateTimeFormatter"
+%>
 <%@ page import="java.util.List" %>	
 <%@ page import="bdUtil.HallDAO" %>
+<%@ page import="bdUtil.MovieDAO" %>
 <%@ page import="model.Hall" %>
+<%@ page import="model.Movie" %>
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -12,6 +16,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style2.css"/>" />
@@ -130,17 +135,25 @@
 								<tr>
 									<td>Hall <c:out value="${ hall.getHall_id() }"></c:out></td>
 									<td>Status: <c:out value="${ hall.getHall_status() }"></c:out></td>
-									<td width="15%"><button class='btn btn-primary font-weight-bold rounded-pill' onclick='toggleDialog("manageSchedulDialog")'><i class="fas fa-edit"></i> Manage</button></td>
+									<td width="15%">
+									<!-- <button class='btn btn-primary font-weight-bold rounded-pill' onclick='toggleDialog("manageSchedulDialog")'>
+									<i class="fas fa-edit"></i> Manage</button></td> -->
+									
+									<div class="right d-flex justify-content-between">
+										<!-- Add branch for cinema company -->
+										<button class="btn btn-primary font-weight-bold rounded-pill"
+											style="margin-right: 8px;" data-bs-toggle="modal" data-id="${hall.getHall_id()}" data-name="${hall.getHall_type() }"
+											data-bs-target="#manageModal">
+											<i class="fas fa-edit"></i> Manage 	<c:out value="${hall.getHall_id() }"></c:out>
+										</button>
+									</div>
+									
+									
 									<td>
 									
 									<form action="hall/deleteHall" method="POST">
 										<input type="hidden" name="currentID" value="${hall.getHall_id()}"/>
 										<button type="submit" onclick="return confirm('Are you sure you want to delete this record?');" class='btn btn-danger font-weight-bold rounded-pill' data-bs-toggle="modal" data-bs-target="#deleteCfmModal"><i class='fa-solid fa-trash-can'></i> Delete</button>
-									</form>
-									
-									
-									<form>
-									
 									</form>
 									
 									</td>
@@ -169,7 +182,108 @@
 			</table>
 		</div>
 	</div>
-
+	<div class="modal fade" id="manageModal" tabindex="-1"
+		aria-labelledby="manageModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="manageModalLabel">Manage Schedule	</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+						<!-- <form action="./branch/add" method="post">
+						<div class="form-group">
+							<label for="branchName" class="col-sm-5 col-form-label w-50">Branch
+								Name</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="branchName" name="branchName"/>
+							</div>
+						</div>
+						<div class="modal-footer">
+						<button type="button"
+							class="btn btn-secondary font-weight-bold rounded-pill"
+							data-bs-dismiss="modal">Close</button>
+						<button type="submit"
+							class="btn btn-success font-weight-bold rounded-pill">Submit</button>
+					</div>
+					</form> -->
+	        	Hall ID: <p id="id"></p>
+	        	Hall Type: <p id="name"></p>
+	        	
+	        	
+		<div class="" style="">
+			<%
+				MovieDAO movies = new MovieDAO();
+				List<Movie> movieList = movies.getAll();
+				for(Movie m : movieList){
+				   System.out.println(m.getName());
+				}
+			
+			 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
+				LocalDateTime date = LocalDateTime.now();
+				String[][] scheduleArray = new String[][] { { "Avatar: The Way of Water", "Deluxe" },
+						{ "Black Adam", "Dual Max" }, { "Adam's Family", "Classic" }, { "SAO", "Deluxe" },
+						{ "Jujutsu Kaisen: RE", "3D" }, };
+				String duration = "10am";
+				for (int i = 0; i < 6; i++) {
+			%>
+			
+			<!-- <select id="mySelect">
+  <option value="">Please select an option</option>
+  <option value="1">Option 1</option>
+  <option value="2">Option 2</option>
+  <option value="3">Option 3</option>
+</select>
+			 -->
+			 <div id="container">
+				<select id="mySelect">
+				   <option value=" " selected>Please select an option</option>
+				   <c:forEach items="${movieList}" var="movie" varStatus="loop">
+ 						<option value="${movie.getMovie_id() }"><c:out value="${movie.getName()}"></c:out></option>
+				   <button id="removeButton" value="Remove"></button>
+				   </c:forEach>
+				 </select>
+				 <button id="deleteButton">Delete</button>
+			 </div>
+				 <br><br>
+		 	<div id="selects"></div>
+				 
+				 
+				 
+			<div class="card">
+				<div class="card-body">
+					<p class="card-title"><%=dtf.format(date.plusDays(i))%></p>
+					<div class="card-text">
+						<table class="table table-sm table-striped">
+							<thead>
+								<th>Timeslot</th>
+								<th>Name</th>
+							</thead>
+							<tbody>
+								<%
+									for (int j = 0; j < scheduleArray.length; j++) {
+								%>
+								<tr>
+									<td><%=duration%></td>
+									<td><%=scheduleArray[j][0]%></td>
+								</tr>
+								<%
+									}
+								%>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<%
+				}
+			%>
+		</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Modal for Add Branch -->
 	<div class="modal fade" id="branchModal" tabindex="-1"
@@ -179,7 +293,7 @@
 				<div class="modal-header">
 					<h5 class="modal-title" id="branchModalLabel">Add Branch</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
+						aria-label="Close"></button>sche
 				</div>
 				<div class="modal-body">
 					<form action="./branch/add" method="post">
@@ -347,11 +461,64 @@
 	</div>
 
 	<script>
-		document.getElementById(id).className = "selected";
-	</script>
+		$(document).ready(function () {
+		  $('#manageModal').on('show.bs.modal', function (event) {
+		    var button = $(event.relatedTarget);
+		    var id = button.data('id');
+		    var name = button.data('name');
+		    var modal = $(this);
+		    modal.find('#id').text(id);
+			modal.find('#name').text(name);
+	  		});
+		});
 
+		$(document).ready(function(){
+			$("#selects").change(function(){
+				var selectedOption = $(this).val();
+				const select = document.querySelector("#selects");
+		        const selectString = select.outerHTML;
+		        if(selectedOption === " "){
+			        $("#selects").remove()
+		        }
+	        })
+		})
+		
+	    $(document).ready(function() {
+	      $("#mySelect").change(function() {
+	        var selectedOption = $(this).val();
+	        const select = document.querySelector("#container");
+	        const selectString = select.outerHTML;
+	        console.log(selectString);
+			console.log(selectedOption);
+			if (selectedOption !== " "){
+				console.log(true);
+				console.log(selectString);
+		          $("#container").append(selectString);
+				}
+			else{
+				$('#selects').removeChild(selectString);
+				console.log(false);
+				
+				}
 
-	<script>
+	        
+	        /* if (selectedOption === "option1") {
+	          
+	        } else if (selectedOption === "option2") {
+	          var newSelect = $("<select><option>Option 2A</option><option>Option 2B</option></select>");
+	          $("#selects").append(newSelect);
+	        } */
+	      });
+	    });
+	    
+
+	   /*  const select = document.querySelector("#mySelect");
+	    select.addEventListener("change", function() {
+	      const selectedOption = select.options[select.selectedIndex].value;
+	      console.log(`Selected option: ${selectedOption}`);
+	    }); */
+
+  	    
 		const hallType = document.querySelector("#hallType");
 		const SeatNo = document.querySelector("#SeatNo");
 
@@ -400,9 +567,9 @@
 			document.getElementById(id).className = "selected";
 		}
 
-		modal.on('show.bs.modal', function() {
+		/* modal.on('show.bs.modal', function() {
 			$('body').addClass('modal-padding-overlap');
-		});
+		}); */
 	</script>
 
 	<script type="text/javascript">
@@ -425,9 +592,13 @@
 			dialog.style.display = "none";
 			backdrop.style.display = "none";
 		}
+
+		
+		
 	</script>
 
 	<!-- Bootstrap -->
+	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
