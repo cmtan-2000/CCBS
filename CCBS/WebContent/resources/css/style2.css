@@ -217,6 +217,7 @@ a.link:hover {
   line-height: 1.6rem;
   margin: 0px 40px 40px 40px;
   padding: 50px 3rem;
+  visibility: 0;
 }
 
 .hidden_contents {
@@ -269,7 +270,7 @@ td[colspan='4'] {
 
 body{
 	padding-right: 0 !important;
-    overflow: scroll !important;
+    /* overflow: scroll !important; */
 }
 
 

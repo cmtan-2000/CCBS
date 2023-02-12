@@ -13,8 +13,11 @@
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
 	rel="stylesheet" />
 <!-- CSS -->
-<link rel="stylesheet" href="/resources/css/modal.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/modal.css"/>" />
 
+<script src="https://kit.fontawesome.com/6f995c3af2.js"
+	crossorigin="anonymous"></script>
+	
 <!-- Bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -23,13 +26,26 @@
 	crossorigin="anonymous" />
 <link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/images/CCBS.ico' /> ">
 <title>MovieDetail Page</title>
+
+
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap')
+	;
+
+* {
+	font-family: 'Poppins', sans-serif;
+}
+
+</style>
 </head>
 <body>
+	<div class="modal-backdrop" id="backdrop"></div>
 	<div class="d-flex flex-row justify-content-center align-items-center mt-5">
 		<div class="d-flex flex-column me-4">
 			<img class="mb-3 rounded" src="${movie.getPoster()}" width="250px">
 			<div class="d-flex justify-content-evenly">
-				<button id="hall__btn" data-bs-toggle="modal" data-bs-target="#movieEditModal" type="button" class="btn btn-dark col-md-5 rounded-pill align-self-center">Edit</button>
+				<button onclick="toggleDialog('insertMovieDialog')" type="button" class="btn btn-dark col-md-5 rounded-pill align-self-center">Edit</button>
 				<button type="submit" class="btn btn-dark col-md-5 rounded-pill align-self-center" onclick="deleteAlert(${movie.getMovie_id()})">Delete</button>
 			</div>
 
@@ -111,23 +127,11 @@
 	</div>
 	
 	<!-- Modal -->
-	<div class="modal fade" id="movieEditModal" tabindex="-1"
-		aria-labelledby="movieEditModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="movieEditModalLabel">Edit Movie</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<jsp:include page="insertMovieModal.jsp">
-					    <jsp:param name="formType" value="edit"/>
-					    <jsp:param name="id" value="${movie.getMovie_id() }"/>
-				    </jsp:include>
-				</div>
-			</div>
-		</div>
+	<div class="dialog" id="insertMovieDialog">
+		<jsp:include page="insertMovieModal.jsp">
+		    <jsp:param name="formType" value="edit"/>
+		    <jsp:param name="id" value="${movie.getMovie_id() }"/>
+	    </jsp:include>
 	</div>
 	
 	<!-- Bootstrap -->
@@ -141,6 +145,28 @@
 			if (confirm('Are you sure you want to delete this thing into the database?')) {
 				  window.location.href="/CCBS/company/movie/delete/"+id;
 				} 
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function toggleDialog(modalId) {
+			var dialog = document.getElementById(modalId);
+			console.log(dialog);
+			console.log(modalId);
+			var backdrop = document.getElementById("backdrop");
+			if (dialog.style.display == 'none' || dialog.style.display == "") {
+				dialog.style.display = "block";
+				backdrop.style.display = "block";
+			} else {
+				dialog.style.display = "none";
+				backdrop.style.display = "none";
+			}
+		}
+		function closeDialog(modalId) {
+			var dialog = document.getElementById(modalId);
+			var backdrop = document.getElementById("backdrop");
+			dialog.style.display = "none";
+			backdrop.style.display = "none";
 		}
 	</script>
 		

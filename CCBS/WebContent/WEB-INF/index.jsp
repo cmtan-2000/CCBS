@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="model.FAB" %>
+	pageEncoding="ISO-8859-1" import="model.FAB"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -8,10 +8,12 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
+<link rel="shortcut icon" type="image/x-icon"
+	href="<c:url value='resources/images/CCBS.ico' /> ">
 
 <!-- CSS -->
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style2.css"/>" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/style2.css"/>" />
 <link rel="stylesheet" href="<c:url value="/resources/css/modal.css"/>" />
 
 
@@ -32,17 +34,17 @@
 
 <title>Home Page</title>
 <style>
-	.grid-display {
-		display: grid;
-	    grid-template-columns: repeat(6,1fr);
-	    grid-gap: 20px 0px;
-	}
+.grid-display {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-gap: 20px 0px;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="header2.jsp"></jsp:include>
 	<div class="modal-backdrop" id="backdrop"></div>
-	
+
 	<br>
 	<br>
 	<!-- for users to navigate and click the tabs -->
@@ -61,17 +63,11 @@
 
 		<div
 			style="justify-content: flex-end; display: flex; flex-direction: row;">
-
 			<button type="button"
 				class="btn btn-primary font-weight-bold rounded-pill right"
 				onclick="toggleDialog('insertMovieDialog')">
 				<i class="fas fa-plus"></i> Add Movie
 			</button>
-
-			<!-- <a target="_blank" href="./movie-history.jsp">
-				<button type="button" class="btn btn-primary font-weight-bold rounded-pill ">
-				<i class="fas fa-plus"></i> History</button>
-			</a> -->
 		</div>
 		<br>
 		<!--poster after click, will open up add movie history -->
@@ -116,24 +112,26 @@
 		<!-- the list, need to chg, insert data backend -->
 		<div class="container mt-5">
 			<table class="table table-border">
-				<c:forEach items="${branchList}" var="branch" varStatus="loop">		
+				<c:forEach items="${branchList}" var="branch" varStatus="loop">
 					<tr>
-						<td colspan="4"><b class="snack-title"> <c:out value="${ branch.getBrch_name() }"></c:out> </b></td>
-				
-					</tr>
-				<%
-					String[] hall = new String[]{"Hall 13", "Hall 14", "Hall 15", "Hall 16"};
-					String[] status = new String[]{"Pending", "Pending", "Approved", "Pending"};
-					String dialog = "\"" + "manageSchedulDialog" + "\"";
+						<td colspan="4"><b class="snack-title"> <c:out
+									value="${ branch.getBrch_name() }"></c:out>
+						</b></td>
 
-					for (int i = 0; i < hall.length; i++) {
-						out.println("<tr>" + "<td>" + hall[i] + "</td>" + "<td>" + status[i] + "</td>"
-								+ "<td width=\"15%\"><button class='btn btn-primary font-weight-bold rounded-pill' onclick='toggleDialog(\"manageSchedulDialog\")'>"
-								+ "<i class=\"fas fa-edit\"></i> Manage</button></td>"
-								+ "<td><button class='btn btn-danger font-weight-bold rounded-pill' data-bs-toggle=\"modal\" data-bs-target=\"#deleteCfmModal\"><i class='fa-solid fa-trash-can'></i> Delete</button></td>"
-								+ "</tr>");
-					}
-				%>
+					</tr>
+					<%
+						String[] hall = new String[]{"Hall 13", "Hall 14", "Hall 15", "Hall 16"};
+							String[] status = new String[]{"Pending", "Pending", "Approved", "Pending"};
+							String dialog = "\"" + "manageSchedulDialog" + "\"";
+
+							for (int i = 0; i < hall.length; i++) {
+								out.println("<tr>" + "<td>" + hall[i] + "</td>" + "<td>" + status[i] + "</td>"
+										+ "<td width=\"15%\"><button class='btn btn-primary font-weight-bold rounded-pill' onclick='toggleDialog(\"manageSchedulDialog\")'>"
+										+ "<i class=\"fas fa-edit\"></i> Manage</button></td>"
+										+ "<td><button class='btn btn-danger font-weight-bold rounded-pill' data-bs-toggle=\"modal\" data-bs-target=\"#deleteCfmModal\"><i class='fa-solid fa-trash-can'></i> Delete</button></td>"
+										+ "</tr>");
+							}
+					%>
 				</c:forEach>
 			</table>
 		</div>
@@ -156,7 +154,8 @@
 							<label for="branchName" class="col-sm-5 col-form-label w-50">Branch
 								Name</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="branchName" name="branchName"/>
+								<input type="text" class="form-control" id="branchName"
+									name="branchName" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -168,34 +167,37 @@
 						<div class="form-group">
 							<label for="branchPostcode" class="col-sm-5 col-form-label w-50">Postcode</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="branchPostcode" name="branchPostcode" />
+								<input type="text" class="form-control" id="branchPostcode"
+									name="branchPostcode" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="branchCity" class="col-sm-5 col-form-label w-50">City</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="branchCity" name="branchCity" />
+								<input type="text" class="form-control" id="branchCity"
+									name="branchCity" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="branchState" class="col-sm-5 col-form-label w-50">State</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="branchState" name="branchState"/>
+								<input type="text" class="form-control" id="branchState"
+									name="branchState" />
 							</div>
 						</div>
-						
+
 						<div class="modal-footer">
-					<button type="button"
-						class="btn btn-secondary font-weight-bold rounded-pill"
-						data-bs-dismiss="modal">Close</button>
-					<button type="button"
-						class="btn btn-success font-weight-bold rounded-pill">Submit</button>
-				</div>
-				
-				
+							<button type="button"
+								class="btn btn-secondary font-weight-bold rounded-pill"
+								data-bs-dismiss="modal">Close</button>
+							<button type="button"
+								class="btn btn-success font-weight-bold rounded-pill">Submit</button>
+						</div>
+
+
 					</form>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
@@ -287,7 +289,7 @@
 
 	<div class="dialog" id="insertMovieDialog">
 		<jsp:include page="insertMovieModal.jsp">
-			<jsp:param name="formType" value="create"/>
+			<jsp:param name="formType" value="create" />
 		</jsp:include>
 	</div>
 
