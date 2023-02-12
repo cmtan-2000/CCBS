@@ -12,6 +12,8 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
 	rel="stylesheet" />
+<!-- CSS -->
+<link rel="stylesheet" href="/resources/css/modal.css">
 
 <!-- Bootstrap -->
 <link
@@ -123,11 +125,6 @@
 					    <jsp:param name="formType" value="edit"/>
 					    <jsp:param name="id" value="${movie.getMovie_id() }"/>
 				    </jsp:include>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success">Update</button>
 				</div>
 			</div>
 		</div>

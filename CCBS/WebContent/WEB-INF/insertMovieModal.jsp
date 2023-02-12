@@ -5,6 +5,11 @@
 label {
 	font-weight: bold;
 }
+.checkboxes {
+    display: inline-block;
+    margin-right: 15px;
+    min-width: 90px;
+}
 </style>
 
 <form action="/CCBS/company/movie/create" method="POST">
@@ -35,18 +40,18 @@ label {
 		<div class="col-6">
 		<div class="card mt-3">
 			<div class="card-body">
-				<label for="tags" class="form-label">Movie Tags</label> (multiple)
-				<select class="form-select" name="tags" multiple required>
-					<option disabled selected>Select Tags</option>
-					<c:forEach items="${allTags}" var="tags"
-						varStatus="loop"><option>${tags}</option>
-					</c:forEach>
-				</select>
+				<label for="tags" class="form-label">Movie Tags</label> (select multiple)<br>
+				<c:forEach items="${allTags}" var="tag" varStatus="loop">
+					<div class="checkboxes">
+						<input class="form-check-input" type="checkbox" name="${tag}" value="${tag}" <c:if test="${movie.getTags().contains(tag)}">checked</c:if> /> 
+						<label class="form-check-label" for="${tag}">${tag}</label>
+					</div>
+				</c:forEach>
 				<label for="genre" class="form-label mt-3">Movie Genre</label> 
 				<select class="form-select" name="genre" required>
 					<option disabled selected>Select Genre</option>
 					<c:forEach items="${allGenres}" var="genre"
-						varStatus="loop"><option value="${genre }">${genre}</option>
+						varStatus="loop"><option value="${genre}" <c:if test="${movie.getGenre().contains(genre)}">selected</c:if> >${genre}</option>
 					</c:forEach>
 				</select>
 			</div>
