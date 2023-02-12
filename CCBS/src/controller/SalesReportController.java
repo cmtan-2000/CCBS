@@ -3,6 +3,8 @@ package controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,89 +17,54 @@ import model.SalesReport;
 @Controller
 @RequestMapping("/salesReport")
 public class SalesReportController {
-
-	SalesReportDAO sReportDAO = new SalesReportDAO();
 	
-	@RequestMapping("/day")
+	SalesReport sReport = new SalesReport();
+	
+	@RequestMapping("/day/ticket")
 	@ResponseBody()
-	protected String day(@RequestParam Map<String, String> req) {
-		
-		SalesReport sReport = new SalesReport();
-		
-		String Branch_id = req.get("branch_id");
-		sReport.setBranch_name(Branch_id);
-		String dispMode = req.get("filter");
-		sReport.setDispMode(dispMode);
-		
-		List<SalesReport> ticketSubTList = sReportDAO.getTicketSubT();
-		List<SalesReport> SnkBvgSubTList = sReportDAO.getSnackBeverageT()();
-		for(int i=0; i<ticketSubTList.size(); i++) {
-			String ticketSubT += ticketSubTList.get(i);
-			return ticketSubT;
-		}
-		
-		for(int i=0; i<SnkBvgSubTList.size(); i++) {
-			String snackBSubTL += SnkBvgSubTList.get(i);
-			return snackBSubT;
-		}		
+	public SalesReport getTicketD(HttpServletRequest req) {
+		SalesReportDAO sReportDAO = new SalesReportDAO();
+		SalesReport total = sReportDAO.getTicketD();
+		return total;
 	}
 	
-	@RequestMapping("/month")
+	@RequestMapping("/month/ticket")
 	@ResponseBody()
-	protected String month(@RequestParam Map<String, String> req) {
-		
-		SalesReport sReport = new SalesReport();
-		
-		String Branch_id = req.get("branch_id");
-		sReport.setBranch_name(Branch_id);
-		String dispMode = req.get("filter");
-		sReport.setDispMode(dispMode);
-		
-		List<SalesReport> ticketSubTList = sReportDAO.getTicketSubT();
-		List<SalesReport> SnkBvgSubTList = sReportDAO.getSnackBeverageT()();
-		for(int i=0; i<ticketSubTList.size(); i++) {
-			String ticketSubT += ticketSubTList.get(i);
-			return ticketSubT;
-		}
-		
-		for(int i=0; i<SnkBvgSubTList.size(); i++) {
-			String snackBSubTL += SnkBvgSubTList.get(i);
-			return snackBSubT;
-		}
-				
+	public SalesReport getTicketM(HttpServletRequest req) {
+		SalesReportDAO sReportDAO = new SalesReportDAO();
+		SalesReport total = sReportDAO.getTicketM();
+		return total;
 	}
 	
-	@RequestMapping("/year")
+	@RequestMapping("/year/ticket")
 	@ResponseBody()
-	protected String year(@RequestParam Map<String, String> req) {
-		
-		SalesReport sReport = new SalesReport();
-		
-		String Branch_id = req.get("branch_id");
-		sReport.setBranch_name(Branch_id);
-		String dispMode = req.get("filter");
-		sReport.setDispMode(dispMode);
-		
-		List<SalesReport> ticketSubTList = sReportDAO.getTicketSubT();
-		List<SalesReport> SnkBvgSubTList = sReportDAO.getSnackBeverageT()();
-		for(int i=0; i<ticketSubTList.size(); i++) {
-			String ticketSubT += ticketSubTList.get(i);
-			return ticketSubT;
-		}
-		
-		for(int i=0; i<SnkBvgSubTList.size(); i++) {
-			String snackBSubTL += SnkBvgSubTList.get(i);
-			return snackBSubT;
-		}
-				
-	}
-
-	@RequestMapping("/index")
-	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("salesReport");
-		List<SalesReport> sReportList = sReportDAO.getDay();
-		model.addObject(sReportList);
-		return model;
+	public SalesReport getTicketY(HttpServletRequest req) {
+		SalesReportDAO sReportDAO = new SalesReportDAO();
+		SalesReport total = sReportDAO.getTicketY();
+		return total;
 	}
 	
+	@RequestMapping("/day/snackB")
+	@ResponseBody()
+	public SalesReport getSnackBD(HttpServletRequest req) {
+		SalesReportDAO sReportDAO = new SalesReportDAO();
+		SalesReport total = sReportDAO.getSnackBD();
+		return total;
+	}
+	
+	@RequestMapping("/month/snackB")
+	@ResponseBody()
+	public SalesReport getSnackBM(HttpServletRequest req) {
+		SalesReportDAO sReportDAO = new SalesReportDAO();
+		SalesReport total = sReportDAO.getSnackBM();
+		return total;
+	}
+	
+	@RequestMapping("/year/snackB")
+	@ResponseBody()
+	public SalesReport getSnackBY(HttpServletRequest req) {
+		SalesReportDAO sReportDAO = new SalesReportDAO();
+		SalesReport total = sReportDAO.getSnackBY();
+		return total;
+	}
 }

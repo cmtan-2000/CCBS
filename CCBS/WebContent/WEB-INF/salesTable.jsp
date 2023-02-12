@@ -54,12 +54,12 @@
 		<tr>
 			<td>Branch</td>
 			<td>:</td>
-			<td>A</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Table Displayed In</td>
 			<td>:</td>
-			<td>Month</td>
+			<td></td>
 		</tr>
 	</table>
 	<table class="sales-report">
@@ -69,15 +69,15 @@
 			</tr>
 			<tr>
 				<td id="t1">Movie Ticket</td>
-				<td id="t2">1000</td>
+				<td id="t2"></td>
 			</tr>
 			<tr>
 				<td id="t1">Snack &amp; Beverage</td>
-				<td id="t2">2000</td>
+				<td id="t2"></td>
 			</tr>
 			<tr>
 				<td id="t1">Total</td>
-				<td id="t2">3000</td>
+				<td id="t2"></td>
 			</tr>
 	</table>
 </body>
