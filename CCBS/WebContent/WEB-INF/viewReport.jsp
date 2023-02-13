@@ -38,7 +38,7 @@
 	}
 </style>
 <body>
-	<form action="{filter}" th:object="${report}" class="getD">
+	<form action="/CCBS/admin/{filter}" th:object="${report}" class="getD">
 		<label class="label-filter">Filter:</label>
 			<select name="filter" id="filter" class="filter" th:field="{filter}">
 				<option value="getDayDetails">Day</option>
