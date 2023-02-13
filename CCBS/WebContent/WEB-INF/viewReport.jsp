@@ -73,13 +73,12 @@
 				</tr>
 				<tr>
 					<td id="t1">Movie Ticket</td>
-					<td id="t2">${detail[0]}</td>
+					<td id="t2">${detail.getTicket_total}</td>
 				</tr>
 				<tr>
 					<td id="t1">Snack And Beverage</td>
-					<td id="t2">${detail[0]}</td>
+					<td id="t2">${detail.getSnackBvg_total}</td>
 				</tr>
 		</table>
-
 </body>
 </html>
