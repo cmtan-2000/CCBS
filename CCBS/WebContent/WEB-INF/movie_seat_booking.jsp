@@ -111,27 +111,27 @@
 		data-bs-target="#exampleModal">Hall Condition</button>
 
 	<!-- Modal -->
-	<%-- <div class="modal fade" id="exampleModal" tabindex="-1"
+	 <div class="modal fade" id="exampleModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">
-						<b>Hall Type: ${hallBean.hall_type}</b>
+						<b>Hall Type: ${hall.hall_type}</b>
 					</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<c:set var="image2" value="${image2}" />
+					<%-- <c:set var="image2" value="${image2}" />
 					<c:set var="imageBase64"
 						value="${Base64.getEncoder().encodeToString(IOUtils.toByteArray(image2))}" />
 					<img src="data:image/jpg;base64,${imageBase64}"
-						class="img-thumbnail" style="max-width: 100%; height: auto;">
+						class="img-thumbnail" style="max-width: 100%; height: auto;"> --%>
 
 					<div style="padding-top: 1.5rem;">
-						<p>Air Conditioner: ${hallBean.air_cond}</p>
-						<p>Sound system: ${hallBean.sound_sys}</p>
+						<p>Air Conditioner: ${hall.air_cond}</p>
+						<p>Sound system: ${hall.sound_sys}</p>
 					</div>
 
 				</div>
@@ -141,7 +141,7 @@
 				</div>
 			</div>
 		</div>
-	</div> --%>
+	</div> 
 
 	<p class="text">
 		You have selected <span id="count"> <c:choose>
@@ -157,7 +157,7 @@
 					<c:out value="${(noseatSelected-1)*price }" />
 				</c:when>
 				<c:otherwise>
-		    0
+		    0.00
 		  </c:otherwise>
 			</c:choose>
 		</span>
