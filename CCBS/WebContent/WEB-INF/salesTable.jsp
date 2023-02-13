@@ -51,37 +51,6 @@
 		
 	<button value="PRINT" class="bttn-print">PRINT</button>
 	<h2>Sales Report</h2>
-	<c:forEach items="${sReportList}" var="sReport" varStatus="loop">
-		<table class="basic-info">
-			<tr>
-				<td>Branch</td>
-				<td>:</td>
-				<td>${sReportBrch.branchName}</td>
-			</tr>
-			<tr>
-				<td>Table Displayed In</td>
-				<td>:</td>
-				<td>${sReportDisp.dispMode}</td>
-			</tr>
-		</table>
-		<table class="sales-report">
-				<tr>
-					<th id="t1">Sales Component</th>
-					<th id="t2">Total (RM)</th>
-				</tr>
-				<tr>
-					<td id="t1">Movie Ticket</td>
-					<td id="t2">${sReportD.total}</td>
-				</tr>
-				<tr>
-					<td id="t1">Snack &amp; Beverage</td>
-					<td id="t2">${sReportD.total}</td>
-				</tr>
-				<tr>
-					<td id="t1">Total</td>
-					<td id="t2">${sReportD.total}</td>
-				</tr>
-		</table>
-	</c:forEach>
+		
 </body>
 </html>

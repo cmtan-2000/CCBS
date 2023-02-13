@@ -193,8 +193,10 @@ body {
 <body>
 	<jsp:include page="header1.jsp"></jsp:include>
 	<div class="company__header">
-		<h1>Admin</h1>		
-		<button>Generate Sales Report</button>
+		<h1>Admin</h1>
+			<form action="salesTable.jsp">
+				<input type="submit" value="Generate Sales Report">
+			</form>
 
 	</div>
 

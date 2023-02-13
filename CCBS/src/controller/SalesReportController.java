@@ -3,9 +3,11 @@ package controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,15 +33,18 @@ public class SalesReportController extends HttpServlet {
 	}
 	
 	@RequestMapping("/salesReport/{branch_id}/{filter}")
-	public ModelAndView branchName(@PathVariable Map<String, String> pathS) {
+	public String dispMode(@PathVariable Map<String, String> pathS) {
 		ModelAndView model = new ModelAndView("salesTable");
 		String dispMode = String.valueOf(pathS.get("filter"));
 		model.addObject("sReportDisp", dispMode);
 		
-		if(dispMode=="day") return "redirect:/day";
-		else if (dispMode=="month") return "redirect:/month";
-		else if (dispMode=="year") return "redirect:/year";
-		return model;
+		if(dispMode=="day") 
+			return "redirect:/day";
+		else if (dispMode=="month") 
+			return "redirect:/month";
+		else if (dispMode=="year") 
+			return "redirect:/year";
+		return dispMode;
 	}
 	
 	@RequestMapping("/day")
@@ -54,7 +59,7 @@ public class SalesReportController extends HttpServlet {
 	
 	@RequestMapping("/month")
 	@ResponseBody()
-	public ModelAndView getDay() {
+	public ModelAndView getMonth() {
 		ModelAndView model = new ModelAndView("salesTable");
 		String month = "2";
 		SalesReport months = sReportDAO.getMonth(month);
@@ -64,7 +69,7 @@ public class SalesReportController extends HttpServlet {
 	
 	@RequestMapping("/year")
 	@ResponseBody()
-	public ModelAndView getDay() {
+	public ModelAndView getYear() {
 		ModelAndView model = new ModelAndView("salesTable");
 		String year = "2023";
 		SalesReport years = sReportDAO.getYear(year);
