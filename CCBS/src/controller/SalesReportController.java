@@ -52,7 +52,7 @@ public class SalesReportController {
 			Statement stt = con.createStatement();
 			ResultSet rs = stt.executeQuery(sql);
 			
-			List<Double> dReport = null;
+			List<Double> dReport = new ArrayList<Double>();
 			while(rs.next()) {
 				double ticket_total = rs.getDouble("ticket_ttl");
 				double snackBvg_total = rs.getDouble("snackBeverage_ttl");
@@ -88,7 +88,7 @@ public class SalesReportController {
 			Statement stt = con.createStatement();
 			ResultSet rs = stt.executeQuery(sql);
 			
-			List<Double> wReport = null;
+			List<Double> wReport = new ArrayList<Double>();
 			while(rs.next()) {
 				double ticket_total = rs.getDouble("ticket_ttl");
 				double snackBvg_total = rs.getDouble("snackBeverage_ttl");
@@ -124,7 +124,7 @@ public class SalesReportController {
 			Statement stt = con.createStatement();
 			ResultSet rs = stt.executeQuery(sql);
 			
-			List<Double> mReport = null;
+			List<Double> mReport = new ArrayList<Double>();
 			while(rs.next()) {
 				double ticket_total = rs.getDouble("ticket_ttl");
 				double snackBvg_total = rs.getDouble("snackBeverage_ttl");
