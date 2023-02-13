@@ -34,17 +34,17 @@
 	}
 </style>
 <body>
-	<form action="/salesReport" th:object="${report}">
+	<form action="CCBS/admin/salesReport">
 		<label class="label-filter">Filter:</label>
-			<select name="filter" id="filter" class="filter" th:field="{filter}">
+			<select name="filter" id="filter" class="filter">
 				<option value="getDayDetails">Day</option>
 				<option value="getWeekDetails">Week</option>
 				<option value="getMonthDetails">Month</option>
 			</select>
 		<label class="label-branchid">Branch Name:</label>
-			<input type="text" id="brch_name" name="brch_name" placeholder="Insert Branch Name" th:field="{brch_name}">
+			<input type="text" id="brch_name" name="brch_name" placeholder="Insert Branch Name">
 		<label class="label-branchid">Company Name:</label>
-			<input type="text" id="cpy_name" name="cpy_name" placeholder="Insert Company Name" th:field="{cpy_name}">
+			<input type="text" id="cpy_name" name="cpy_name" placeholder="Insert Company Name">
 			<input type="submit" value="SEARCH" name="search">
 	</form>
 		
