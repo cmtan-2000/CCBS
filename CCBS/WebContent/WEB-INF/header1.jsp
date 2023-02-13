@@ -39,7 +39,7 @@
 					class="link">ADMIN</a></li>
 				<li class="menu-item current menu-item"><a href="/admin"
 					class="link">Home</a></li>
-				<li class="menu-item"><a href="/login" class="link">Sign Out</a></li>
+				<li class="menu-item"><a href="<c:url value='/logout'/>" class="link">Sign Out</a></li>
 			</ul>
 		</nav>
 	</header>

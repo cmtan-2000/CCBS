@@ -45,6 +45,11 @@ public class LoginController extends HttpServlet {
 		return mav;
 	}
 	
+	@RequestMapping("/logout")
+	public ModelAndView logout() {
+		ModelAndView mav = new ModelAndView("Logout");
+		return mav;
+	}
 	
 	@PostMapping("/login_success")
 	protected String login(HttpServletRequest request, HttpServletResponse response,
