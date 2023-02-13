@@ -15,56 +15,100 @@ import bdUtil.SalesReportDAO;
 import model.SalesReport;
 
 @Controller
-@RequestMapping("/salesReport")
-public class SalesReportController {
+//@RequestMapping("/salesReport")
+public class SalesReportController extends HttpServlet {
 	
 	SalesReport sReport = new SalesReport();
+	SalesReportDAO sReportDAO = new SalesReportDAO();
 	
-	@RequestMapping("/day/ticket")
-	@ResponseBody()
-	public SalesReport getTicketD(HttpServletRequest req) {
-		SalesReportDAO sReportDAO = new SalesReportDAO();
-		SalesReport total = sReportDAO.getTicketD();
-		return total;
+	@RequestMapping("/salesReport/{branch_id}")
+	public ModelAndView branchName(@PathVariable Map<String, String> pathS) {
+		ModelAndView model = new ModelAndView("salesTable");
+		int id = Integer.valueOf(pathS.get("branch_id"));
+		SalesReport branchName = sReportDAO.findById(id);
+		model.addObject("sReportBrch", branchName);
+		return model;
 	}
 	
-	@RequestMapping("/month/ticket")
-	@ResponseBody()
-	public SalesReport getTicketM(HttpServletRequest req) {
-		SalesReportDAO sReportDAO = new SalesReportDAO();
-		SalesReport total = sReportDAO.getTicketM();
-		return total;
+	@RequestMapping("/salesReport/{branch_id}/{filter}")
+	public ModelAndView branchName(@PathVariable Map<String, String> pathS) {
+		ModelAndView model = new ModelAndView("salesTable");
+		String dispMode = String.valueOf(pathS.get("filter"));
+		model.addObject("sReportDisp", dispMode);
+		
+		if(dispMode=="day") return "redirect:/day";
+		else if (dispMode=="month") return "redirect:/month";
+		else if (dispMode=="year") return "redirect:/year";
+		return model;
 	}
 	
-	@RequestMapping("/year/ticket")
+	@RequestMapping("/day")
 	@ResponseBody()
-	public SalesReport getTicketY(HttpServletRequest req) {
-		SalesReportDAO sReportDAO = new SalesReportDAO();
-		SalesReport total = sReportDAO.getTicketY();
-		return total;
+	public ModelAndView getDay() {
+		ModelAndView model = new ModelAndView("salesTable");
+		String date = "2023-2-13";
+		SalesReport day = sReportDAO.getDay(date);
+		model.addObject("sReportD", day);
+		return model;
 	}
 	
-	@RequestMapping("/day/snackB")
+	@RequestMapping("/month")
 	@ResponseBody()
-	public SalesReport getSnackBD(HttpServletRequest req) {
-		SalesReportDAO sReportDAO = new SalesReportDAO();
-		SalesReport total = sReportDAO.getSnackBD();
-		return total;
+	public ModelAndView getDay() {
+		ModelAndView model = new ModelAndView("salesTable");
+		String month = "2";
+		SalesReport months = sReportDAO.getMonth(month);
+		model.addObject("sReportM", months);
+		return model;
 	}
 	
-	@RequestMapping("/month/snackB")
+	@RequestMapping("/year")
 	@ResponseBody()
-	public SalesReport getSnackBM(HttpServletRequest req) {
-		SalesReportDAO sReportDAO = new SalesReportDAO();
-		SalesReport total = sReportDAO.getSnackBM();
-		return total;
+	public ModelAndView getDay() {
+		ModelAndView model = new ModelAndView("salesTable");
+		String year = "2023";
+		SalesReport years = sReportDAO.getYear(year);
+		model.addObject("sReportY", years);
+		return model;
 	}
 	
-	@RequestMapping("/year/snackB")
-	@ResponseBody()
-	public SalesReport getSnackBY(HttpServletRequest req) {
-		SalesReportDAO sReportDAO = new SalesReportDAO();
-		SalesReport total = sReportDAO.getSnackBY();
-		return total;
-	}
+//	@RequestMapping("/month/ticket")
+//	@ResponseBody()
+//	public SalesReport getTicketM(HttpServletRequest req) {
+//		SalesReportDAO sReportDAO = new SalesReportDAO();
+//		SalesReport total = sReportDAO.getTicketM();
+//		return total;
+//	}
+//	
+//	@RequestMapping("/year/ticket")
+//	@ResponseBody()
+//	public SalesReport getTicketY(HttpServletRequest req) {
+//		SalesReportDAO sReportDAO = new SalesReportDAO();
+//		SalesReport total = sReportDAO.getTicketY();
+//		return total;
+//	}
+//	
+//	@RequestMapping("/day/snackB")
+//	@ResponseBody()
+//	public SalesReport getSnackBD(HttpServletRequest req) {
+//		SalesReportDAO sReportDAO = new SalesReportDAO();
+//		SalesReport total = sReportDAO.getSnackBD();
+//		return total;
+//	}
+//	
+//	@RequestMapping("/month/snackB")
+//	@ResponseBody()
+//	public SalesReport getSnackBM(HttpServletRequest req) {
+//		SalesReportDAO sReportDAO = new SalesReportDAO();
+//		SalesReport total = sReportDAO.getSnackBM();
+//		return total;
+//	}
+//	
+//	@RequestMapping("/year/snackB")
+//	@ResponseBody()
+//	public SalesReport getSnackBY(HttpServletRequest req) {
+//		SalesReportDAO sReportDAO = new SalesReportDAO();
+//		SalesReport total = sReportDAO.getSnackBY();
+//		return total;
+//	}
 }

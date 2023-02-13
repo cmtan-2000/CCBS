@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,35 +51,37 @@
 		
 	<button value="PRINT" class="bttn-print">PRINT</button>
 	<h2>Sales Report</h2>
-	<table class="basic-info">
-		<tr>
-			<td>Branch</td>
-			<td>:</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>Table Displayed In</td>
-			<td>:</td>
-			<td></td>
-		</tr>
-	</table>
-	<table class="sales-report">
+	<c:forEach items="${sReportList}" var="sReport" varStatus="loop">
+		<table class="basic-info">
 			<tr>
-				<th id="t1">Sales Component</th>
-				<th id="t2">Total (RM)</th>
+				<td>Branch</td>
+				<td>:</td>
+				<td>${sReportBrch.branchName}</td>
 			</tr>
 			<tr>
-				<td id="t1">Movie Ticket</td>
-				<td id="t2"></td>
+				<td>Table Displayed In</td>
+				<td>:</td>
+				<td>${sReportDisp.dispMode}</td>
 			</tr>
-			<tr>
-				<td id="t1">Snack &amp; Beverage</td>
-				<td id="t2"></td>
-			</tr>
-			<tr>
-				<td id="t1">Total</td>
-				<td id="t2"></td>
-			</tr>
-	</table>
+		</table>
+		<table class="sales-report">
+				<tr>
+					<th id="t1">Sales Component</th>
+					<th id="t2">Total (RM)</th>
+				</tr>
+				<tr>
+					<td id="t1">Movie Ticket</td>
+					<td id="t2">${sReportD.total}</td>
+				</tr>
+				<tr>
+					<td id="t1">Snack &amp; Beverage</td>
+					<td id="t2">${sReportD.total}</td>
+				</tr>
+				<tr>
+					<td id="t1">Total</td>
+					<td id="t2">${sReportD.total}</td>
+				</tr>
+		</table>
+	</c:forEach>
 </body>
 </html>
