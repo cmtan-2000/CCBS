@@ -19,6 +19,7 @@ bdUtil\SeatDAO.class
 model\Auth.class
 model\Price.class
 controller\BranchController.class
+model\Hall.class
 controller\FABController.class
 bdUtil\SalesReportDAO.class
 controller\FoodBeverageController.class
