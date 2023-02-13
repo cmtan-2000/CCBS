@@ -138,13 +138,13 @@ body {
 
 .cover {
 	position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.80;
-    left: 0;
-    top: 0;
-    z-index: 1;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 0.80;
+	left: 0;
+	top: 0;
+	z-index: 1;
 }
 
 .hidden {
@@ -200,22 +200,6 @@ body {
 	</div>
 
 	<!-- All related Model  -->
-
-	<div id="addBranch" class="model hidden" style="width: 30%">
-		<p>
-			Company: <input type="text" name="company" value="" />
-		</p>
-		<input type="file" name="filepicture" />
-		<p>
-			Location: <br>
-			<textarea id="location" name="location" rows="3" cols="40"></textarea>
-		</p>
-		<div class="row" style="align-self: flex-end; margin: 0">
-			<button id="addBranch" onclick="cancelModel(this.id)" class="btn btn-light">Cancel</button>
-			<button style="margin-left: 10px" class="btn btn-success">Create</button>
-		</div>
-	</div>
-
 	<div id="request" class="model hidden" style="width: 40%">
 		<div>
 			GSC
@@ -261,8 +245,9 @@ body {
 			</div>
 		</div>
 
-		<div class="row" style="align-self: flex-end; margin: 0">
-			<button id="request" onclick="cancelModel(this.id)">Cancel</button>
+		<div class="mt-3" style="align-self: flex-end; margin: 0">
+			<button id="request" onclick="cancelModel(this.id)"
+				class="btn btn-light">Cancel</button>
 		</div>
 	</div>
 
@@ -302,8 +287,8 @@ body {
 		<div class="row"
 			style="margin: 0; flex-direction: row; align-self: flex-end">
 			<button id="hallDetail" onclick="cancelModel(this.id)"
-				style="margin-right: 20px">Cancel</button>
-			<button onclick="cancelModel(this.id)" style="">Update</button>
+				class="btn btn-light">Cancel</button>
+			<button onclick="cancelModel(this.id)" class="btn btn-success">Update</button>
 		</div>
 
 		<b>Last updated: 11 November 2022</b>
