@@ -24,13 +24,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import bdUtil.DetailDAO;
 import bdUtil.MovieDAO;
+import model.Detail;
 import model.Movie;
 
 @Controller
 public class MovieController extends HttpServlet {
 
 	MovieDAO movDAO = new MovieDAO();
+	DetailDAO detDAO = new DetailDAO();
 
 	public MovieController() {
 		super();
@@ -61,10 +64,12 @@ public class MovieController extends HttpServlet {
 		ModelAndView mav = new ModelAndView("movieDetail");
 		int id = Integer.valueOf(pathV.get("id"));
 		Movie movieObject = movDAO.findById(id);
+//		Detail detailObject = detDAO.findById(id);
 		mav.addObject("movie", movieObject);
 		mav.addObject("moviePrices", movDAO.getMoviePrices(id));
 		mav.addObject("allTags", movDAO.getAllMovieTags());
 		mav.addObject("allGenres", movDAO.getAllMovieGenres());
+		mav.addObject("detail", detDAO.findById(id));
 		return mav;
 	}
 

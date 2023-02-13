@@ -78,14 +78,15 @@
 				    </tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${movie.size()}" var="movie">
+				<c:out value="${detail}"/> 
+					<%-- <c:forEach items="${movie.size()}" var="movie">
 						<tr>
-							<td><c:out value="${movie.getShowtime()}"></c:out></td>
-							<td><c:out value="${movie.getHall_id()}"></c:out></td>
-							<td><c:out value="${movie.getPrice()}"></c:out></td>
-							<td><c:out value="${movie.getHall_type()}"></c:out></td>
+							<td><c:out value="${detail.getShowtime_time()}"></c:out></td>
+							<td><c:out value="${detail.getHall_id()}"></c:out></td>
+							<td><c:out value="${moviePrices.getPrice()}"></c:out></td>
+							<td><c:out value="${detail.getHall_type()}"></c:out></td>
 						</tr>
-					</c:forEach>
+					</c:forEach> --%>
 				</tbody>
 			</table>
 		</div>
