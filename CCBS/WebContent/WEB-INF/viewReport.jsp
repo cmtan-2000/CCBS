@@ -56,12 +56,12 @@
 			<tr>
 				<td>Branch</td>
 				<td>:</td>
-				<td th:text="${report.brch_name}"></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>Company Name</td>
 				<td>:</td>
-				<td th:text="${report.cpy_name}"></td>
+				<td></td>
 			</tr>
 		</table>
 		<table class="sales-report">

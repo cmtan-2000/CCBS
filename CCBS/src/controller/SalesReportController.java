@@ -13,135 +13,70 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import bdUtil.SalesReportDAO;
 import model.SalesReport;
 
 @Controller
 public class SalesReportController {
 	
-	SalesReport sReport = new SalesReport();
+	SalesReportDAO sReportDAO = new SalesReportDAO();
 	
-	@RequestMapping("/salesReport")
+	@RequestMapping("/salesReport/{brch_name}/{cpy_name}")
 	public String getRedirect(HttpServletRequest request, HttpServletResponse response){
 		String red = request.getParameter("filter");
+		String brch_name = request.getParameter("brch_name");
+		String cpy_name = request.getParameter("cpy_name");
 		if(red == "getDayDetails")
-			return "redirect:/getDayDetails";
+			return "redirect:/getDayDetails/{" + brch_name + "}/{" + cpy_name + "}";
 		else if(red == "getWeekDetails")
-			return "redirect/getWeekDetails";
+			return "redirect/getWeekDetails/{" + brch_name + "}/{" + cpy_name + "}";
 		else if(red == "getMonthDetails")
-			return "redirect:/getMonthDetails";
+			return "redirect:/getMonthDetails/{" + brch_name + "}/{" + cpy_name + "}";
 		else return null;
 	}
 	
-	@RequestMapping("/getDayDetails")
-	public ModelAndView getDetailD() {
-		String dbURL = "hdbc:mysql://localhost:3303/ccbs";
-		String username = "root";
-		String password = "";
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection(dbURL, username, password);
-			
-			String sql = "select * from report where day(date)";
-			Statement stt = con.createStatement();
-			ResultSet rs = stt.executeQuery(sql);
-			
-			List<Double> dReport = new ArrayList<Double>();
-			while(rs.next()) {
-				double ticket_total = rs.getDouble("ticket_ttl");
-				double snackBvg_total = rs.getDouble("snackBeverage_ttl");
-				dReport = new ArrayList<Double>(20);
-				dReport.add(ticket_total);
-				dReport.add(snackBvg_total);	
-			}
-			ModelAndView model = new ModelAndView("viewReport");
-			model.addObject("detail", dReport);
-			con.close();
-			return model;
-		}
-		catch(SQLException ex) {
-			ex.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+	@RequestMapping("/getDayDetails/{brch_name}/{cpy_name}")
+	public ModelAndView getDetailD(@PathVariable Map<String, String> pathD) {
 		ModelAndView model = new ModelAndView("viewReport");
+		String date = "2023-02-14";
+		String branch_name = String.valueOf(pathD.get("brch_name"));
+		String company_name = String.valueOf(pathD.get("cpy_name"));
+		SalesReport reportObject = sReportDAO.findByDay(date);
+		model.addObject("day", reportObject);
+		model.addObject("branchName", branch_name);
+		model.addObject("companyName", company_name);
 		return model;
 	}
 	
-	@RequestMapping("/getWeekDetails")
-	public ModelAndView getDetailW() {
-		String dbURL = "hdbc:mysql://localhost:3303/ccbs";
-		String username = "root";
-		String password = "";
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection(dbURL, username, password);
-			
-			String sql = "select * from report where week(date)=week(now())";
-			Statement stt = con.createStatement();
-			ResultSet rs = stt.executeQuery(sql);
-			
-			List<Double> wReport = new ArrayList<Double>();
-			while(rs.next()) {
-				double ticket_total = rs.getDouble("ticket_ttl");
-				double snackBvg_total = rs.getDouble("snackBeverage_ttl");
-				wReport = new ArrayList<Double>(20);
-				wReport.add(ticket_total);
-				wReport.add(snackBvg_total);
-			}
-			ModelAndView model = new ModelAndView("viewReport");
-			model.addObject("detail", wReport);
-			con.close();
-			return model;
-		}
-		catch(SQLException ex) {
-			ex.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+	@RequestMapping("/getWeekDetails/{brch_name}/{cpy_name}")
+	public ModelAndView getDetailW(@PathVariable Map<String, String> pathD) {
 		ModelAndView model = new ModelAndView("viewReport");
+		String date = "2023-02-14";
+		String branch_name = String.valueOf(pathD.get("brch_name"));
+		String company_name = String.valueOf(pathD.get("cpy_name"));
+		SalesReport reportObject = sReportDAO.findByWeek(date);
+		model.addObject("week", reportObject);
+		model.addObject("branchName", branch_name);
+		model.addObject("companyName", company_name);
 		return model;
 	}
 	
-	@RequestMapping("/getMonthDetails")
-	public ModelAndView getDetail() {
-		String dbURL = "hdbc:mysql://localhost:3303/ccbs";
-		String username = "root";
-		String password = "";
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection(dbURL, username, password);
-			
-			String sql = "select * from report where month(date)";
-			Statement stt = con.createStatement();
-			ResultSet rs = stt.executeQuery(sql);
-			
-			List<Double> mReport = new ArrayList<Double>();
-			while(rs.next()) {
-				double ticket_total = rs.getDouble("ticket_ttl");
-				double snackBvg_total = rs.getDouble("snackBeverage_ttl");
-				mReport = new ArrayList<Double>(20);
-				mReport.add(ticket_total);
-				mReport.add(snackBvg_total);
-			}
-			ModelAndView model = new ModelAndView("viewReport");
-			model.addObject("detail", mReport);
-			con.close();
-			return model;
-		}
-		catch(SQLException ex) {
-			ex.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+	@RequestMapping("/getMonthDetails/{brch_name}/{cpy_name}")
+	public ModelAndView getDetailM(@PathVariable Map<String, String> pathD) {
 		ModelAndView model = new ModelAndView("viewReport");
+		String date = "2023-02-14";
+		String branch_name = String.valueOf(pathD.get("brch_name"));
+		String company_name = String.valueOf(pathD.get("cpy_name"));
+		SalesReport reportObject = sReportDAO.findByMonth(date);
+		model.addObject("month", reportObject);
+		model.addObject("branchName", branch_name);
+		model.addObject("companyName", company_name);
 		return model;
 	}
 }
