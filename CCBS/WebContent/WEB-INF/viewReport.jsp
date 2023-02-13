@@ -51,8 +51,6 @@
 			<input type="text" id="cpy_name" name="cpy_name" placeholder="Insert Company Name" th:field="{cpy_name}">
 			<input type="submit" value="SEARCH" name="search">
 	</form>
-		
-	<button value="PRINT" class="bttn-print">PRINT</button>
 	<h2>Sales Report</h2>
 		<table class="basic-info">
 			<tr>
