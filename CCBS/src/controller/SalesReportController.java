@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import model.SalesReport;
 
 @Controller
-@RequestMapping("/salesReport")
 public class SalesReportController {
 	
 	SalesReport sReport = new SalesReport();
