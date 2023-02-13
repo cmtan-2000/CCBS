@@ -1,34 +1,41 @@
 package model;
 
 public class SalesReport {
-	private int branch_id;
-	private int user_id;
-	private String branch_name;
-	private String dispMode;
+	private String brch_name;
+	private String cpy_name;
+	private String filter;
+	private double ticket_total;
+	private double snackBvg_total;
 	
-	public int getBranch_id() {
-		return branch_id;
+	public String getBrch_name() {
+		return brch_name;
 	}
-	public void setBranch_id(int branch_id) {
-		this.branch_id = branch_id;
+	public void setBrch_name(String brch_name) {
+		this.brch_name = brch_name;
 	}
-	public int getUser_id() {
-		return user_id;
+	public String getCpy_name() {
+		return cpy_name;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setCpy_name(String cpy_name) {
+		this.cpy_name = cpy_name;
 	}
-	public String getBranch_name() {
-		return branch_name;
+	public String getFilter() {
+		return filter;
 	}
-	public void setBranch_name(String branch_name) {
-		this.branch_name = branch_name;
+	public void setFilter(String filter) {
+		this.filter = filter;
 	}
-	public String getDispMode() {
-		return dispMode;
+	public double getTicket_total() {
+		return ticket_total;
 	}
-	public void setDispMode(String dispMode) {
-		this.dispMode = dispMode;
+	public void setTicket_total(double ticket_total) {
+		this.ticket_total = ticket_total;
+	}
+	public double getSnackBvg_total() {
+		return snackBvg_total;
+	}
+	public void setSnackBvg_total(double snackBvg_total) {
+		this.snackBvg_total = snackBvg_total;
 	}
 	
 	
