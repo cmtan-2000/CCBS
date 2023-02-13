@@ -167,7 +167,7 @@ body {
 	<jsp:include page="header1.jsp"></jsp:include>
 	<div class="company__header">
 		<h1>Admin</h1>
-		<form action="/generateReport">
+		<form action="/CCBS/admin/generateReport">
 			<input type="submit" value="Generate Sales Report">
 		</form>	
 
