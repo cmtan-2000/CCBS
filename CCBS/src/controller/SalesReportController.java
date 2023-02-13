@@ -52,21 +52,26 @@ public class SalesReportController {
 			Statement stt = con.createStatement();
 			ResultSet rs = stt.executeQuery(sql);
 			
+			List<Double> dReport = null;
 			while(rs.next()) {
 				double ticket_total = rs.getDouble("ticket_ttl");
 				double snackBvg_total = rs.getDouble("snackBeverage_ttl");
-				List<Double> dReport = new ArrayList<Double>(20);
+				dReport = new ArrayList<Double>(20);
 				dReport.add(ticket_total);
-				dReport.add(snackBvg_total);
+				dReport.add(snackBvg_total);	
 			}
 			ModelAndView model = new ModelAndView("viewReport");
 			model.addObject("detail", dReport);
-			return model;
 			con.close();
+			return model;
 		}
 		catch(SQLException ex) {
 			ex.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
+		ModelAndView model = new ModelAndView("viewReport");
+		return model;
 	}
 	
 	@RequestMapping("/getWeekDetails")
@@ -83,21 +88,26 @@ public class SalesReportController {
 			Statement stt = con.createStatement();
 			ResultSet rs = stt.executeQuery(sql);
 			
+			List<Double> wReport = null;
 			while(rs.next()) {
 				double ticket_total = rs.getDouble("ticket_ttl");
 				double snackBvg_total = rs.getDouble("snackBeverage_ttl");
-				List<Double> wReport = new ArrayList<Double>(20);
+				wReport = new ArrayList<Double>(20);
 				wReport.add(ticket_total);
 				wReport.add(snackBvg_total);
 			}
 			ModelAndView model = new ModelAndView("viewReport");
 			model.addObject("detail", wReport);
-			return model;
 			con.close();
+			return model;
 		}
 		catch(SQLException ex) {
 			ex.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
+		ModelAndView model = new ModelAndView("viewReport");
+		return model;
 	}
 	
 	@RequestMapping("/getMonthDetails")
@@ -114,20 +124,25 @@ public class SalesReportController {
 			Statement stt = con.createStatement();
 			ResultSet rs = stt.executeQuery(sql);
 			
+			List<Double> mReport = null;
 			while(rs.next()) {
 				double ticket_total = rs.getDouble("ticket_ttl");
 				double snackBvg_total = rs.getDouble("snackBeverage_ttl");
-				List<Double> mReport = new ArrayList<Double>(20);
+				mReport = new ArrayList<Double>(20);
 				mReport.add(ticket_total);
 				mReport.add(snackBvg_total);
 			}
 			ModelAndView model = new ModelAndView("viewReport");
 			model.addObject("detail", mReport);
-			return model;
 			con.close();
+			return model;
 		}
 		catch(SQLException ex) {
 			ex.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
+		ModelAndView model = new ModelAndView("viewReport");
+		return model;
 	}
 }
