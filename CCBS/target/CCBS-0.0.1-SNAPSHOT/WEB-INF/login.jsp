@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" errorPage="errorLogin.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Login Page</title>
 <!-- CSS -->
-<link rel="stylesheet" type="text/css" href="css/style2.css">
+<link rel="stylesheet" type="text/css" href="resources/css/style2.css">
 
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
 <style>
 
 body {
@@ -169,7 +171,7 @@ a.link:hover {
     transition: .5s;
 }
 
-.forgot_password {
+.loginlink {
 	text-decoration: none;
 	color: rgb(136, 135, 135);
 	margin: 20px 30px 35px 20px;
@@ -442,6 +444,7 @@ body{
 
 </style>
 
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style2.css"/>">
 
 <!-- Bootstrap -->
 <link
@@ -456,7 +459,7 @@ body{
 		<div class="login_header">
 			<label>Login</label>
 		</div>
-		<form method="POST" action="./login">
+		<form method="POST" action="login_success">
 			<div class="username_input">
 				<input type="text" name="username" id="username" required><br>
 				<span></span> <label>Username</label>
@@ -465,24 +468,17 @@ body{
 				<input type="password" name="password" id="password" required><br>
 				<span></span> <label>Password</label>
 			</div>
-			<div class="forgot_password">
-				<a href="forgotpassword.jsp">Forgot password?</a>
+			<div class="loginlink">
+				<a style="text-decoration: none;" href="<c:url value='/forgotPassword'/>">Forgot password?</a>
 			</div>
 
-
-			<input class="btn btn-primary font-weight-bold rounded-pill login_submit" type="submit" value="LOGIN">
-			<br><br>
-
-			<!-- <p>
-			<label>User Name</label>
-			<input type="text" name="username" required><br>
-			</p>
-			<p>
-			<label>Password</label>
-			<input type="password" name="password" required><br>
-			</p> -->
-
+			<input class="btn btn-primary font-weight-bold rounded-pill login_submit" type="submit" value="LOGIN" style="margin-bottom: 5px;">
+			
+			<hr>
+			<span class="mt-3">Dont have an account? <a style="text-decoration: none;" href="<c:url value='/register'/>"/>Create now!</a></span>
+			
 		</form>
+		
 	</div>
 
 </body>

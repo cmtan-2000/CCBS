@@ -2,6 +2,7 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
 	rel="stylesheet" />
 
 <!-- CSS -->
-<link rel="stylesheet" href="css/style2.css">
+<link rel="stylesheet" href="<c:url value='/resources/css/style2.css'/>" type="text/css" >
 </head>
 <body>
 	<header class="site-header">
@@ -34,10 +35,11 @@
 		</div>
 		<nav class="main-navigation">
 			<ul class="menu">
-				<li class="menu-profile menu-item" style="color: white">ADMIN</li>
-				<li class="menu-item current menu-item"><a href="adminDashboard.jsp"
+				<li class="menu-profile menu-item" style="color: white"><a href="/CCBS/profile/${user.getUser_id()}"
+					class="link">ADMIN</a></li>
+				<li class="menu-item current menu-item"><a href="/admin"
 					class="link">Home</a></li>
-				<li class="menu-item"><a href="login.jsp" class="link">Sign Out</a></li>
+				<li class="menu-item"><a href="/login" class="link">Sign Out</a></li>
 			</ul>
 		</nav>
 	</header>

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> <!-- photos -->
+<%@ page import="org.apache.commons.io.IOUtils"%>
+<%@ page import="java.util.Base64"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +20,8 @@
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/6f995c3af2.js"
 	crossorigin="anonymous"></script>
+<link rel="shortcut icon" type="image/x-icon"
+	href="<c:url value='/resources/images/CCBS.ico' /> ">
 <title>Movie Home Page</title>
 
 <style>
@@ -135,13 +143,12 @@ label {
 </style>
 </head>
 
-<body>
-	<jsp:include page="header3.jsp"></jsp:include>
-
+<body style="background: black;">
 	<div
+		<jsp:useBean id="movie" class="model.Movie" scope="session"/>
 		style="position: fixed; width: 33%; margin: auto; background: black; height: 100vh;">
 		<div class="px-5">
-			<h5 class="font-weight-bold pt-5">Black Panther: Wakanda Forever</h5>
+			<h5 class="font-weight-bold pt-5">${movieBean.name}</h5>
 			<p>
 				<small>2022 [] PG-13 [] 161 mins</small>
 			</p>
@@ -157,32 +164,65 @@ label {
 			</p>
 			<img height="100%" width="250px"
 				src="https://m.media-amazon.com/images/M/MV5BNTM4NjIxNmEtYWE5NS00NDczLTkyNWQtYThhNmQyZGQzMjM0XkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg">
-
-			<button class="btn watch-movie-button mt-3">
-				<span><i class="fas fa-ticket-alt" aria-hidden="true"></i>
-					Watch Now</span>
-			</button>
 		</div>
 	</div>
 	<div>
 		<div class="row">
-			<div class="col-4"></div>
+			<div class="col-4">
+				<div style="margin: auto; background: black;">
+					<div class="px-5">
+						<h5 class="font-weight-bold pt-5">${movie.getName() }</h5>
+						<p>
+							<small>${movie.getYear()} <c:forEach
+									items="${movie.getGenre()}" var="genre" varStatus="loop">
+									<small>${genre}</small>
+								</c:forEach> ${movie.getDuration()}
+							</small>
+						</p>
+						<p>
+							<c:forEach items="${movie.getTags()}" var="tag" varStatus="loop">
+								<span class="movie-badge"><small>${tag}</small></span>
+							</c:forEach>
+						</p>
+						<img height="100%" style="object-fit: cover; width: 100%"
+							src="${movie.getPoster()}">
+
+						<button class="btn watch-movie-button mt-3">
+							<span><i class="fas fa-ticket-alt" aria-hidden="true"></i>
+								Watch Now</span>
+						</button>
+					</div>
+				</div>
+			</div>
 
 			<!-- selection -->
 			<div class="col-8">
-				<div class="d-flex flex-wrap mt-5 px-5" style="gap: 12px;">
+				<form class="d-flex flex-wrap mt-5 px-5" style="gap: 12px;"
+					method="get" action="/CCBS/movie/${movie.getMovie_id()}/view">
 					<div>
-						<label>Cinema</label> <select name="cinema">
+						<label class="form-label">Cinema</label> <select name="cinema" class="form-select">
 							<option selected>Choose Cinema</option>
 							<option value="GSC">GSC</option>
 							<option value="TGV">TGV</option>
 							<option value="MBO">MBO</option>
-							<option value="abc">abc</option>
-							<option value="abc">abc</option>
 						</select>
 					</div>
 					<div>
-						<label>State</label> <select name="state">
+						<label class="form-label">Location</label> <select name="city" class="form-select">
+							<option value="Johor Bahru" selected>Johor Bahru</option>
+							<option value="Kluang">Kluang</option>
+							<option value="Skudai">Skudai</option>
+							<option value="Tangkak">Tangkak</option>
+							<option value="Batu Pahat">Batu Pahat</option>
+							<option value="Kota Tinggi">Kota Tinggi</option>
+							<option value="Mersing">Mersing</option>
+							<option value="Muar">Muar</option>
+							<option value="Pontian">Pontian</option>
+							<option value="Segamat">Segamat</option>
+						</select>
+					</div>
+					<div>
+						<label class="form-label">State</label> <select name="state" class="form-select">
 							<option value="Johor">Johor</option>
 							<option value="Melaka">Melaka</option>
 							<option value="Pahang">Pahang</option>
@@ -199,75 +239,44 @@ label {
 						</select>
 					</div>
 					<div>
-						<label>Location</label> <select name="location">
-							<option value="Kluang">Kluang</option>
-							<option value="Skudai">Skudai</option>
-							<option value="Johor Bahru">Johor Bahru</option>
-							<option value="Tangkak">Tangkak</option>
-							<option value="Batu Pahat">Batu Pahat</option>
-							<option value="Kota Tinggi">Kota Tinggi</option>
-							<option value="Mersing">Mersing</option>
-							<option value="Muar">Muar</option>
-							<option value="Pontian">Pontian</option>
-							<option value="Segamat">Segamat</option>
-						</select>
+						<label class="form-label">Date</label> <input type="date" name="date" class="form-control"
+							value="2023-01-22" />
 					</div>
-					<div>
-						<label>Date</label> <input type="date" />
-					</div>
-				</div>
+					<div class="align-self-end"><input type="submit" value="submit" class="btn btn-primary" /></div>
+				</form>
 
-				<!-- movies in each mall -->
-
-				<%
-					for (int j = 0; j < 7; j++) {
-				%>
-				<div class="row mt-4 mx-5">
-					<div class="card" style="background: grey; margin: auto">
-						<div class="card-body">
-							<div class="card-title" style="color: black;">
-								<div class="d-flex">
-									<div class="col-9 ml-3 pl-4 py-2"
-										style="background: white; border-radius: 2px;">
-										<b>GSC Setia City Mall</b><br> <small>Level 2 -
-											Setia City Mall, No. 7, Persiaran Setia Dagang - Bandar Setia
-											Alam - Seksyen u13, Shah Alam SL, 40170</small>
+				<!-- movies showtime in each mall -->
+				<c:forEach items="${branchMovie}" var="branch" varStatus="loop">
+					<div class="row mt-4 mx-5">
+						<div class="card" style="background: grey;">
+							<div class="card-body">
+								<div class="card-title" style="color: black;">
+									<div class="d-flex">
+										<div class="px-4 py-2"
+											style="background: white; border-radius: 2px;">
+											<b><c:out value="${branch.getValue()[0].brch_name}" /></b><br>
+											<small>${branch.getValue()[0].brch_addr} ${branch.getValue()[0].brch_post} ${branch.getValue()[0].brch_city}</small>
+										</div>
 									</div>
-									<div class="col-3">
-										<button type="button"
-											class="btn btn-light watch-movie-type-button">
-											<span style="font-size: 25px;">Premium</span>
-										</button>
+									<div class="pt-3">
+										<span class="dividor-style"><b>Showtimes: </b></span>
 									</div>
 								</div>
-								<div class="pl-3 pt-3">
-									<span class="dividor-style"><b>Showtimes: </b></span>
-
-								</div>
-							</div>
-							<div class="card-text">
-
-								<div class="movie-timeslots px-3 pt-2 pb-3">
-									<%
-										String[] showtimes = new String[] { "10.20am", "10.30am", "10.45am", "10.55am", "11.20am", "11.40am",
-													"1.25pm", "1.35pm", "1.45pm", "2.00pm", "2.10pm", "2.35pm", "2.55pm", "4.25pm", "4.40pm",
-													"4.50pm", "5.00pm", "5.15pm", "5.25pm", "8.05pm", "8.15pm" };
-											String[] colorClass = new String[] { "success", "warning", "danger" };
-											for (int i = 0; i < showtimes.length; i++) {
-												int randNum = (int) (Math.random() * (colorClass.length - 0));
-												out.println("<a href='movie-seat-booking.jsp'><button type='button' class='btn btn-" + colorClass[randNum] + " font-weight-bold'>"
-														+ showtimes[i] + "</button></a>");
-											}
-									%>
+								<div class="card-text">
+									<div class="movie-timeslots pt-2 pb-3">
+										<c:forEach items="${branch.getValue()}" var="showTime">
+											<a href="/CCBS/movie/${showTime.movie_id}/${showTime.hall_type}/${showTime.schedule_id}/1/seatBooking"><button type="button"
+													class="btn btn-warning font-weight-bold">
+													<c:out value="${showTime.showtime_time} ${showTime.hall_type}" />
+												</button></a>
+										</c:forEach>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<%
-					}
-				%>
+				</c:forEach>
+				
 			</div>
 		</div>
 	</div>

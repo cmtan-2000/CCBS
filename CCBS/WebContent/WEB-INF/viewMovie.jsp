@@ -7,6 +7,8 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/images/CCBS.ico' /> ">
 <title>${movie.getName()}</title>
 
 <style type="text/css">

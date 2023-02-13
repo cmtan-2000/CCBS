@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Admin_Dashboard</title>
-<link rel="stylesheet" href="/css/style.css">
+<title>Dashboard</title>
+<link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +14,8 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
 	rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
+	
 
 <style>
 @import

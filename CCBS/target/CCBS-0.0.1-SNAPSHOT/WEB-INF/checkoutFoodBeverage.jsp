@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +14,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
 	rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
 
 <style>
 @import
@@ -54,6 +57,7 @@ input {
 </style>
 </head>
 <body>
+	<!-- joan: data got in FABController, feel free to move the mapping to your controller -->
 	<div
 		style="display: flex; flex-direction: row; justify-content: center">
 		<button style="margin-right: 20px; margin-top:50px; height: fit-content" class="btn btn-secondary font-weight-bold mt-5">Exit</button>
@@ -64,37 +68,15 @@ input {
 				<p class="combo">
 					Combo<br>
 				<hr>
-				<div class="foodRow">
-					<label>Signature PopCorn (Small) + 1x Regular Drink/Mineral
-						Water</label>
-					<div class="qtyPrice">
-						<b>Qty: <input value=0 min="0" type="number" name="quant1"
-							style="width: 50px" /></b> <b>RM 9.90</b>
+				<c:forEach var="combo" items="${FABList.get('combo')}">
+					<div class="foodRow">
+						<label>${combo.getName() }</label>
+						<div class="qtyPrice">
+							<b>Qty: <input value=0 min="0" type="number" name="quant1" style="width: 50px" />
+							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${combo.getPrice()}" /></b>
+						</div>
 					</div>
-				</div>
-				<div class="foodRow">
-					<label>Big Depper + 1x Regular Drink/Mineral Water</label>
-					<div class="qtyPrice">
-						<b>Qty: <input value=0 min="0" type="number" name="quant2"
-							style="width: 50px" /></b> <b>RM 9.90</b>
-					</div>
-				</div>
-				<div class="foodRow">
-					<label>Golden Horn Chips (Small) + 1x Regular Drink/Mineral
-						Water</label>
-					<div class="qtyPrice">
-						<b>Qty: <input value=0 min="0" type="number" name="quant3"
-							style="width: 50px" /></b> <b>RM 9.90</b>
-					</div>
-				</div>
-				<div class="foodRow">
-					<label>Signature PopCorn (Small) + 1x Regular Drink/Mineral
-						Water</label>
-					<div class="qtyPrice">
-						<b>Qty: <input value=0 min="0" type="number" name="quant4"
-							style="width: 50px" /></b> <b>RM 9.90</b>
-					</div>
-				</div>
+				</c:forEach>
 				</p>
 				<p class="food">
 					Food<br>
@@ -106,45 +88,28 @@ input {
 							style="width: 50px" /></b> <b>RM 9.90</b>
 					</div>
 				</div>
-				<div class="foodRow">
-					<label>Extra Large Size French Fries</label>
-					<div class="qtyPrice">
-						<b>Qty: <input value=0 min="0" type="number" name="quant6"
-							style="width: 50px" /></b> <b>RM 9.90</b>
+				<c:forEach var="food" items="${FABList.get('food')}">
+					<div class="foodRow">
+						<label>${food.getName()}</label>
+						<div class="qtyPrice">
+							<b>Qty: <input value=0 min="0" type="number" name="quant1" style="width: 50px" />
+							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${food.getPrice()}" /></b>
+						</div>
 					</div>
-				</div>
-				<div class="foodRow">
-					<label>Medium PopCorn</label>
-					<div class="qtyPrice">
-						<b>Qty: <input value=0 min="0" type="number" name="quant7"
-							style="width: 50px" /></b> <b>RM 9.90</b>
-					</div>
-				</div>
+				</c:forEach>
 				</p>
 				<p class="drink">
 					Drink<br>
 				<hr>
-				<div class="foodRow">
-					<label>Sprite</label>
-					<div class="qtyPrice">
-						<b>Qty: <input value=0 min="0" type="number" name="quant8"
-							style="width: 50px" /></b> <b>RM 9.90</b>
+				<c:forEach var="drink" items="${FABList.get('drink')}">
+					<div class="foodRow">
+						<label>${drink.getName()}</label>
+						<div class="qtyPrice">
+							<b>Qty: <input value=0 min="0" type="number" name="quant1" style="width: 50px" />
+							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${drink.getPrice()}" /></b>
+						</div>
 					</div>
-				</div>
-				<div class="foodRow">
-					<label>Mountain Dew</label>
-					<div class="qtyPrice">
-						<b>Qty: <input value=0 min="0" type="number" name="quant9"
-							style="width: 50px" /></b> <b>RM 9.90</b>
-					</div>
-				</div>
-				<div class="foodRow">
-					<label>Medium PopCorn</label>
-					<div class="qtyPrice">
-						<b>Qty: <input value=0 min="0" type="number" name="quant10"
-							style="width: 50px" /></b> <b>RM 9.90</b>
-					</div>
-				</div>
+				</c:forEach>
 				</p>
 			</div>
 			<div style="display: flex; flex-direction: row-reverse;">
@@ -152,7 +117,6 @@ input {
 					<input type="submit" class="btn btn-success font-weight-bold" value="Confirm"/>
 				</form>
 			</div>
-
 		</div>
 	</div>
 </body>

@@ -16,6 +16,7 @@ import model.FAB;
 
 public class FABDAO {
 
+	//inform joan if you want to change this file***************************
 	JdbcTemplate jdbct = new JdbcTemplate(getDataSource());
 
 	public Map<String, List<FAB>> getAllFAB() {
@@ -59,7 +60,7 @@ public class FABDAO {
 
 	public DataSource getDataSource() {
 		DataSource ds = null;
-		String dbURL = "jdbc:mysql://localhost:3307/ccbs";
+		String dbURL = "jdbc:mysql://localhost:3306/ccbs";
 		String username = "root";
 		String password = "";
 

@@ -1,15 +1,9 @@
 @charset "ISO-8859-1";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
 
-* {
-  font-family: "Poppins", sans-serif;
-}
-
 .center {
-	position: absolute;
 	margin: auto;
-	background-color: white;
-	border-radius: 10px;
+	text-align: center;	
 }
 
 .error_header {

@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import bdUtil.DBConnect;
 import bdUtil.FABDAO;
+import bdUtil.BranchDAO;
 import bdUtil.MovieDAO;
 import model.*;
 
@@ -119,6 +120,10 @@ public class LoginController extends HttpServlet {
 		FABDAO fabDAO = new FABDAO();
 		Map<String, List<FAB>> fabList = fabDAO.getAllFAB();
 		mav.addObject("FABList", fabList);
+
+		BranchDAO brchDAO = new BranchDAO();
+		List<Branch> brchList = brchDAO.getAll();
+		mav.addObject("branchList", brchList);
 		return mav;
 	}
 

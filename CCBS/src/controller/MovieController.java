@@ -7,10 +7,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,14 +42,6 @@ public class MovieController extends HttpServlet {
 		super();
 	}
 
-//	@RequestMapping("/movie/index")
-//	public ModelAndView index() {
-//		ModelAndView mav = new ModelAndView("movieGridListView");
-//		List<Movie> movieList = movDAO.getAll();
-//		mav.addObject("movieList", movieList);
-//		return mav;
-//	}
-
 	@RequestMapping("/movie/{id}")
 	public ModelAndView view(@PathVariable Map<String, String> pathV) {
 		ModelAndView mav = new ModelAndView("viewMovie");
@@ -55,11 +52,17 @@ public class MovieController extends HttpServlet {
 	}	
 	
 	@RequestMapping("/movie/{id}/view")
-	public ModelAndView cIndex(@PathVariable Map<String, String> pathV) {
+	public ModelAndView cIndex(@PathVariable Map<String, String> pathV,
+			@RequestParam(value = "company", required = false, defaultValue = "") String company,
+			@RequestParam(value = "city", required = false, defaultValue = "Kuala Lumpur") String city,
+			@RequestParam(value = "state", required = false, defaultValue = "Selangor") String state,
+			@RequestParam(value = "date", required = false, defaultValue = "2023-02-13") String date) {
 		ModelAndView mav = new ModelAndView("movieHomePage");
-		int id = Integer.valueOf(pathV.get("id"));
-		Movie movieObject = movDAO.findById(id);
+		int movieId = Integer.valueOf(pathV.get("id"));
+		Movie movieObject = movDAO.findById(movieId);
 		mav.addObject("movie", movieObject);
+		if (city != "" && state != "" && date != "")
+			mav.addObject("branchMovie", movDAO.getBranchMovie(movieId, company, city, state, date));
 		return mav;
 	}
 
@@ -95,7 +98,6 @@ public class MovieController extends HttpServlet {
 	}
 	
 	
-//	@RequestParam("seat") String seat
 	@RequestMapping("/movie/{movie_id}/{type}/{schedule_id}/{user_id}/seatBooking")
 	public ModelAndView seatBooking(@PathVariable("movie_id") int movie_id, @PathVariable("type") String type, @PathVariable("schedule_id") int schedule_id, @PathVariable("user_id") int user_id, HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
 		
@@ -104,7 +106,7 @@ public class MovieController extends HttpServlet {
 		String sql2 = "select * from movie inner join prices on movie.movie_id = prices.movie_id where movie.movie_id = ? AND prices.type = ?;";
 		String sql3 = "select * from schedule where movie_id = ? AND schedule_id = ?";
 		String sql4 = "select * from hall where hall_id = ?";
-		String sql5 = "insert into ticket(`movie_id`, `user_id`, `hall_id`, `seat`) values(?,?,?,?)";
+		
 		String seat = request.getParameter("seatHidden");
 		
 		HttpSession session = request.getSession(true);
@@ -123,7 +125,8 @@ public class MovieController extends HttpServlet {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				movieName = rs.getString("name");
+				//movieName = rs.getString("name");
+				movieName = "Black Panther: Wakanda Forever";
 				movie.setName(movieName);
 				System.out.println(movieName);
 			}
@@ -186,14 +189,14 @@ public class MovieController extends HttpServlet {
 			InputStream image2 = hallPhoto.getBinaryStream();
     		mv.addObject("image2", image2);
     		
-    		seat = "A05,A06,A07,A08";
     		
+    		String sql5 = "insert into ticket(`movie_id`, `user_id`, `hall_id`, `seat`) values(?,?,?,?)";
     		PreparedStatement ps5 = con.prepareStatement(sql5);
-    		
+    		String seat5 = "A05,A06,A07,A08,A09";
     		ps5.setInt(1, movie_id);
     		ps5.setInt(2, user_id);
     		ps5.setInt(3, hallID);
-    		ps5.setString(4, seat);
+    		ps5.setString(4, seat5);
     		
     		ps5.executeUpdate();
     		System.out.print("insert ticket success");

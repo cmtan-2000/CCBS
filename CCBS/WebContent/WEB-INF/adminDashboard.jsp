@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Admin_Dashboard</title>
+<title>Dashboard</title>
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -13,6 +14,9 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
 	rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon"
+	href="<c:url value='resources/images/CCBS.ico' /> ">
+
 
 <style>
 @import
@@ -129,21 +133,28 @@ body {
 	transform: translate(-50%, -50%);
 	background-color: white;
 	padding: 20px;
-	z-index: 1
+	z-index: 10;
 }
 
 .cover {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background-color: black;
-	opacity: 0.80;
-	left: 0;
-	top: 0
+	position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.80;
+    left: 0;
+    top: 0;
+    z-index: 1;
 }
 
 .hidden {
 	display: none
+}
+
+.branch-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	padding: 20px;
 }
 </style>
 <script>
@@ -169,14 +180,6 @@ body {
 		coverID.classList.add("hidden");
 	}
 
-	//function request() {
-	//	var reqID = document.getElementById("request");
-	//	var coverID = document.getElementById("cover");
-	//	reqID.classList.remove("hidden");
-	//	coverID.classList.remove("hidden");
-	//
-	//}
-
 	function onHallDetail() {
 		var hallDetailID = document.getElementById("hallDetail");
 		var coverID = document.getElementById("cover");
@@ -188,215 +191,174 @@ body {
 
 </head>
 
-	
-
-<body>
+<body style="overflow: auto;">
 	<jsp:include page="header1.jsp"></jsp:include>
 	<div class="company__header">
-		<h1>Admin</h1>		
-		<button>Generate Sales Report</button>
+		<a class="btn btn-primary right mt-5" href="/CCBS/admin/salesReport">Generate
+			Sales Report</a>
 
 	</div>
 
-	<div style="display: flex; flex-direction: column; padding: 20px">
-		<button onclick="onAddCompany()"
-			style="width: 25%; align-self: flex-end; padding: 25px 90px">Add
-			Company</button>
+	<!-- All related Model  -->
 
-		<!-- All related Model  -->
-		<div id="addCom" class="model hidden" style="width: 20%;">
-			<p>
-				Id: <input type="text" name="comid" value="">
-			</p>
-			<p>
-				Company: <input type="text" name="company">
-			</p>
-			<div class="row" style="align-self: flex-end; margin: 0">
-				<button id="addCom" onclick="cancelModel(this.id)">Cancel</button>
-				<button style="margin-left: 10px">Create</button>
+	<div id="addBranch" class="model hidden" style="width: 30%">
+		<p>
+			Company: <input type="text" name="company" value="" />
+		</p>
+		<input type="file" name="filepicture" />
+		<p>
+			Location: <br>
+			<textarea id="location" name="location" rows="3" cols="40"></textarea>
+		</p>
+		<div class="row" style="align-self: flex-end; margin: 0">
+			<button id="addBranch" onclick="cancelModel(this.id)" class="btn btn-light">Cancel</button>
+			<button style="margin-left: 10px" class="btn btn-success">Create</button>
+		</div>
+	</div>
+
+	<div id="request" class="model hidden" style="width: 40%">
+		<div>
+			GSC
+			<div
+				style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
+				Hall 13
+				<div class="wrap">
+					<button>View</button>
+					<button>Approve</button>
+					<button>Reject</button>
+				</div>
+			</div>
+			<div
+				style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
+				Hall 14
+				<div class="wrap">
+					<button>View</button>
+					<button>Approve</button>
+					<button>Reject</button>
+				</div>
+			</div>
+			<div
+				style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
+				Hall 15
+				<div class="wrap">
+					<button>View</button>
+					<button>Approve</button>
+					<button>Reject</button>
+				</div>
 			</div>
 		</div>
 
-		<div id="addBranch" class="model hidden" style="width: 30%">
-			<p>
-				Company: <input type="text" name="company" value="" />
-			</p>
-			<input type="file" name="filepicture" />
-			<p>
-				Location: <br>
-				<textarea id="location" name="location" rows="3" cols="40"></textarea>
-			</p>
-			<div class="row" style="align-self: flex-end; margin: 0">
-				<button id="addBranch" onclick="cancelModel(this.id)">Cancel</button>
-				<button style="margin-left: 10px">Create</button>
-			</div>
-		</div>
-		
-		<div id="request" class="model hidden" style="width: 40%">
-
-			<div>
-				GSC
-				<div
-					style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
-					Hall 13
-					<div class="wrap">
-						<button>View</button>
-						<button>Approve</button>
-						<button>Reject</button>
-					</div>
+		<div>
+			TGV
+			<div
+				style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
+				Hall 13
+				<div class="wrap">
+					<button>View</button>
+					<button>Approve</button>
+					<button>Reject</button>
 				</div>
-				<div
-					style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
-					Hall 14
-					<div class="wrap">
-						<button>View</button>
-						<button>Approve</button>
-						<button>Reject</button>
-					</div>
-				</div>
-				<div
-					style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
-					Hall 15
-					<div class="wrap">
-						<button>View</button>
-						<button>Approve</button>
-						<button>Reject</button>
-					</div>
-				</div>
-			</div>
-
-
-
-
-
-			<div>
-				TGV
-				<div
-					style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
-					Hall 13
-					<div class="wrap">
-						<button>View</button>
-						<button>Approve</button>
-						<button>Reject</button>
-					</div>
-				</div>
-			</div>
-
-			<div class="row" style="align-self: flex-end; margin: 0">
-				<button id="request" onclick="cancelModel(this.id)">Cancel</button>
 			</div>
 		</div>
 
+		<div class="row" style="align-self: flex-end; margin: 0">
+			<button id="request" onclick="cancelModel(this.id)">Cancel</button>
+		</div>
+	</div>
 
-		<div id="hallDetail" class="model hidden" style="width: 20%">
-			<p>GSC Setia City Mall</p>
-			<div>
-				<div class="row" style="margin: 0; justify-content: space-between">
-					<b>Air Conditioner</b>
-					<select id="rate">
-					  <option value="bad">BAD</option>
-					  <option value="moderate">MODERATE</option>
-					  <option value="good" selected>GOOD</option>
-					</select>
-				</div>
-				<div class="row" style="margin: 0; justify-content: space-between">
-					<b>Sound System</b>
-					<select id="rate">
-					  <option value="bad">BAD</option>
-					  <option value="moderate">MODERATE</option>
-					  <option value="good" selected>GOOD</option>
-					</select>
-				</div>
-				<div class="row" style="margin: 0; justify-content: space-between">
-					<b>Seat Cushion</b>
-					<select id="rate">
-					  <option value="bad">BAD</option>
-					  <option value="moderate">MODERATE</option>
-					  <option value="good" selected>GOOD</option>
-					</select>
-				</div>
-				<div class="row" style="margin: 0; justify-content: space-between">
-					<b>CleanNess</b>
-					<select id="rate" value="good">
-					  <option value="bad">BAD</option>
-					  <option value="moderate">MODERATE</option>
-					  <option value="good" selected>GOOD</option>
-					</select>
-				</div>
-			</div>
-			<div class="row"
-				style="margin: 0; flex-direction: row; align-self: flex-end">
-				<button id="hallDetail" onclick="cancelModel(this.id)"
-					style="margin-right: 20px">Cancel</button>
-				<button onclick="cancelModel(this.id)" style="">Update</button>
-			</div>
 
-			<b>Last updated: 11 November 2022</b>
+	<div id="hallDetail" class="model hidden" style="width: 20%">
+		<p>GSC Setia City Mall</p>
+		<div>
+			<div class="row" style="margin: 0; justify-content: space-between">
+				<b>Air Conditioner</b> <select id="rate">
+					<option value="bad">BAD</option>
+					<option value="moderate">MODERATE</option>
+					<option value="good" selected>GOOD</option>
+				</select>
+			</div>
+			<div class="row" style="margin: 0; justify-content: space-between">
+				<b>Sound System</b> <select id="rate">
+					<option value="bad">BAD</option>
+					<option value="moderate">MODERATE</option>
+					<option value="good" selected>GOOD</option>
+				</select>
+			</div>
+			<div class="row" style="margin: 0; justify-content: space-between">
+				<b>Seat Cushion</b> <select id="rate">
+					<option value="bad">BAD</option>
+					<option value="moderate">MODERATE</option>
+					<option value="good" selected>GOOD</option>
+				</select>
+			</div>
+			<div class="row" style="margin: 0; justify-content: space-between">
+				<b>CleanNess</b> <select id="rate" value="good">
+					<option value="bad">BAD</option>
+					<option value="moderate">MODERATE</option>
+					<option value="good" selected>GOOD</option>
+				</select>
+			</div>
+		</div>
+		<div class="row"
+			style="margin: 0; flex-direction: row; align-self: flex-end">
+			<button id="hallDetail" onclick="cancelModel(this.id)"
+				style="margin-right: 20px">Cancel</button>
+			<button onclick="cancelModel(this.id)" style="">Update</button>
 		</div>
 
-		<div id="cover" class="cover hidden"></div>
+		<b>Last updated: 11 November 2022</b>
+	</div>
 
-		<!-- All related Model -->
+	<div id="cover" class="cover hidden"></div>
 
-		<div class="TabSelect">
-			<a href="adminDashboard.jsp"><button class="tab active">Company</button></a>
-		</div>
-
-		<div class="bottomContainer"
-			style="border-radius: 10px; background-color: #BBCFD0; padding: 20px;">
-			<div class="row"
-				style="display: flex; flex-direction: row; justify-content: flex-end; margin-right: 20px">
-				<button onclick="addBranch()">Add Branch</button>
-			</div>
-			<div class="cinemaContainer">
-				<%!int noCinema = 2;%>
-				<%
+	<!-- All related Model -->
+	<div class="w-100">
+		<div class="container">
+			<%!int noCinema = 2;%>
+			<%
 				for (int h = 0; h < noCinema; h++) {
 			%>
-				<div class="cinema">
-					<h2>
+			<div class="card shadow mt-3">
+				<div class="card-body">
+					<p class="font-weight-bold card-title" style="font-size: 21;">
 						Name_Cinema
-						<%=h + 1%></h2>
+						<%=h + 1%></p>
 					<hr>
-					<div class="cinemaRow"">
+					<div class="branch-grid">
 						<%!int noBranch = 3;%>
 						<%
-						for (int i = 0; i < noBranch; i++) {
-					%>
+							for (int i = 0; i < noBranch; i++) {
+						%>
 						<div class="branch">
-							<font size="6"> Branch <%=i + 1%>
-							</font>
-							<div
-								style="display: flex; flex-direction: row; justify-content: space-between; height: 160px">
-								<div style="width: 60%; height: 100%; background-color: orange">Picture</div>
-								<div
-									style="width: 40%; height: 100%; background-color: white; display: flex; flex-wrap: wrap">
-									<%!int noHall = 12;%>
-									<%
+							<p class="font-weight-bold" style="font-size: 15;">
+								Branch
+								<%=i + 1%>
+							</p>
+							<div>
+								<%!int noHall = 12;%>
+								<%
 									for (int j = 0; j < noHall; j++) {
 								%>
-									<button onclick="onHallDetail()"
-										style="margin: 5px; width: 30px; height: 22px; text-align: center; background-color: green; color: white">
-										H<%=j + 1%></button>
-									<%
+								<button onclick="onHallDetail()"
+									class="btn btn-outline-primary border-3 font-weight-bold">
+									H<%=j + 1%></button>
+								<%
 									}
 								%>
-								</div>
 							</div>
 						</div>
 						<%
-						}
-					%>
+							}
+						%>
 					</div>
-
 				</div>
-				<%
+
+			</div>
+			<%
 				}
 			%>
-			</div>
-
 		</div>
-
 	</div>
+
 </body>
 </html>

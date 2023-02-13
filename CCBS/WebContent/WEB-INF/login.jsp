@@ -9,6 +9,7 @@
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="resources/css/style2.css">
 
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
 <style>
 
 body {
@@ -443,6 +444,7 @@ body{
 
 </style>
 
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style2.css"/>">
 
 <!-- Bootstrap -->
 <link

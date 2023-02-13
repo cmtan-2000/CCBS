@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import bdUtil.MovieDAO;
 
 public class Movie {
+	//inform joan if you want to change this file***************************
 	private int movie_id;
 	private int user_id;
 	private String name;
