@@ -22,8 +22,6 @@ public class Seat {
 			{"J01", "J02", "J03", "J04", "J05", "J06", "J07", "J08", "J09", "J10", "J11", "J12", "J13", "J14", "J15", "J16"},
 			{"K01", "K02", "K03", "K04", "K05", "K06", "K07", "K08", "K09", "K10", "K11", "K12", "K13", "K14", "K15", "K16"}};
 	
-//	public JSONObject jsonObject = new JSONObject(seat);
-	
 	public String[][] getSeat() {
 		return seat;
 	}

@@ -1,5 +1,5 @@
-
-window.onload = function(){
+window.addEventListener("load", (e) => {
+	
 	const container = document.querySelector(".container");
 	
 	const seats = document.querySelectorAll(".row .seat:not(.sold)");
@@ -11,19 +11,32 @@ window.onload = function(){
 	console.log("movieSelect: " + movieSelect);
 	console.log("movieSelect.value: " + movieSelect.getAttribute('value'));
 	
-	let ticketPrice = +movieSelect.getAttribute('value');
-
+	let ticketPrice = +movieSelect.getAttribute('value');	
+	
 	// Save selected movie index and price
 	function setMovieData(movieIndex, moviePrice) {
 	  localStorage.setItem("selectedMovieIndex", movieIndex);
 	  localStorage.setItem("selectedMoviePrice", moviePrice);
 	}
 
+	seatArray.forEach((item) => {
+		let seatSold = document.getElementById(item);
+		console.log(item, seatSold);
+		seatSold.classList.add("sold");
+	});
+	
 	// Update total and count
 	function updateSelectedCount() {
 	  const selectedSeats = document.querySelectorAll(".row .seat.selected");
+	  
+//		console.log(seatedArray, document.getElementById("seat"));
+//		
+//		document.getElementById("seat").value = seatedArray;
+//		
+//		console.log(document.getElementById("seat").value);
 
 	  const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
+	  const seatArray = [...selectedSeats].map((seat) => seat.getAttribute("value"));
 
 	  localStorage.setItem("selectedSeats", JSON.stringify(seatsIndex));
 
@@ -31,10 +44,12 @@ window.onload = function(){
 
 	  count.innerText = selectedSeatsCount;
 	  total.innerText = selectedSeatsCount * ticketPrice;
+	  document.getElementById("seat").value = seatArray.toString();
+	  
+	  console.log(document.getElementById("seat").value);
 
 	  setMovieData(movieSelect.selectedIndex, movieSelect.value);
 	}
-
 
 	// Get data from localstorage and populate UI
 	function populateUI() {
@@ -63,6 +78,8 @@ window.onload = function(){
 	  setMovieData(e.target.selectedIndex, e.target.value);
 	  updateSelectedCount();
 	});
+	
+	var seatedArray = [];
 
 	// Seat click event
 	container.addEventListener("click", (e) => {
@@ -71,12 +88,22 @@ window.onload = function(){
 	    !e.target.classList.contains("sold")
 	  ) {
 	    e.target.classList.toggle("selected");
-
+		if(!seatedArray.includes(e.target.getAttribute("value"))){
+			seatedArray.push(e.target.getAttribute("value"));
+		}
+		else{
+			let indexSeat = seatedArray.indexOf(e.target.getAttribute("value"));
+			seatedArray.splice(indexSeat, 1);
+		}
+		
+//	    e.target.innerHTML += '<input type="hidden" name="seat${row}${col}" value="${row}${col}">';
 	    updateSelectedCount();
 	  }
 	});
+	
+	
 
 	// Initial count and total set
 	updateSelectedCount();
-}
+});
 

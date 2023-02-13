@@ -94,27 +94,8 @@ public class MovieController extends HttpServlet {
 		return "redirect:/company";
 	}
 	
-//	@RequestMapping("/movie/{id}/booking")
-//	public ModelAndView booking(@PathVariable Map<String, String> pathV) {
-//		ModelAndView mav = new ModelAndView("movieHomePage");
-//		String sql = "SELECT b.brch_name, b.brch_addr, b.brch_post, b.brch_city, b.state, h.hall_id, h.hall_type, m.name, s.showtime_time, s.showtime_date FROM branch AS b " +
-//				"INNER JOIN hall AS h ON h.hall_id  = b.brch_id " +
-//				"INNER JOIN schedule AS s ON s.hall_id = h.hall_id " +
-//				"INNER JOIN movie AS m ON s.movie_id = m.movie_id " +
-//				"order BY s.showtime_time";
-//		Connection con = DBConnect.openconnection();
-//		
-//		try {
-//			
-//		}
-//		catch(SQLException ex) {
-//			ex.printStackTrace();
-//		}
-//		
-//		return mav;
-//	}
 	
-	
+//	@RequestParam("seat") String seat
 	@RequestMapping("/movie/{movie_id}/{type}/{schedule_id}/{user_id}/seatBooking")
 	public ModelAndView seatBooking(@PathVariable("movie_id") int movie_id, @PathVariable("type") String type, @PathVariable("schedule_id") int schedule_id, @PathVariable("user_id") int user_id, HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
 		
@@ -124,7 +105,8 @@ public class MovieController extends HttpServlet {
 		String sql3 = "select * from schedule where movie_id = ? AND schedule_id = ?";
 		String sql4 = "select * from hall where hall_id = ?";
 		String sql5 = "insert into ticket(`movie_id`, `user_id`, `hall_id`, `seat`) values(?,?,?,?)";
-		String seat = request.getParameter("seat");
+		String seat = request.getParameter("seatHidden");
+		
 		HttpSession session = request.getSession(true);
 		
 		Movie movie = new Movie();
@@ -204,8 +186,8 @@ public class MovieController extends HttpServlet {
 			InputStream image2 = hallPhoto.getBinaryStream();
     		mv.addObject("image2", image2);
     		
+    		seat = "A05,A06,A07,A08";
     		
-    		System.out.print("Seat: " + seat);
     		PreparedStatement ps5 = con.prepareStatement(sql5);
     		
     		ps5.setInt(1, movie_id);
