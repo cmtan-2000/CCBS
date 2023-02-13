@@ -80,45 +80,45 @@
 				<tbody>
 				    <tr>
 				      <th scope="row">1</th>
-				      <td>11:45am</td>
-				      <td>H12</td>
-				      <td>25</td>
-				      <td>Deluxe</td>
+				      <td>${movie.getShowtime()}</td>
+				      <td>${movie.getHall_id()}</td>
+				      <td>${movie.getPrice()}</td>
+				      <td>${movie.getHall_type()}</td>
 				    </tr>
 				    <tr>
 				      <th scope="row">2</th>
-				      <td>12:45am</td>
-				      <td>H1</td>
-				      <td>25</td>
-				      <td>3D</td>
+				      <td>${movie.getShowtime()}</td>
+				      <td>${movie.getHall_id()}</td>
+				      <td>${movie.getPrice()}</td>
+				      <td>${movie.getHall_type()}</td>
 				    </tr>
 				    <tr>
 				      <th scope="row">3</th>
-				      <td>1:45pm</td>
-				      <td>H2</td>
-				      <td>25</td>
-				      <td>Deluxe</td>
+				      <td>${movie.getShowtime()}</td>
+				      <td>${movie.getHall_id()}</td>
+				      <td>${movie.getPrice()}</td>
+				      <td>${movie.getHall_type()}</td>
 					</tr>
 					<tr>
 				      <th scope="row">4</th>
-				      <td>2:45pm</td>
-				      <td>H2</td>
-				      <td>25</td>
-				      <td>Premium</td>
+				      <td>${movie.getShowtime()}</td>
+				      <td>${movie.getHall_id()}</td>
+				      <td>${movie.getPrice()}</td>
+				      <td>${movie.getHall_type()}</td>
 					</tr>
 					<tr>
 				      <th scope="row">5</th>
-				      <td>3:45pm</td>
-				      <td>H2</td>
-				      <td>25</td>
-				      <td>DualMax</td>
+				      <td>${movie.getShowtime()}</td>
+				      <td>${movie.getHall_id()}</td>
+				      <td>${movie.getPrice()}</td>
+				      <td>${movie.getHall_type()}</td>
 					</tr>
 					<tr>
 				      <th scope="row">6</th>
-				      <td>4:45pm</td>
-				      <td>H2</td>
-				      <td>25</td>
-				      <td>2D</td>
+				      <td>${movie.getShowtime()}</td>
+				      <td>${movie.getHall_id()}</td>
+				      <td>${movie.getPrice()}</td>
+				      <td>${movie.getHall_type()}</td>
 					</tr>
 				</tbody>
 			</table>

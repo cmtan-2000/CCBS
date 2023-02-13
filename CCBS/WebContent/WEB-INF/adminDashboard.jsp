@@ -48,28 +48,6 @@ body {
 	overflow-y: scroll;
 	height: 90%;
 }
-/* 
-.cinemaContainer::-webkit-scrollbar{
-    width:2px;
-    background-color: grey
-}
-.cinemaContainer::-webkit-scrollbar-thumb{
-    background: black
-}
- */
-/* button {
-	background-color: white;
-	border: 0.2px;
-	color: black;
-	padding: 15px 32px;
-	text-align: center;
-	display: inline-block;
-	font-size: 16px;
-	border-radius: 5px;
-	box-shadow: 0 5px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 2px 0
-		rgba(0, 0, 0, 0.19);
-	font-weight: bolder;
-} */
 .TabSelect {
 	margin-left: 50px;
 }
@@ -172,14 +150,6 @@ body {
 		coverID.classList.add("hidden");
 	}
 
-	//function request() {
-	//	var reqID = document.getElementById("request");
-	//	var coverID = document.getElementById("cover");
-	//	reqID.classList.remove("hidden");
-	//	coverID.classList.remove("hidden");
-	//
-	//}
-
 	function onHallDetail() {
 		var hallDetailID = document.getElementById("hallDetail");
 		var coverID = document.getElementById("cover");
@@ -196,8 +166,10 @@ body {
 <body>
 	<jsp:include page="header1.jsp"></jsp:include>
 	<div class="company__header">
-		<h1>Admin</h1>		
-		<button>Generate Sales Report</button>
+		<h1>Admin</h1>
+		<form action="/generateReport">
+			<input type="submit" value="Generate Sales Report">
+		</form>	
 
 	</div>
 
@@ -219,24 +191,8 @@ body {
 				<button style="margin-left: 10px">Create</button>
 			</div>
 		</div>
-
-		<div id="addBranch" class="model hidden" style="width: 30%">
-			<p>
-				Company: <input type="text" name="company" value="" />
-			</p>
-			<input type="file" name="filepicture" />
-			<p>
-				Location: <br>
-				<textarea id="location" name="location" rows="3" cols="40"></textarea>
-			</p>
-			<div class="row" style="align-self: flex-end; margin: 0">
-				<button id="addBranch" onclick="cancelModel(this.id)">Cancel</button>
-				<button style="margin-left: 10px">Create</button>
-			</div>
-		</div>
 		
 		<div id="request" class="model hidden" style="width: 40%">
-
 			<div>
 				GSC
 				<div
@@ -267,11 +223,6 @@ body {
 					</div>
 				</div>
 			</div>
-
-
-
-
-
 			<div>
 				TGV
 				<div
@@ -284,12 +235,10 @@ body {
 					</div>
 				</div>
 			</div>
-
 			<div class="row" style="align-self: flex-end; margin: 0">
 				<button id="request" onclick="cancelModel(this.id)">Cancel</button>
 			</div>
 		</div>
-
 
 		<div id="hallDetail" class="model hidden" style="width: 20%">
 			<p>GSC Setia City Mall</p>
@@ -340,11 +289,6 @@ body {
 		<div id="cover" class="cover hidden"></div>
 
 		<!-- All related Model -->
-
-		<div class="TabSelect">
-			<a href="adminDashboard.jsp"><button class="tab active">Company</button></a>
-		</div>
-
 		<div class="bottomContainer"
 			style="border-radius: 10px; background-color: #BBCFD0; padding: 20px;">
 			<div class="row"

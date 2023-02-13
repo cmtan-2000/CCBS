@@ -20,6 +20,11 @@ public class Movie {
 	private String story_by;
 	private int year;
 	private String poster;
+	private String branch_name;
+	private String showtime;
+	private String hall_id;
+	private String hall_type;
+	private String price;
 
 	MovieDAO movDAO = new MovieDAO();
 
@@ -156,4 +161,46 @@ public class Movie {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
+
+	public String getBranch_name() {
+		return branch_name;
+	}
+
+	public void setBranch_name(String branch_name) {
+		this.branch_name = branch_name;
+	}
+
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
+	}
+
+	public String getHall_id() {
+		return hall_id;
+	}
+
+	public void setHall_id(String hall_id) {
+		this.hall_id = hall_id;
+	}
+
+	public String getHall_type() {
+		return hall_type;
+	}
+
+	public void setHall_type(String hall_type) {
+		this.hall_type = hall_type;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	
+	
 }
