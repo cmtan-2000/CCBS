@@ -163,21 +163,7 @@
 						</c:forEach>
 						<c:if test="${empty hallList}">
 						  <p>The result is empty. There might be an issue with the calculation.</p>
-						</c:if>
-				<%-- <%
-					
-					String[] hall = new String[]{"Hall 13", "Hall 14", "Hall 15", "Hall 16"};
-					String[] status = new String[]{"Pending", "Pending", "Approved", "Pending"};
-					String dialog = "\"" + "manageSchedulDialog" + "\"";
-
-					for (int i = 0; i < hall.length; i++) {
-						out.println("<tr>" + "<td>" + hall[i] + "</td>" + "<td>" + status[i] + "</td>"
-								+ "<td width=\"15%\"><button class='btn btn-primary font-weight-bold rounded-pill' onclick='toggleDialog(\"manageSchedulDialog\")'>"
-								+ "<i class=\"fas fa-edit\"></i> Manage</button></td>"
-								+ "<td><button class='btn btn-danger font-weight-bold rounded-pill' data-bs-toggle=\"modal\" data-bs-target=\"#deleteCfmModal\"><i class='fa-solid fa-trash-can'></i> Delete</button></td>"
-								+ "</tr>");
-					}
-				%> --%>
+						</c:if>	
 				</c:forEach>
 			</table>
 		</div>
@@ -192,22 +178,6 @@
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-						<!-- <form action="./branch/add" method="post">
-						<div class="form-group">
-							<label for="branchName" class="col-sm-5 col-form-label w-50">Branch
-								Name</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="branchName" name="branchName"/>
-							</div>
-						</div>
-						<div class="modal-footer">
-						<button type="button"
-							class="btn btn-secondary font-weight-bold rounded-pill"
-							data-bs-dismiss="modal">Close</button>
-						<button type="submit"
-							class="btn btn-success font-weight-bold rounded-pill">Submit</button>
-					</div>
-					</form> -->
 	        	Hall ID: <p id="id"></p>
 	        	Hall Type: <p id="name"></p>
 	        	
@@ -228,24 +198,13 @@
 				String duration = "10am";
 				for (int i = 0; i < 6; i++) {
 			%>
-			
-			<!-- <select id="mySelect">
-  <option value="">Please select an option</option>
-  <option value="1">Option 1</option>
-  <option value="2">Option 2</option>
-  <option value="3">Option 3</option>
-</select>
-			 -->
-			 <div id="container">
 				<select id="mySelect">
 				   <option value=" " selected>Please select an option</option>
 				   <c:forEach items="${movieList}" var="movie" varStatus="loop">
  						<option value="${movie.getMovie_id() }"><c:out value="${movie.getName()}"></c:out></option>
-				   <button id="removeButton" value="Remove"></button>
 				   </c:forEach>
-				 </select>
-				 <button id="deleteButton">Delete</button>
-			 </div>
+				 </select><button id="removeButton" value="Insert"></button>
+				 
 				 <br><br>
 		 	<div id="selects"></div>
 				 
@@ -477,23 +436,23 @@
 				var selectedOption = $(this).val();
 				const select = document.querySelector("#selects");
 		        const selectString = select.outerHTML;
-		        if(selectedOption === " "){
+		        if(selectedOption == " "){
 			        $("#selects").remove()
-		        }
+			        }
 	        })
 		})
 		
 	    $(document).ready(function() {
 	      $("#mySelect").change(function() {
 	        var selectedOption = $(this).val();
-	        const select = document.querySelector("#container");
+	        const select = document.querySelector("#mySelect");
 	        const selectString = select.outerHTML;
 	        console.log(selectString);
 			console.log(selectedOption);
 			if (selectedOption !== " "){
 				console.log(true);
 				console.log(selectString);
-		          $("#container").append(selectString);
+		          $("#selects").append(selectString);
 				}
 			else{
 				$('#selects').removeChild(selectString);
