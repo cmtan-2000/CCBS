@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,12 +21,13 @@
 	crossorigin="anonymous" />
 
 <!-- CSS -->
-<link rel="stylesheet" type="text/css" href="./css/style2.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/style2.css" />
 
 <!-- Font -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
 </head>
 
 <body>

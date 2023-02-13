@@ -26,7 +26,7 @@
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" href="css/style2.css">
+<link rel="stylesheet" href="<c:url value='/resources/css/style2.css'/>" type="text/css" >
 </head>
 
 <body>
@@ -40,10 +40,11 @@
 
 		<nav class="main-navigation">
 			<ul class="menu">
-				<li class="menu-profile menu-item" style="color: white">COMPANY</li>
+				<li class="menu-profile menu-item" style="color: white"><a href="/CCBS/profile/${user.getUser_id()}"
+					class="link">COMPANY</a></li>
 				<li class="menu-item current menu-item"><a href="index.jsp"
 					class="link">Home</a></li>
-				<li class="menu-item"><a href="login.jsp" class="link">Sign Out</a></li>
+				<li class="menu-item"><a href="/logout" class="link">Sign Out</a></li>
 			</ul>
 		</nav>
 	</header>

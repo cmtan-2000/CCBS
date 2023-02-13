@@ -1,120 +1,165 @@
-	<form action="/CCBS/company/movie/create" method="POST">
-		<span class="float-end times-button"
-			onclick="closeDialog('insertMovieDialog')" style="cursor: pointer;"><i
-			class="fas fa-times"></i></span>
-		<h2>
-			<b>Insert Movie</b>
-		</h2>
-		<%--<%
-			String[] badges = new String[] { "2000", "PG-13", "311mins" };
-			for (int i = 0; i < badges.length; i++) {
-				out.println("<small><span class='badge-style badge-lime'>" + badges[i] + "</span></small>");
-			}
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+label {
+	font-weight: bold;
+}
 
-			String[] tags = new String[] { "Action", "Drama", "Fantastic" };
-			for (int i = 0; i < tags.length; i++) {
-				out.println("<small><span class='badge-style badge-lightblue'>" + badges[i] + "</span></small>");
-			}
-		%> --%>
+.checkboxes {
+	display: inline-block;
+	margin-right: 15px;
+	min-width: 90px;
+}
+</style>
 
+<form class="container p-5" action="/CCBS/company/movie/create"
+	method="POST">
+	<span class="float-end times-button"
+		onclick="closeDialog('insertMovieDialog')" style="cursor: pointer;"><i
+		class="fas fa-times"></i></span>
 
-		<div class="row">
-			<div class="col-6">
-				<div class="card mt-3">
-					<div class="card-body">
-						<label for="formFile" class="form-label">Name </label> <input
-							name="name" placeholder="Enter Movie Name" class="form-control">
-						<label for="formFile" class="form-label mt-3">Description
-						</label>
-						<textarea rows="5" name="tags" class="form-control"
-							placeholder="Enter tags and seperate using coma (,)"></textarea>
-						<!-- <img src="images/SAO-poster.jpeg" style="width: 19vw" /> -->
-						<label for="formFile" class="form-label mt-3">Poster </label> <input
-							class="form-control" type="file" name="formFile">
-					</div>
-				</div>
-			</div>
-			<div class="col-6">
-				<div class="card mt-3">
-					<div class="card-body">
-						<div class="card-title">Price</div>
-						<table class="table table-striped table-sm">
-							<thead>
-								<th>Type</th>
-								<th>Price</th>
-							</thead>
-							<tbody>
-								<tr>
-									<td><b>Deluxe</b></td>
-									<td><input class="form-control form-control-sm"
-										type="number" name="deluxePrice" /></td>
-								</tr>
-								<tr>
-									<td><b>Dual Max</b></td>
-									<td><input class="form-control form-control-sm"
-										type="number" name="dualmaxPrice" /></td>
-								</tr>
-								<tr>
-									<td><b>3D</b></td>
-									<td><input class="form-control form-control-sm"
-										type="number" name="3dPrice" /></td>
-								</tr>
-								<tr>
-									<td><b>DA DB</b></td>
-									<td><input class="form-control form-control-sm"
-										type="number" name="dadbPrice" /></td>
-								</tr>
-								<tr>
-									<td><b>Premium</b></td>
-									<td><input class="form-control form-control-sm"
-										type="number" name="premiumPrice" /></td>
-								</tr>
-								<tr>
-									<td><b>Classic</b></td>
-									<td><input class="form-control form-control-sm"
-										type="number" name="classicPrice" /></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+	<h3 style="font-weight:bold">
+		<c:choose>
+			<c:when test="${empty param.id}">Create</c:when>
+			<c:otherwise>Edit</c:otherwise>
+		</c:choose>
+		Movie
+	</h3>
+	<div class="row">
+		<div class="col-6">
+			<div class="card mt-3">
+				<div class="card-body">
+					<label for="name" class="form-label">Name </label> <input
+						name="name" placeholder="Enter Movie Name" class="form-control"
+						value="${movie.getName()}" required> <label
+						for="description" class="form-label mt-3">Description </label>
+					<textarea rows="5" name="description" class="form-control"
+						placeholder="Enter tags and seperate using coma (,)" required>${movie.getDescription() }</textarea>
+					<!-- <img src="images/SAO-poster.jpeg" style="width: 19vw" /> -->
+					<label for="poster" class="form-label mt-3">Poster Image
+						Link </label> <input class="form-control" type="url" name="poster"
+						value="${movie.getPoster() }" required> <label
+						for="duration" class="form-label mt-3">Duration </label> <input
+						class="form-control" type="text" name="duration"
+						value="${movie.getDuration() }" required> <label
+						for="year" class="form-label mt-3">Year of Production </label> <input
+						class="form-control" type="number" name="year"
+						value="${movie.getYear() }" minlength="4" required>
 				</div>
 			</div>
 		</div>
 
-		<div class="card mt-3">
-			<div class="card-body">
-				<div class="card-title">Casts</div>
-				<table class="table table-striped">
-					<tr>
-						<td><b>Director</b></td>
-						<!-- <td><span class="badge-style badge-white">James Cameron</span></td> -->
-						<td><input class="form-control" type="text" name="director"
-							placeholder="Enter Director" /></td>
-					</tr>
-					<tr>
-						<td><b>Screenplay by</b></td>
-						<!-- <td><span class="badge-style badge-white">James Cameron</span>	<span class="badge-style badge-white">Rick Jaffa</span>	<span class="badge-style badge-white">Amanda Silver</span> <br></td> -->
-						<td><textarea type="text" class="form-control"
-								name="screenplay"
-								placeholder="Enter Screenplay and seperate using coma (,)"></textarea></td>
-					</tr>
-					<tr>
-						<td><b>Story by</b></td>
-						<%-- <td>
-							<% 
-								String[] actors = new String[]{"James Cameron", "Rick Jaffa", "Amanda Silver", "Josh Friedman", "Shane Salerno"};
-								for(int i=0;i<tags.length;i++){
-									out.println("<span class='badge-style badge-white'>"+actors[i]+"</span>");
-								}
-							%>	
-							</td> --%>
-						<td><textarea type="text" class="form-control"
-								placeholder="Enter Casts and seperate using coma (,)"
-								name="cast"></textarea></td>
-					</tr>
-				</table>
-
-				<input class="btn btn-success float-right" type="submit" value="Insert"></button>
+		<div class="col-6">
+			<div class="card mt-3">
+				<div class="card-body">
+					<label for="tags" class="form-label">Movie Tags</label> (select
+					multiple)<br>
+					<c:forEach items="${allTags}" var="tag" varStatus="loop">
+						<div class="checkboxes">
+							<input class="form-check-input" type="checkbox" name="${tag}"
+								value="${tag}"
+								<c:if test="${movie.getTags().contains(tag)}">checked</c:if> />
+							<label class="form-check-label" for="${tag}">${tag}</label>
+						</div>
+					</c:forEach>
+					<label for="genre" class="form-label mt-3">Movie Genre</label> <select
+						class="form-select" name="genre" required>
+						<option disabled selected>Select Genre</option>
+						<c:forEach items="${allGenres}" var="genre" varStatus="loop">
+							<option value="${genre}"
+								<c:if test="${movie.getGenre().contains(genre)}">selected</c:if>>${genre}</option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
+			<div class="card mt-3">
+				<div class="card-body">
+					<div class="card-title">Price</div>
+					<table class="table table-striped table-sm">
+						<thead>
+							<th>Type</th>
+							<th>Price</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td><b>Premium</b></td>
+								<td><input class="form-control form-control-sm"
+									type="number" name="premiumPrice"
+									value="${moviePrices.premium }" min="0" step="0.1" required /></td>
+							</tr>
+							<tr>
+								<td><b>Classic</b></td>
+								<td><input class="form-control form-control-sm"
+									type="number" name="classicPrice"
+									value="${moviePrices.classic }" min="0" step="0.1" required /></td>
+							</tr>
+							<tr>
+								<td><b>Deluxe</b></td>
+								<td><input class="form-control form-control-sm"
+									type="number" name="deluxePrice" value="${moviePrices.deluxe }"
+									min="0" step="0.1" /></td>
+							</tr>
+							<tr>
+								<td><b>Dual Max</b></td>
+								<td><input class="form-control form-control-sm"
+									type="number" name="dualmaxPrice"
+									value="${moviePrices.dualMax }" min="0" step="0.1" /></td>
+							</tr>
+							<tr>
+								<td><b>3D</b></td>
+								<td><input class="form-control form-control-sm"
+									type="number" name="3dPrice" value="${moviePrices.threeD }"
+									min="0" step="0.1" /></td>
+							</tr>
+							<tr>
+								<td><b>2D</b></td>
+								<td><input class="form-control form-control-sm"
+									type="number" name="2dPrice" value="${moviePrices.twoD }"
+									min="0" step="0.1" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-	</form>
+	</div>
+
+	<div class="card mt-3">
+		<div class="card-body">
+			<div class="card-title">Casts</div>
+			<table class="table table-striped">
+				<tr>
+					<td><b>Director</b></td>
+					<!-- <td><span class="badge-style badge-white">James Cameron</span></td> -->
+					<td><input class="form-control" type="text" name="director"
+						placeholder="Enter Director" value="${movie.getDirector()}"
+						required /></td>
+				</tr>
+				<tr>
+					<td><b>Screenplay by</b></td>
+					<!-- <td><span class="badge-style badge-white">James Cameron</span>	<span class="badge-style badge-white">Rick Jaffa</span>	<span class="badge-style badge-white">Amanda Silver</span> <br></td> -->
+					<td><textarea type="text" class="form-control"
+							name="screenplay"
+							placeholder="Enter Screenplay and seperate using coma (,)"
+							required>${movie.getStoryBy()}</textarea></td>
+				</tr>
+				<tr>
+					<td><b>Story by</b></td>
+					<td><textarea type="text" class="form-control"
+							placeholder="Enter Casts and seperate using coma (,)" name="cast"
+							required>${movie.getCast()}</textarea></td>
+				</tr>
+			</table>
+
+			<input type="hidden" name="formType" value="${param.formType}">
+			<c:choose>
+				<c:when test="${not empty param.id }">
+					<input type="hidden" name="id" value="${param.id}">
+				</c:when>
+			</c:choose>
+			<input class="btn btn-success float-right" type="submit"
+				value="Insert" onClick="submitForm(this)"> </input>
+		</div>
+	</div>
+</form>

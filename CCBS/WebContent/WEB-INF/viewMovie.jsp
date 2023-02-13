@@ -4,27 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="ISO-8859-1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
-	rel="stylesheet">
-<script src="https://kit.fontawesome.com/6f995c3af2.js"
-	crossorigin="anonymous"></script>
-<title>Wakanda Forever</title>
+	
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/images/CCBS.ico' /> ">
+<title>${movie.getName()}</title>
 
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap')
-	;
-
-* {
-	font-family: 'Poppins', sans-serif;
-}
+<style type="text/css">
 
 body {
 	margin: auto;
@@ -69,13 +56,11 @@ p, span, small, h1, h2, h3, h4, h5 {
 </style>
 </head>
 
-<body style="background: black">
+<body style="background: black;">
 	<jsp:include page="header3.jsp"></jsp:include>
-
 	<div class="container">
-		<a> </a>
 		<div class="float-right watch-movie-button mt-5">
-			<a href="./movieHomePage.jsp"> <span><i
+			<a href="/CCBS/movie/${movie.getMovie_id()}/view"> <span><i
 					class="fas fa-ticket-alt" aria-hidden="true"></i> Watch Now</span>
 			</a>
 
@@ -91,12 +76,11 @@ p, span, small, h1, h2, h3, h4, h5 {
 					<div class="row">
 						<h2 class="font-weight-bold pt-5">${movie.getName()}</h2>
 						<p>
-							<small>${movie.getYear()} [] PG-13 []
+							<small>${movie.getYear()} ${movie.getGenre()}
 								${movie.getDuration()}</small><br />
 						</p>
 						<p class="pl-3">
-							<c:forEach items="${movie.getTags_id()}" var="tag"
-								varStatus="loop">
+							<c:forEach items="${movie.getTags()}" var="tag" varStatus="loop">
 								<span class="movie-badge"><small>${tag}</small></span>
 							</c:forEach>
 						</p>
