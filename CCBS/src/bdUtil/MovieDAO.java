@@ -116,6 +116,28 @@ public class MovieDAO {
 		jdbct.update("delete from `movie` where movie_id =?", id);
 	}
 
+
+	public Map<Object, List<Map<String, Object>>> getBranchMovie(int movieId, String company, String city, String state, String date) {
+		String sql = "SELECT b.brch_name, b.brch_addr, b.brch_post, b.brch_city, b.state, h.hall_id, h.hall_type, m.name, s.showtime_time, s.showtime_date, m.movie_id, s.schedule_id " + 
+				"FROM branch AS b " + 
+				"INNER JOIN hall AS h ON h.hall_id  = b.brch_id " + 
+				"INNER JOIN schedule AS s ON s.hall_id = h.hall_id " + 
+				"INNER JOIN movie AS m ON s.movie_id = m.movie_id ";
+		sql = sql + " WHERE b.brch_city='"+city + "' AND b.state='"+state + "' AND m.movie_id='"+movieId;
+		if(date!="") sql = sql + "' AND s.showtime_date='"+date;
+		sql = sql + "' ORDER BY b.brch_name, s.showtime_time";
+		List<Map<String, Object>> rs = jdbct.queryForList(sql);
+//		System.out.println(sql);
+//		System.out.println(rs);
+		/*
+		 * for(Map<String, Object> r: rs) { System.out.println(r.get("brch_name")); }
+		 */
+		Map<Object, List<Map<String, Object>>> branchMovieGrouped =
+			    rs.stream().collect(Collectors.groupingBy(w -> w.get("brch_name")));
+//		System.out.println(branchMovieGrouped);
+		return branchMovieGrouped;
+	}
+
 	public String getMovieGenre(int genreId) {
 		String sql = "select movie_genre from movie_genre where genre_id=?";
 		return jdbct.queryForObject(sql, String.class, genreId);

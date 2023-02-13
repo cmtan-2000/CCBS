@@ -45,17 +45,22 @@ public class MovieController extends HttpServlet {
 		return mav;
 	}
 
-
 	@RequestMapping("/movie/{id}/view")
-	public ModelAndView cIndex(@PathVariable Map<String, String> pathV) {
+	public ModelAndView cIndex(@PathVariable Map<String, String> pathV,
+			@RequestParam(value = "company", required = false, defaultValue = "") String company,
+			@RequestParam(value = "city", required = false, defaultValue = "Kuala Lumpur") String city,
+			@RequestParam(value = "state", required = false, defaultValue = "Selangor") String state,
+			@RequestParam(value = "date", required = false, defaultValue = "2023-02-13") String date) {
 		ModelAndView mav = new ModelAndView("movieHomePage");
-		int id = Integer.valueOf(pathV.get("id"));
-		Movie movieObject = movDAO.findById(id);
+		int movieId = Integer.valueOf(pathV.get("id"));
+		Movie movieObject = movDAO.findById(movieId);
 		mav.addObject("movie", movieObject);
+		if (city != "" && state != "" && date != "")
+			mav.addObject("branchMovie", movDAO.getBranchMovie(movieId, company, city, state, date));
 		return mav;
 	}
 
-	//home page for company is /company ->index.jsp
+	// home page for company is /company ->index.jsp
 	@RequestMapping("/company/movie/{id}")
 	public ModelAndView cView(@PathVariable Map<String, String> pathV) {
 		ModelAndView mav = new ModelAndView("movieDetail");
@@ -68,11 +73,13 @@ public class MovieController extends HttpServlet {
 		return mav;
 	}
 
-	@PostMapping("/company/movie/create") //create+update in insertMovieModal.jsp
+	@PostMapping("/company/movie/create") // create+update in insertMovieModal.jsp
 	public String cCreate(@RequestParam Map<String, String> req) {
 		try {
-			if(req.get("formType").equals("create")) movDAO.add(req);
-			else movDAO.update(req, Integer.parseInt(req.get("id")));
+			if (req.get("formType").equals("create"))
+				movDAO.add(req);
+			else
+				movDAO.update(req, Integer.parseInt(req.get("id")));
 			return "redirect:/company";
 		} catch (SQLException e) {
 			e.printStackTrace();
