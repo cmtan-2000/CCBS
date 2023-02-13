@@ -78,51 +78,16 @@
 				    </tr>
 				</thead>
 				<tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>${movie.getShowtime()}</td>
-				      <td>${movie.getHall_id()}</td>
-				      <td>${movie.getPrice()}</td>
-				      <td>${movie.getHall_type()}</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>${movie.getShowtime()}</td>
-				      <td>${movie.getHall_id()}</td>
-				      <td>${movie.getPrice()}</td>
-				      <td>${movie.getHall_type()}</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>${movie.getShowtime()}</td>
-				      <td>${movie.getHall_id()}</td>
-				      <td>${movie.getPrice()}</td>
-				      <td>${movie.getHall_type()}</td>
-					</tr>
-					<tr>
-				      <th scope="row">4</th>
-				      <td>${movie.getShowtime()}</td>
-				      <td>${movie.getHall_id()}</td>
-				      <td>${movie.getPrice()}</td>
-				      <td>${movie.getHall_type()}</td>
-					</tr>
-					<tr>
-				      <th scope="row">5</th>
-				      <td>${movie.getShowtime()}</td>
-				      <td>${movie.getHall_id()}</td>
-				      <td>${movie.getPrice()}</td>
-				      <td>${movie.getHall_type()}</td>
-					</tr>
-					<tr>
-				      <th scope="row">6</th>
-				      <td>${movie.getShowtime()}</td>
-				      <td>${movie.getHall_id()}</td>
-				      <td>${movie.getPrice()}</td>
-				      <td>${movie.getHall_type()}</td>
-					</tr>
+					<c:forEach items="${movie.size()}" var="movie">
+						<tr>
+							<td><c:out value="${movie.getShowtime()}"></c:out></td>
+							<td><c:out value="${movie.getHall_id()}"></c:out></td>
+							<td><c:out value="${movie.getPrice()}"></c:out></td>
+							<td><c:out value="${movie.getHall_type()}"></c:out></td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
-		
 		</div>
 	</div>
 	
@@ -130,7 +95,7 @@
 	<div class="dialog" id="insertMovieDialog">
 		<jsp:include page="insertMovieModal.jsp">
 		    <jsp:param name="formType" value="edit"/>
-		    <jsp:param name="id" value="${movie.getMovie_id() }"/>
+		    <jsp:param name="id" value="${movie.getMovie_id()}"/>
 	    </jsp:include>
 	</div>
 	
