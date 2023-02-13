@@ -38,7 +38,7 @@ public class MovieDAO {
 
 	public void add(Map<String, String> req) throws SQLException {
 		String movSql = "insert into `movie`(`user_id`, `name`, `description`, `director`, `casts`, `duration`, `genre_id`, `tags_id`, `story_by`, `year`, `poster`) values (?,?,?,?,?,?,?,?,?,?,?)";
-		//get tags from checkboxes
+		// get tags from checkboxes
 		ArrayList<String> tags = new ArrayList<String>();
 		for (String tagName : this.getAllMovieTags()) {
 			System.out.println(req.get(tagName));
@@ -53,14 +53,14 @@ public class MovieDAO {
 				Integer.class);
 		System.out.println(tagIds);
 		String listString = tagIds.toString().replaceAll(", ", ",");
-		System.out.println(listString.substring(1, listString.length()-1));
+		System.out.println(listString.substring(1, listString.length() - 1));
 
 		// get genre id
 		int genreId = jdbct.queryForObject("select genre_id from movie_genre where movie_genre=?", Integer.class,
 				req.get("genre")); // insert new movie
 		Object movArgs[] = { 1, req.get("name"), req.get("description"), req.get("director"), req.get("cast"),
-				req.get("duration"), genreId, listString.substring(1, listString.length()-1), req.get("screenplay"), req.get("year"),
-				req.get("poster") };
+				req.get("duration"), genreId, listString.substring(1, listString.length() - 1), req.get("screenplay"),
+				req.get("year"), req.get("poster") };
 		jdbct.update(movSql, movArgs);
 
 		int newMovieId = jdbct.queryForObject("select movie_id from movie order by movie_id desc limit 1",
@@ -116,26 +116,26 @@ public class MovieDAO {
 		jdbct.update("delete from `movie` where movie_id =?", id);
 	}
 
-
-	public Map<Object, List<Map<String, Object>>> getBranchMovie(int movieId, String company, String city, String state, String date) {
-		String sql = "SELECT b.brch_name, b.brch_addr, b.brch_post, b.brch_city, b.state, h.hall_id, h.hall_type, m.name, s.showtime_time, s.showtime_date, m.movie_id, s.schedule_id " + 
-				"FROM branch AS b " + 
-				"INNER JOIN hall AS h ON h.hall_id  = b.brch_id " + 
-				"INNER JOIN schedule AS s ON s.hall_id = h.hall_id " + 
-				"INNER JOIN movie AS m ON s.movie_id = m.movie_id ";
-		sql = sql + " WHERE b.brch_city='"+city + "' AND b.state='"+state + "' AND m.movie_id='"+movieId;
-		if(date!="") sql = sql + "' AND s.showtime_date='"+date;
+	public Map<Object, List<Map<String, Object>>> getBranchMovie(int movieId, String company, String city, String state,
+			String date) {
+		String sql = "SELECT b.brch_name, b.brch_addr, b.brch_post, b.brch_city, b.state, h.hall_id, h.hall_type, m.name, s.showtime_time, s.showtime_date, m.movie_id, s.schedule_id "
+				+ "FROM branch AS b " + "INNER JOIN hall AS h ON h.hall_id  = b.brch_id "
+				+ "INNER JOIN schedule AS s ON s.hall_id = h.hall_id "
+				+ "INNER JOIN movie AS m ON s.movie_id = m.movie_id ";
+		sql = sql + " WHERE b.brch_city='" + city + "' AND b.state='" + state + "' AND m.movie_id='" + movieId;
+		if (date != "")
+			sql = sql + "' AND s.showtime_date='" + date;
 		sql = sql + "' ORDER BY b.brch_name, s.showtime_time";
 		List<Map<String, Object>> rs = jdbct.queryForList(sql);
-//		System.out.println(sql);
-//		System.out.println(rs);
-		/*
-		 * for(Map<String, Object> r: rs) { System.out.println(r.get("brch_name")); }
-		 */
-		Map<Object, List<Map<String, Object>>> branchMovieGrouped =
-			    rs.stream().collect(Collectors.groupingBy(w -> w.get("brch_name")));
-//		System.out.println(branchMovieGrouped);
+		Map<Object, List<Map<String, Object>>> branchMovieGrouped = rs.stream()
+				.collect(Collectors.groupingBy(w -> w.get("brch_name")));
 		return branchMovieGrouped;
+	}
+
+	public double getMoviePriceByType(String type, int movieId) {
+		String sql = "SELECT prices.movie_price FROM movie INNER JOIN prices ON prices.movie_id = movie.movie_id "
+				+ " WHERE prices.type ='" + type + "' AND movie.movie_id =" + movieId;
+		return jdbct.queryForObject(sql, Double.class);
 	}
 
 	public String getMovieGenre(int genreId) {
