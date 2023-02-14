@@ -6,36 +6,25 @@
 <head>
 <meta charset="ISO-8859-1">
 	<title>Payment Result Page</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/paymentSuccess.css">
+	<link href="<c:url value="/resources/css/afterRegNPayment.css" />" rel="stylesheet">
 	<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
+	<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
 </head>
-<body>
-	<div class="header">
-		<label>Payment Successfully</label>
-		<a href="./viewMovie.jsp"> 
-			<input type="submit" value="RETURN" name="return" class="return">
-		</a>
-		
-	</div>
-	<div class="grid-container">
-		<div class="grid-item item1">
-        	<b style="font-size: 20px">Movie: Black Panther: Wakanda Forever</b><br>
-        	Seat: B5, B6, B7, B8<br>
-            Quantity: Adult 4
+<body class="background">
+    <div class="page-wrapper">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+        <div class="wrapper">
+            <h1 class="header-register">Payment successful!</h1>
+            <br> <br>
+            <a class="btn btn-primary float-end ms-5" href="<c:url value='/login'/>">Back to login</a>
         </div>
-        <div class="grid-item item2">
-        	<input type="submit" value="PRINT" name="print">
-        </div>
-        <div class="grid-item item3">RM </div>
-        <div class="grid-item item98"></div>
-        <div class="grid-item item4">
-        	<b style="font-size: 20px">Signature Popcorn (Small) + 1x Regular Drink / Mineral Water</b><br>
-            Quantity: 3
-        </div>
-        <div class="grid-item item5">
-        	<input type="submit" value="PRINT" name="print">
-        </div>
-        <div class="grid-item item6">RM </div>
-</div>
+    </div>
 </body>
 </html>

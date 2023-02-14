@@ -24,7 +24,7 @@ public class DBConnect {
 		}catch (SQLException | ClassNotFoundException ex) {
 			ex.printStackTrace();
 		}
-		
+			
 		return conn;
 	}
 }

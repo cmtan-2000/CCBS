@@ -6,37 +6,42 @@
 <head>
 <meta charset="ISO-8859-1">
 	<title>Payment Page</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/payment.css">
 	<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+	<style>
+        body {
+            background-color: black;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .page-wrapper {
+            margin: 40px 300px;
+            color: white;
+        }
+
+        .wrapper {
+            margin: 0px 90px;
+        }
+    </style>
 </head>
-<body>
-	<div class="header">
-		<label>Checkout</label>
-	</div>
-	<div class="grid-container">
-		<div class="grid-item item1">
-        	<br>
-        	
+<body class="background">
+    <div class="page-wrapper">
+        <div class="wrapper">
+
+        	<jsp:useBean id="ticket" class="model.Ticket" scope="session"/>
+        	<jsp:useBean id="user" class="model.User" scope="session"/>
+
+            <h1 style="color: yellow; margin-bottom: 30px;">Make payment</h1>
+			
+            <h5>Total amount to pay: RM${ticket.totalPrice}</h5>
+            <p> <input type="text" class="form-control" placeholder="Enter amount"> </p>
+
+			<a class="btn btn-success float-end mt-4" href="<c:url value='/checkout/makePayment/${user.user_id}'/>" role="button">Submit</a>
         </div>
-        <div class="grid-item item2"></div>
-        <div class="grid-item item3"></div>
-		<div class="grid-item item4">
-        	 
-            
-        </div>
-        <div class="grid-item item5"> </div>
-        <div class="grid-item item6"></div>
-        <div class="grid-item item7">
-        	
-        </div>
-        <div class="grid-item item8"><hr></div>
-        <div class="grid-item item9"></div>
-        <div class="grid-item item10">
-        	 
-        </div>
-      	<div class="grid-item item11" align="right">
-        	<input type="submit" value="NEXT" name="next">
-        </div>
-	</div>
+    </div>
 </body>
 </html>

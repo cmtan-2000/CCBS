@@ -64,13 +64,15 @@ input {
 		<div
 			style="width: 70%; height: 100%; padding: 20px 50px; background-color: #2a2a2a">
 			<div class="foodBeverage">
-				Food And Beverage
+				<h1 style="color:yellow;">Food And Beverage</h1>
 				<p class="combo">
 					Combo<br>
 				<hr>
+				
+				
 				<c:forEach var="combo" items="${FABList.get('combo')}">
 					<div class="foodRow">
-						<label>${combo.getName() }</label>
+						<label>${combo.getName()}</label>
 						<div class="qtyPrice">
 							<b>Qty: <input value=0 min="0" type="number" name="quant1" style="width: 50px" />
 							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${combo.getPrice()}" /></b>
@@ -113,7 +115,7 @@ input {
 				</p>
 			</div>
 			<div style="display: flex; flex-direction: row-reverse;">
-				<form action="./CheckoutController" method="post">
+				<form action="" method="post">
 					<input type="submit" class="btn btn-success font-weight-bold" value="Confirm"/>
 				</form>
 			</div>
