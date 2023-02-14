@@ -96,11 +96,11 @@ public class LoginController extends HttpServlet {
 		
 		if(type==1) return "redirect:/admin";
 		else if (type==2) return "redirect:/company";
-		else if (type==3) return "redirect:/movie";
+		else if (type==3) return "redirect:/";
 		else return "redirect:/loginError";
 	}
 
-	@RequestMapping("/movie")
+	@RequestMapping("/")
 	public ModelAndView userDashboard() {
 		ModelAndView mav = new ModelAndView("movieGridListView");
 		MovieDAO movDAO = new MovieDAO();
@@ -111,6 +111,7 @@ public class LoginController extends HttpServlet {
 	@RequestMapping("/admin")
 	public ModelAndView adminDashboard() {
 		ModelAndView mav = new ModelAndView("adminDashboard");
+		
 		return mav;
 	}
 
