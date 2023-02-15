@@ -298,50 +298,28 @@ body {
 
 	<!-- All related Model -->
 	<div class="w-100">
-		<div class="container">
-			<%!int noCinema = 2;%>
-			<%
-				for (int h = 0; h < noCinema; h++) {
-			%>
+		<div class="container mt-5">
 			<div class="card shadow mt-3">
 				<div class="card-body">
 					<p class="font-weight-bold card-title" style="font-size: 21;">
-						Name_Cinema
-						<%=h + 1%></p>
+						TGV</p>
 					<hr>
 					<div class="branch-grid">
-						<%!int noBranch = 3;%>
-						<%
-							for (int i = 0; i < noBranch; i++) {
-						%>
-						<div class="branch">
-							<p class="font-weight-bold" style="font-size: 15;">
-								Branch
-								<%=i + 1%>
-							</p>
-							<div>
-								<%!int noHall = 12;%>
-								<%
-									for (int j = 0; j < noHall; j++) {
-								%>
-								<button onclick="onHallDetail()"
-									class="btn btn-outline-primary border-3 font-weight-bold">
-									H<%=j + 1%></button>
-								<%
-									}
-								%>
+						<c:forEach items="${branchHall}" var="hall" varStatus="loop">
+							<div class="branch">
+								<p class="font-weight-bold" style="font-size: 15;">
+									${hall.get("brch_name") }</p>
+								<div>
+									<button onclick="onHallDetail()"
+										class="btn btn-outline-primary border-3 font-weight-bold">
+										H${loop.index }</button>
+								</div>
 							</div>
-						</div>
-						<%
-							}
-						%>
+						</c:forEach>
 					</div>
 				</div>
 
 			</div>
-			<%
-				}
-			%>
 		</div>
 	</div>
 

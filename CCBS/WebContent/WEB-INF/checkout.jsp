@@ -92,5 +92,6 @@
             <a class="btn btn-success float-end mt-4" href="<c:url value='/checkout/showPayment'/>" role="button">Confirm checkout</a>
         </div>
     </div>
+    
 </body>
 </html>

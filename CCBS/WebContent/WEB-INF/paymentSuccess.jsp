@@ -26,5 +26,6 @@
             <a class="btn btn-primary float-end ms-5" href="<c:url value='/login'/>">Back to login</a>
         </div>
     </div>
+    <%session.invalidate(); %>
 </body>
 </html>

@@ -111,7 +111,8 @@ public class LoginController extends HttpServlet {
 	@RequestMapping("/admin")
 	public ModelAndView adminDashboard() {
 		ModelAndView mav = new ModelAndView("adminDashboard");
-		
+		BranchDAO branchDAO = new BranchDAO();
+		mav.addObject("branchHall", branchDAO.getBranchHall());
 		return mav;
 	}
 

@@ -49,6 +49,13 @@ public class BranchDAO {
 		int rowAffected = jdbct.update(brchSql, id);
 		return rowAffected;
 	}
+	
+	public List<Map<String, Object>> getBranchHall() {
+		String sql = "SELECT hall.hall_id, hall.brch_id, profile.user_id, profile.name, branch.brch_name FROM profile " + 
+				"INNER JOIN branch on profile.user_id = branch.user_id " + 
+				"INNER JOIN hall ON branch.brch_id = hall.brch_id";
+		return jdbct.queryForList(sql);
+	}
 
 	public DataSource getDataSource() {
 		DataSource ds = null;

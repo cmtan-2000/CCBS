@@ -56,8 +56,11 @@
 
 	<form action="/CCBS/movie/seatBooking/submit" method="get">
 		<!-- 	Seats: -->
-		<input type="hidden" id="seat" name="seat"
-			value="<c:out value="${seatSelected}"/>">
+		<input type="hidden" id="seat" name="seat" value="<c:out value="${seatSelected}"/>">
+		<input type="hidden" name="movieId" value="<c:out value="${movieId}"/>">
+		<input type="hidden" name="userId" value="<c:out value="${userId}"/>">
+		<input type="hidden" name="scheduleId" value="<c:out value="${scheduleId}"/>">
+		<input type="hidden" name="priceId" value="<c:out value="${priceId}"/>">
 
 		<div class="showcase__submit">
 			<div class="center__showcase">

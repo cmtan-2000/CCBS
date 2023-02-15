@@ -138,6 +138,12 @@ public class MovieDAO {
 		return jdbct.queryForObject(sql, Double.class);
 	}
 
+	public int getMoviePriceIdByType(String type, int movieId) {
+		String sql = "SELECT prices.price_id FROM movie INNER JOIN prices ON prices.movie_id = movie.movie_id "
+				+ " WHERE prices.type ='" + type + "' AND movie.movie_id =" + movieId;
+		return jdbct.queryForObject(sql, Integer.class);
+	}
+
 	public String getMovieGenre(int genreId) {
 		String sql = "select movie_genre from movie_genre where genre_id=?";
 		return jdbct.queryForObject(sql, String.class, genreId);

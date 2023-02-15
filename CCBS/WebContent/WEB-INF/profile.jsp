@@ -124,7 +124,7 @@ a.link:hover {
 			<ul class="menu">
 				<li class="menu-profile current menu-item" style="color: white"><a href="/CCBS/profile/${user.getUser_id()}"
 					class="link">CUSTOMER</a></li>
-				<li class="menu-item menu-item"><a href="<c:url value='/movie'/>"
+				<li class="menu-item menu-item"><a href="<c:url value='/'/>"
 					class="link">Home</a></li>
 				<li class="menu-item"><a href="/CCBS/wallet/${user.getUser_id()}"
 					class="link">Top Up</a></li>

@@ -1,6 +1,7 @@
 package bdUtil;
 
 import java.util.List;
+import java.util.Map;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -15,102 +16,110 @@ import model.SalesReport;;
 
 public class SalesReportDAO {
 	JdbcTemplate jdbct = new JdbcTemplate(getDataSource());
-	
+
+	public List<Map<String, Object>> getAll() {
+		return jdbct.queryForList(
+				"SELECT *, movie.name AS movieName FROM ticket  " + 
+				"INNER JOIN custfab_ticket on ticket.ticket_id = custfab_ticket.ticket_id " + 
+				"INNER JOIN movie ON ticket.movie_id = movie.movie_id " + 
+				"INNER JOIN prices ON ticket.price_id = prices.price_id");
+	}
+
 	public SalesReport getBranchName(HttpServletRequest req) {
 		int id = Integer.parseInt(req.getParameter("branch_id"));
 		String sql = "select brch_name from branch where id=?";
 		SalesReport sReport = jdbct.queryForObject(sql, new BeanPropertyRowMapper<SalesReport>(SalesReport.class), id);
 		return sReport;
 	}
-	
+
 	public String getType(HttpServletRequest req) {
 		String type = req.getParameter("filter");
 		return type;
 	}
-	
+
 	public SalesReport getTicketD() {
 		String tp = "movie ticket";
-		
-		//getDate
+
+		// getDate
 //		LocalDate dateObj = LocalDate.now();
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //		String Date = dateObj.format(formatter);
 		String Date = "2023-01-13";
-		
+
 		String sql = "select total from record where type=" + tp + "and date= " + Date;
 		SalesReport sReport = jdbct.queryForObject(sql, new BeanPropertyRowMapper<SalesReport>(SalesReport.class));
 		return sReport;
 	}
-	
+
 	public SalesReport getTicketM() {
 		String tp = "movie ticket";
-		
-		//getDate
+
+		// getDate
 //		LocalDate dateObj = LocalDate.now();
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //		String Date = dateObj.format(formatter);
 		String Date = "2023-2-13";
 		String Date1 = "2023-2-1";
-		
+
 		String sql = "select total from record where type=" + tp + "and date between " + Date + " and " + Date1;
 		SalesReport sReport = jdbct.queryForObject(sql, new BeanPropertyRowMapper<SalesReport>(SalesReport.class));
 		return sReport;
 	}
-	
+
 	public SalesReport getTicketY() {
 		String tp = "movie ticket";
-		
-		//getDate
+
+		// getDate
 //		LocalDate dateObj = LocalDate.now();
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //		String Date = dateObj.format(formatter);
 		String Date = "2023-2-13";
 		String Date1 = "2023-1-1";
-				
+
 		String sql = "select total from record where type=" + tp + "and date between " + Date + " and " + Date1;
 		SalesReport sReport = jdbct.queryForObject(sql, new BeanPropertyRowMapper<SalesReport>(SalesReport.class));
 		return sReport;
 	}
-	
+
 	public SalesReport getSnackBD() {
 		String tp = "snack n beverage";
-		
-		//getDate
+
+		// getDate
 //		LocalDate dateObj = LocalDate.now();
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //		String Date = dateObj.format(formatter);
 		String Date = "2023-2-13";
-		
+
 		String sql = "select total from record where type=" + tp + "and date= " + Date;
 		SalesReport sReport = jdbct.queryForObject(sql, new BeanPropertyRowMapper<SalesReport>(SalesReport.class));
 		return sReport;
 	}
-	
+
 	public SalesReport getSnackBM() {
 		String tp = "snack n beverage";
-		
-		//getDate
+
+		// getDate
 //		LocalDate dateObj = LocalDate.now();
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //		String Date = dateObj.format(formatter);
 		String Date = "2023-2-13";
 		String Date1 = "2023-2-1";
-		
+
 		String sql = "select total from record where type=" + tp + "and date between " + Date + " and " + Date1;
 		SalesReport sReport = jdbct.queryForObject(sql, new BeanPropertyRowMapper<SalesReport>(SalesReport.class));
 		return sReport;
 	}
-	
+
 	public SalesReport getSnackBY() {
 		String tp = "snack n beverage";
-		
-		//getDate
+
+		// getDate
 //		LocalDate dateObj = LocalDate.now();
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //		String Date = dateObj.format(formatter);
 		String Date = "2023-2-13";
 		String Date1 = "2023-1-1";
-		
+
 		String sql = "select total from record where type=" + tp + "and date between " + Date + " and " + Date1;
 		SalesReport sReport = jdbct.queryForObject(sql, new BeanPropertyRowMapper<SalesReport>(SalesReport.class));
 		return sReport;

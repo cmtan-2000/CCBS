@@ -15,8 +15,16 @@ import bdUtil.SalesReportDAO;
 import model.SalesReport;
 
 @Controller
-@RequestMapping("/salesReport")
 public class SalesReportController {
+	
+	
+	@RequestMapping("/admin/salesReport")
+	public ModelAndView viewReport() {
+		ModelAndView mav = new ModelAndView("salesReportTable");
+		SalesReportDAO srDAO = new SalesReportDAO();
+		mav.addObject("ticket", srDAO.getAll());
+		return mav;
+	}
 	
 	SalesReport sReport = new SalesReport();
 	

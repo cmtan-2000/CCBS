@@ -61,7 +61,7 @@ input {
 	<div
 		style="display: flex; flex-direction: row; justify-content: center">
 		<button style="margin-right: 20px; margin-top:50px; height: fit-content" class="btn btn-secondary font-weight-bold mt-5">Exit</button>
-		<div
+		<form action="/CCBS/displayFoodDrinks/insertTicket" method="get"
 			style="width: 70%; height: 100%; padding: 20px 50px; background-color: #2a2a2a">
 			<div class="foodBeverage">
 				<h1 style="color:yellow;">Food And Beverage</h1>
@@ -74,7 +74,7 @@ input {
 					<div class="foodRow">
 						<label>${combo.getName()}</label>
 						<div class="qtyPrice">
-							<b>Qty: <input value=0 min="0" type="number" name="quant1" style="width: 50px" />
+							<b>Qty: <input value=0 min="0" type="number" name="combo_amount${combo.getFab_id()}" style="width: 50px" />
 							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${combo.getPrice()}" /></b>
 						</div>
 					</div>
@@ -94,7 +94,7 @@ input {
 					<div class="foodRow">
 						<label>${food.getName()}</label>
 						<div class="qtyPrice">
-							<b>Qty: <input value=0 min="0" type="number" name="quant1" style="width: 50px" />
+							<b>Qty: <input value=0 min="0" type="number" name="food_amount${food.getFab_id()}" style="width: 50px" />
 							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${food.getPrice()}" /></b>
 						</div>
 					</div>
@@ -107,7 +107,7 @@ input {
 					<div class="foodRow">
 						<label>${drink.getName()}</label>
 						<div class="qtyPrice">
-							<b>Qty: <input value=0 min="0" type="number" name="quant1" style="width: 50px" />
+							<b>Qty: <input value=0 min="0" type="number" name="drink_amount${drink.getFab_id()}"  style="width: 50px" />
 							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${drink.getPrice()}" /></b>
 						</div>
 					</div>
@@ -115,11 +115,9 @@ input {
 				</p>
 			</div>
 			<div style="display: flex; flex-direction: row-reverse;">
-				<form action="" method="post">
 					<input type="submit" class="btn btn-success font-weight-bold" value="Confirm"/>
-				</form>
 			</div>
-		</div>
+		</form>
 	</div>
 </body>
 </html>

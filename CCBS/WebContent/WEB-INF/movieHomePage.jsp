@@ -144,28 +144,7 @@ label {
 </head>
 
 <body style="background: black;">
-	<div
 		<jsp:useBean id="movie" class="model.Movie" scope="session"/>
-		style="position: fixed; width: 33%; margin: auto; background: black; height: 100vh;">
-		<div class="px-5">
-			<h5 class="font-weight-bold pt-5">${movieBean.name}</h5>
-			<p>
-				<small>2022 [] PG-13 [] 161 mins</small>
-			</p>
-			<p>
-				<%
-					String[] labels = new String[] { "Action", "Adventure", "Drama" };
-					for (String label : labels) {
-				%>
-				<span class="movie-badge"><small><%=label%></small></span>
-				<%
-					}
-				%>
-			</p>
-			<img height="100%" width="250px"
-				src="https://m.media-amazon.com/images/M/MV5BNTM4NjIxNmEtYWE5NS00NDczLTkyNWQtYThhNmQyZGQzMjM0XkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg">
-		</div>
-	</div>
 	<div>
 		<div class="row">
 			<div class="col-4">
