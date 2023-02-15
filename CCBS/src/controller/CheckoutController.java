@@ -107,6 +107,7 @@ public class CheckoutController {
 	    	java.sql.Time showTime = null;
 	    	double movie_price = 0, drink_price = 0, food_price = 0, combo_price = 0,totalPrice = 0;
 	    	int food_amount = 0, drink_amount = 0, combo_amount = 0,seatCount = 0, sesfoodID = 0, sesDrinkID = 0, sesComboID = 0;
+	    	int foodStockQuantity = 0, drinkStockQuantity = 0, comboStockQuantity = 0, leftFoodQ = 0, leftDrinkQ = 0, leftComboQ = 0;
 	    	Ticket ticket = new Ticket();
 	    	
 	    	try {
@@ -129,28 +130,34 @@ public class CheckoutController {
 		    			ticketType = rs.getString("type");
 		    			seat = rs.getString("seat");
 		    			movie_price = rs.getDouble("movie_price");
+		    			foodStockQuantity = rs.getInt("food.stock_quantity");
+		    			drinkStockQuantity = rs.getInt("drink.stock_quantity");
+		    			comboStockQuantity = rs.getInt("combo.stock_quantity");
+		    			food_price = rs.getDouble("food.price");
+		    			food = rs.getString("food.name");
+		    			food_amount = rs.getInt("food_amount");
+		    			drink_price = rs.getDouble("drink.price");
+		    			drink = rs.getString("drink.name");
+		    			drink_amount = rs.getInt("drink_amount");
+		    			combo_price = rs.getDouble("combo.price");
+		    			comboName = rs.getString("combo.name");
+			    		combo_amount = rs.getInt("combo_amount");
+		    			
+		    			leftFoodQ = foodStockQuantity - food_amount;
+		    			leftDrinkQ = drinkStockQuantity - drink_amount;
+		    			leftComboQ = comboStockQuantity - combo_amount;
+		    			
+		    			System.out.println("left food" + leftFoodQ);
+		    			System.out.println("left drink" + leftDrinkQ);
+		    			System.out.println("left combo" + leftComboQ);
 		    			
 		    			System.out.println("movieName: " + movieName);
 		    			System.out.println("showTime: " + showTime);
 		    			System.out.println("showDate: " + showDate);
-		    			
 		    			System.out.println("food ID: " + sesfoodID);
 		    			System.out.println("drink ID: " + sesDrinkID);
 		    			System.out.println("combo ID: " + sesComboID);
 		    			
-		    			
-		    			food_price = rs.getDouble("food.price");
-		    			food = rs.getString("food.name");
-		    			food_amount = rs.getInt("food_amount");
-		    				
-		    			drink_price = rs.getDouble("drink.price");
-		    			drink = rs.getString("drink.name");
-		    			drink_amount = rs.getInt("drink_amount");
-		    			
-		    			combo_price = rs.getDouble("combo.price");
-		    			comboName = rs.getString("combo.name");
-			    		combo_amount = rs.getInt("combo_amount");
-			    		
 			    		ticket.setFoodPrice(food_price);
 		    			ticket.setFoodName(food);
 		    			ticket.setFoodAmount(food_amount);
@@ -161,6 +168,34 @@ public class CheckoutController {
 			    		ticket.setComboPrice(combo_price);
 			    		ticket.setComboAmount(combo_amount);
 		    		}
+		    		
+			    	String sql4 = "update `food` set `stock_quantity` = ? where `fab_id` = ?";
+			    	String sql5 = "update `drink` set `stock_quantity` = ? where `fab_id` = ?";
+			    	String sql6 = "update `combo` set `stock_quantity` = ? where `fab_id` = ?";
+			    		
+			    	PreparedStatement ps4 = con.prepareStatement(sql4);
+			    	PreparedStatement ps5 = con.prepareStatement(sql5);
+			    	PreparedStatement ps6 = con.prepareStatement(sql6);
+			    	
+			    	System.out.println("-----------------------------------");
+			    	System.out.println("left food: " + leftFoodQ);
+	    			System.out.println("left drink: " + leftDrinkQ);
+	    			System.out.println("left combo: " + leftComboQ);
+			    	
+			    	ps4.setInt(1, leftFoodQ);
+			    	ps4.setInt(2, sesfoodID);
+			    	ps4.executeUpdate();
+			    	System.out.println("success update food stock");
+			    	
+			    	ps5.setInt(1, leftDrinkQ);
+			    	ps5.setInt(2, sesDrinkID);
+			    	ps5.executeUpdate();
+			    	System.out.println("success update drink stock");
+			    	
+			    	ps6.setInt(1, leftComboQ);
+			    	ps6.setInt(2, sesComboID);
+			    	ps6.executeUpdate();
+			    	System.out.println("success update combo stock");
 	    		}
 	    		else {
 	    			//if no order fab at all
@@ -213,12 +248,12 @@ public class CheckoutController {
 	    		session.setAttribute("ticket", ticket);
 	    		System.out.println("movie name: " + movieName);
 	    	
-	 }
-	 catch(SQLException ex)
-	{
-	    ex.printStackTrace();
-	}
-	ModelAndView mv = new ModelAndView("checkout");return mv;
+	    	}
+	    	catch(SQLException ex) {
+	    		ex.printStackTrace();
+	    	}	    	
+	    	ModelAndView mv = new ModelAndView("checkout");
+	    	return mv;
 	}
 
 	@RequestMapping("/displayFoodDrinks")
@@ -284,8 +319,9 @@ public class CheckoutController {
 				System.out.print(i + 1);
 				System.out.print(foodInput.get(i));
 				food_id = i + 1;
-				food_amount = foodInput.get(i);
+				food_amount = foodInput.get(i);				
 				break;
+				
 			}
 			food_id = 0;
 			food_amount = 0;
@@ -375,6 +411,7 @@ public class CheckoutController {
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+
 		return "redirect:/viewcheckout/" + ticket_id;
 	}
 

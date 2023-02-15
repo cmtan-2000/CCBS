@@ -24,7 +24,7 @@
         }
 
         .page-wrapper {
-            margin: 80px 300px;
+            margin: 80px 300px 80px 300px;
         }
 
         .title {
@@ -122,7 +122,7 @@
                     <td>RM<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ticket.getTotalPrice()}" /></td>
                 </tr>
                </table>
-            <a class="btn btn-success float-end mt-4" href="<c:url value='/checkout/showPayment'/>" role="button">Confirm checkout</a>
+            <a class="btn btn-success float-end mt-4" style="margin-bottom: 80px;" href="<c:url value='/checkout/showPayment'/>" role="button">Confirm checkout</a>
         </div>
     </div>
     
