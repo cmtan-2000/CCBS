@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import bdUtil.DBConnect;
@@ -32,9 +34,53 @@ public class ProfileController extends HttpServlet {
         super();
     }
     
+	@RequestMapping("/profile/editProfile")
+	public ModelAndView editProfile(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		ModelAndView mv = new ModelAndView("editProfile");		
+		return mv;
+	}
+	
+	@RequestMapping("profile/editProfile/success")
+	public String editProfileSuccess(@RequestParam("photoFile") MultipartFile photoFile, HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		String name = request.getParameter("name");
+		java.sql.Date dob = Date.valueOf(request.getParameter("dob"));
+		String phoneNo = request.getParameter("phoneNo");
+		String address = request.getParameter("address");
+		String state = request.getParameter("stateSelect");
+    	String town = request.getParameter("townSelect");
+    	InputStream fileContent = photoFile.getInputStream();
+    	int user_id = 0;
+    	String completeAddress = address + " ," + town + " ," + state;
+    	
+    	try {
+    		HttpSession session = request.getSession(true);
+    		User user = (User)session.getAttribute("user"); 
+    		user_id = user.getUser_id();
+    		
+    		Connection con = DBConnect.openconnection();
+    		String sql = "update profile set name = ?, phoneNo = ?, address = ?, photoFile = ?, dob = ? where user_id = ?";
+    		PreparedStatement ps = con.prepareStatement(sql);
+    		ps.setString(1, name);
+    		ps.setString(2, phoneNo);
+    		ps.setString(3, completeAddress);
+    		ps.setBlob(4, fileContent);
+    		ps.setDate(5, dob);
+    		ps.setInt(6, user_id);
+    		
+    		ps.executeUpdate();
+    		System.out.println("update profile success");
+    	}
+    	catch(SQLException ex) {
+    		ex.printStackTrace();
+    	}
+		
+		return "redirect:/profile/" + user_id;
+	}
+	
+	
 	@RequestMapping("/profile/{user_id}")
 	protected ModelAndView profile(@PathVariable("user_id") int userID, HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
-		ModelAndView mv = new ModelAndView("profile");
+		ModelAndView mv = new ModelAndView("profile");	
 		Blob photoFile = null;
 		String name = "", phoneNo="", address="";
 		java.sql.Date dob = null;
@@ -65,17 +111,18 @@ public class ProfileController extends HttpServlet {
 			user.setUser_id(userID);
 			user.setType(type);
 			
-			session.setAttribute("user", user);
 			
     		InputStream image1 = photoFile.getBinaryStream();
     		mv.addObject("image1", image1);
+    		
+    		session.setAttribute("image3", image1); //to display at edit profile
+    		session.setAttribute("user", user);
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}		
 		return mv;
 	}	
-	
 	
 	@RequestMapping("/wallet/{user_id}")
     protected ModelAndView viewWallet(@PathVariable("user_id") int userID, HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
