@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="model.FAB"%>
+	pageEncoding="ISO-8859-1"
+	import="java.time.LocalDateTime, java.text.SimpleDateFormat, java.util.Date, java.time.format.DateTimeFormatter"%>
+<%@ page import="java.util.List"%>
+<%@ page import="bdUtil.HallDAO"%>
+<%@ page import="bdUtil.MovieDAO"%>
+<%@ page import="model.Hall"%>
+<%@ page import="model.Movie"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -16,6 +23,7 @@
 	href="<c:url value="/resources/css/style2.css"/>" />
 <link rel="stylesheet" href="<c:url value="/resources/css/modal.css"/>" />
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -112,32 +120,161 @@
 		<!-- the list, need to chg, insert data backend -->
 		<div class="container mt-5">
 			<table class="table table-border">
-				<c:forEach items="${branchList}" var="branch" varStatus="loop">
+				<c:forEach items="${ compBrchList }" var="branch" varStatus="loop">
 					<tr>
 						<td colspan="4"><b class="snack-title"> <c:out
-									value="${ branch.getBrch_name() }"></c:out>
-						</b></td>
+									value="${ branch.getBrch_name() }">
+								</c:out> <c:out value="${branch.getBrch_id()}"></c:out></b></td>
 
 					</tr>
-					<%
-						String[] hall = new String[]{"Hall 13", "Hall 14", "Hall 15", "Hall 16"};
-							String[] status = new String[]{"Pending", "Pending", "Approved", "Pending"};
-							String dialog = "\"" + "manageSchedulDialog" + "\"";
 
-							for (int i = 0; i < hall.length; i++) {
-								out.println("<tr>" + "<td>" + hall[i] + "</td>" + "<td>" + status[i] + "</td>"
-										+ "<td width=\"15%\"><button class='btn btn-primary font-weight-bold rounded-pill' onclick='toggleDialog(\"manageSchedulDialog\")'>"
-										+ "<i class=\"fas fa-edit\"></i> Manage</button></td>"
-										+ "<td><button class='btn btn-danger font-weight-bold rounded-pill' data-bs-toggle=\"modal\" data-bs-target=\"#deleteCfmModal\"><i class='fa-solid fa-trash-can'></i> Delete</button></td>"
-										+ "</tr>");
-							}
-					%>
+					<c:forEach items="${ hallList }" var="hall" varStatus="loop">
+						<c:if test="${branch.getBrch_id() == hall.getBrch_id() }">
+							<tr>
+								<td>Hall <c:out value="${ hall.getHall_id() }"></c:out></td>
+								<td>Status: <c:out value="${ hall.getHall_status() }"></c:out></td>
+								<td width="15%">
+									<!-- <button class='btn btn-primary font-weight-bold rounded-pill' onclick='toggleDialog("manageSchedulDialog")'>
+									<i class="fas fa-edit"></i> Manage</button></td> -->
+
+									<div class="d-flex justify-content-between">
+										<!-- Add branch for cinema company -->
+										<form action="branch/test" method="post">		
+											<input type="hidden" name="hall_id" value="${ hall.getHall_id() }">
+											<input type="hidden" name="hall_type" value="${ hall.getHall_type() }">								
+											<button class='btn btn-primary font-weight-bold rounded-pill' onclick='toggleDialog("manageSchedulDialog")'>
+										</form>
+											<i class="fas fa-edit"></i> Manage</button>
+									</div>
+								<td>
+
+									<form action="hall/deleteHall" method="POST">
+										<input type="hidden" name="currentID"
+											value="${hall.getHall_id()}" />
+										<button type="submit"
+											onclick="return confirm('Are you sure you want to delete this record?');"
+											class='btn btn-danger font-weight-bold rounded-pill'
+											data-bs-toggle="modal" data-bs-target="#deleteCfmModal">
+											<i class='fa-solid fa-trash-can'></i> Delete
+										</button>
+									</form>
+
+								</td>
+
+							</tr>
+						</c:if>
+					</c:forEach>
+					<c:if test="${empty hallList}">
+						<p>The result is empty. There might be an issue with the
+							calculation.</p>
+					</c:if>
 				</c:forEach>
 			</table>
 		</div>
 	</div>
 
+	<!-- Modal for Manage Schedule -->
+	<div class="modal fade" id="manageModal" tabindex="-1"
+		aria-labelledby="manageModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="manageModalLabel">Manage Schedule
+					</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Hall ID:
+					<p id="id"></p>
+					Hall Type:
+					<p id="name"></p>
 
+
+					<div class="" style="">
+						<%
+							MovieDAO movies = new MovieDAO();
+							List<Movie> movieList = movies.getAll();
+							for (Movie m : movieList) {
+								System.out.println(m.getName());
+							}
+
+							DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+							LocalDateTime date = LocalDateTime.now();
+							String[][] scheduleArray = new String[][]{{"Avatar: The Way of Water", "Deluxe"},
+									{"Black Adam", "Dual Max"}, {"Adam's Family", "Classic"}, {"SAO", "Deluxe"},
+									{"Jujutsu Kaisen: RE", "3D"},};
+							String duration = "10am";
+							for (int i = 0; i < 6; i++) {
+						%>
+						<%-- <select id="mySelect">
+							<option value=" " selected>Please select an option</option>
+							<c:forEach items="${movieList}" var="movie" varStatus="loop">
+								<option value="${movie.getMovie_id() }"><c:out
+										value="${movie.getName()}"></c:out></option>
+							</c:forEach>
+						</select>
+						<button id="removeButton" value="Insert"></button>
+ --%>
+						<br>
+						<br>
+						<div id="selects"></div>
+
+						<div class="card">
+							<div class="card-body">
+								<p class="card-title"><%=dtf.format(date.plusDays(i))%></p>
+								<div class="card-text">
+									<form action="branch/manageSchedule" method="post">
+								
+										<table class="table table-sm table-striped">
+										<thead>
+											<th>Timeslot</th>
+											<th>Name</th>
+										</thead>
+										<tbody>
+											<tr>
+												<td><input name="time" type="number" readonly></td>
+												<td><select name="movie_id" id="mySelect">
+														<option value=" " selected>Please select an
+															option</option>
+														<c:forEach items="${movieList}" var="movie"
+															varStatus="loop">
+															<option value="${movie.getMovie_id() }"><c:out
+																	value="${movie.getName()}"></c:out></option>
+														</c:forEach>
+												</select></td>
+											</tr>
+											<tr>
+												<td><input name="time" type="number" readonly></td>
+												<td><select name="movie_id" id="mySelect">
+														<option value=" " selected>Please select an
+															option</option>
+														<c:forEach items="${movieList}" var="movie"
+															varStatus="loop">
+															<option value="${movie.getMovie_id() }"><c:out
+																	value="${movie.getName()}"></c:out></option>
+														</c:forEach>
+												</select></td>
+											</tr>
+										</tbody>
+										</table>
+										<input type="hidden" id="mhall_id" name="hall_id"/>
+										<button type="submit">Insert Schedule</button>
+									</form>
+								</div>
+							</div>
+						</div>
+						<%
+							}
+						%>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal for Add Branch -->
 	<!-- Modal for Add Branch -->
 	<div class="modal fade" id="branchModal" tabindex="-1"
 		aria-labelledby="branchModalLabel" aria-hidden="true">
@@ -146,7 +283,7 @@
 				<div class="modal-header">
 					<h5 class="modal-title" id="branchModalLabel">Add Branch</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
+						aria-label="Close"></button>sche
 				</div>
 				<div class="modal-body">
 					<form action="./branch/add" method="post">
@@ -154,8 +291,7 @@
 							<label for="branchName" class="col-sm-5 col-form-label w-50">Branch
 								Name</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="branchName"
-									name="branchName" />
+								<input type="text" class="form-control" id="branchName" name="branchName"/>
 							</div>
 						</div>
 						<div class="form-group">
@@ -167,40 +303,38 @@
 						<div class="form-group">
 							<label for="branchPostcode" class="col-sm-5 col-form-label w-50">Postcode</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="branchPostcode"
-									name="branchPostcode" />
+								<input type="text" class="form-control" id="branchPostcode" name="branchPostcode" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="branchCity" class="col-sm-5 col-form-label w-50">City</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="branchCity"
-									name="branchCity" />
+								<input type="text" class="form-control" id="branchCity" name="branchCity" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="branchState" class="col-sm-5 col-form-label w-50">State</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="branchState"
-									name="branchState" />
+								<input type="text" class="form-control" id="branchState" name="branchState"/>
 							</div>
 						</div>
-
+						
 						<div class="modal-footer">
-							<button type="button"
-								class="btn btn-secondary font-weight-bold rounded-pill"
-								data-bs-dismiss="modal">Close</button>
-							<button type="button"
-								class="btn btn-success font-weight-bold rounded-pill">Submit</button>
-						</div>
-
-
+					<button type="button"
+						class="btn btn-secondary font-weight-bold rounded-pill"
+						data-bs-dismiss="modal">Close</button>
+					<button type="submit"
+						class="btn btn-success font-weight-bold rounded-pill">Submit</button>
+				</div>
+				
+				
 					</form>
 				</div>
-
+				
 			</div>
 		</div>
 	</div>
+
 
 	<!-- Modal for Add Hall-->
 	<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -212,16 +346,30 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body">
-					<form action="" method="">
+				<form action="hall/add" method="post" enctype="multipart/form-data">
+					<div class="modal-body">
 						<div class="form-group">
 							<label for="branch" class="col-sm-5 col-form-label w-50">Branch</label>
 							<div class="col-sm-10">
-								<select id="branch" class="form-control">
-									<option selected value="L1">Location 1</option>
-									<option value="L2">Location 2</option>
-									<option value="L3">Location 3</option>
-									<option value="L4">Location 4</option>
+								<select id="branch" class="form-control" required name="brchId">
+									<c:forEach items="${ compBrchList }" var="branch"
+										varStatus="loop">
+										<option value="${branch.getBrch_id()}"><c:out
+												value="${ branch.getBrch_name() }"></c:out></option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="branch" class="col-sm-5 col-form-label w-50">Seat
+								Type</label>
+							<div class="col-sm-10">
+								<select id="hallSeat" class="form-control" required
+									name="hallSeat">
+									<option value="standardSeat" selected>Standard Seat</option>
+									<option value="beanieSeat">Beanie Seat</option>
+									<option value="coupleSeat">Couple Seat</option>
+									<option value="premiumSeat">Premium Seat</option>
 								</select>
 							</div>
 						</div>
@@ -229,11 +377,14 @@
 							<label for="hallType" class="col-sm-5 col-form-label w-50">Hall
 								Type</label>
 							<div class="col-sm-10">
-								<select id="hallType" class="form-control">
-									<option selected value="2D">2D Hall</option>
-									<option value="DolbyAtmosHall">Dolby Atmos Hall</option>
-									<option value="IMAX">IMAX</option>
-									<option value="D-BOX">D-BOX</option>
+								<select id="hallType" class="form-control" name="hallType">
+									<option value="Classic" selected>Classic</option>
+									<option value="DualMax">DualMax</option>
+									<option value="Premium">Premium</option>
+									<option value="2D">2D</option>
+									<option value="3D">3D</option>
+									<option value="Deluxe">Deluxe</option>
+									
 								</select>
 							</div>
 						</div>
@@ -241,7 +392,7 @@
 							<label for="airConditioner" class="col-sm-5 col-form-label w-50">Air
 								Conditioner</label>
 							<div class="col-sm-10">
-								<select id="airConditioner" class="form-control">
+								<select id="airConditioner" class="form-control" name="hallAir">
 									<option selected value="taurus">Taurus Tech</option>
 									<option value="eurus">Eurus</option>
 									<option value="ocean">Ocean TechMe</option>
@@ -253,7 +404,7 @@
 							<label for="soundSystem" class="col-sm-5 col-form-label w-50">Sound
 								system</label>
 							<div class="col-sm-10">
-								<select id="soundSystem" class="form-control">
+								<select id="soundSystem" class="form-control" name="hallSound">
 									<option selected value="DolbyAtmosSound">Dolby Atmos
 										Cinema Sound</option>
 								</select>
@@ -263,21 +414,34 @@
 							<label for="hallPicture" class="col-sm-5 col-form-label w-50">Hall
 								picture</label>
 							<div class="col-sm-10">
-								<input type="file" class="form-control" id="hallPicture" />
+								<input type="file" class="form-control" id="hallPicture"
+									name="file" accept="image/png, image/gif, image/jpeg" />
 							</div>
 						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button"
-						class="btn btn-secondary font-weight-bold rounded-pill"
-						data-bs-dismiss="modal">Close</button>
-					<button type="button"
-						class="btn btn-success font-weight-bold rounded-pill">Submit</button>
-				</div>
+						<div class="form-group">
+							<label for="SeatNo" class="col-sm-5 col-form-label w-50">No.
+								Seat</label>
+							<div class="col-sm-10">
+								<input type="number" class="form-control" id="SeatNo"
+									name="SeatNo" readonly />
+							</div>
+						</div>
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="button"
+							class="btn btn-secondary font-weight-bold rounded-pill"
+							data-bs-dismiss="modal">Close</button>
+						<button type="submit"
+							class="btn btn-success font-weight-bold rounded-pill">Submit</button>
+					</div>
+				</form>
+
 			</div>
 		</div>
 	</div>
+
 
 	<div id="visible_contents"></div>
 
@@ -308,6 +472,18 @@
 
 
 	<script>
+	$(document).ready(function () {
+		  $('#manageModal').on('show.bs.modal', function (event) {
+		    var button = $(event.relatedTarget);
+		    var id = button.data('id');
+		    var name = button.data('name');
+		    var modal = $(this);
+		    modal.find('#id').text(id);
+			modal.find('#name').text(name);
+			modal.find('#mhall_id').val(id);
+	  		});
+		});
+	
 		// movie tab
 		document.getElementById("visible_contents").innerHTML = document
 				.getElementById("movietab_desc").innerHTML;
