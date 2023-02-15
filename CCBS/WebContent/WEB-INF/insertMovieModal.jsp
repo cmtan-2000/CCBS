@@ -19,7 +19,7 @@ label {
 		onclick="closeDialog('insertMovieDialog')" style="cursor: pointer;"><i
 		class="fas fa-times"></i></span>
 
-	<h3 style="font-weight:bold">
+	<h3 style="font-weight: bold">
 		<c:choose>
 			<c:when test="${empty param.id}">Create</c:when>
 			<c:otherwise>Edit</c:otherwise>

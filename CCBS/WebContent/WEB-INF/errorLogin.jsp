@@ -12,6 +12,13 @@
 	<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
 </head>
 <body >
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+	%>
 	<div class="center">
 		<h1 class="error_header">Error Login</h1>
 		<p class="error_1">Sorry your userName or password is incorrect or no input!</p>

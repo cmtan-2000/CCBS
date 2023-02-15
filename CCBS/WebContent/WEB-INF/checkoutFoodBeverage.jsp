@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,8 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
 	rel="stylesheet">
-<link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/CCBS.ico' /> ">
+<link rel="shortcut icon" type="image/x-icon"
+	href="<c:url value='resources/images/CCBS.ico' /> ">
 
 <style>
 @import
@@ -57,25 +58,32 @@ input {
 </style>
 </head>
 <body>
-	<!-- joan: data got in FABController, feel free to move the mapping to your controller -->
-	<div
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+	%>
+	<div class="mt-5 mb-5"
 		style="display: flex; flex-direction: row; justify-content: center">
-		<button style="margin-right: 20px; margin-top:50px; height: fit-content" class="btn btn-secondary font-weight-bold mt-5">Exit</button>
 		<form action="/CCBS/displayFoodDrinks/insertTicket" method="get"
 			style="width: 70%; height: 100%; padding: 20px 50px; background-color: #2a2a2a">
 			<div class="foodBeverage">
-				<h1 style="color:yellow;">Food And Beverage</h1>
+				<h1 style="color: yellow;">Food And Beverage</h1>
 				<p class="combo">
 					Combo<br>
 				<hr>
-				
-				
+
+
 				<c:forEach var="combo" items="${FABList.get('combo')}">
 					<div class="foodRow">
 						<label>${combo.getName()}</label>
 						<div class="qtyPrice">
-							<b>Qty: <input value=0 min="0" type="number" name="combo_amount${combo.getFab_id()}" style="width: 50px" />
-							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${combo.getPrice()}" /></b>
+							<b>Qty: <input value=0 min="0" type="number"
+								name="combo_amount${combo.getFab_id()}" style="width: 50px" />
+							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2"
+									minFractionDigits="2" value="${combo.getPrice()}" /></b>
 						</div>
 					</div>
 				</c:forEach>
@@ -94,8 +102,10 @@ input {
 					<div class="foodRow">
 						<label>${food.getName()}</label>
 						<div class="qtyPrice">
-							<b>Qty: <input value=0 min="0" type="number" name="food_amount${food.getFab_id()}" style="width: 50px" />
-							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${food.getPrice()}" /></b>
+							<b>Qty: <input value=0 min="0" type="number"
+								name="food_amount${food.getFab_id()}" style="width: 50px" />
+							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2"
+									minFractionDigits="2" value="${food.getPrice()}" /></b>
 						</div>
 					</div>
 				</c:forEach>
@@ -107,15 +117,18 @@ input {
 					<div class="foodRow">
 						<label>${drink.getName()}</label>
 						<div class="qtyPrice">
-							<b>Qty: <input value=0 min="0" type="number" name="drink_amount${drink.getFab_id()}"  style="width: 50px" />
-							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${drink.getPrice()}" /></b>
+							<b>Qty: <input value=0 min="0" type="number"
+								name="drink_amount${drink.getFab_id()}" style="width: 50px" />
+							</b> <b>RM <fmt:formatNumber type="number" maxFractionDigits="2"
+									minFractionDigits="2" value="${drink.getPrice()}" /></b>
 						</div>
 					</div>
 				</c:forEach>
 				</p>
 			</div>
 			<div style="display: flex; flex-direction: row-reverse;">
-					<input type="submit" class="btn btn-success font-weight-bold" value="Confirm"/>
+				<input type="submit" class="btn btn-success font-weight-bold"
+					value="Confirm" />
 			</div>
 		</form>
 	</div>

@@ -38,6 +38,7 @@ public class ProfileController extends HttpServlet {
 		Blob photoFile = null;
 		String name = "", phoneNo="", address="";
 		java.sql.Date dob = null;
+		int type = 0;
 		
 		try {
 			Connection con = DBConnect.openconnection();
@@ -54,6 +55,7 @@ public class ProfileController extends HttpServlet {
 				dob = rs.getDate("dob");
 				phoneNo = rs.getString("phoneNo");
 				address = rs.getString("address");
+				type = rs.getInt("type");
 			}
 			user.setName(name);
 			user.setPhotoFile(photoFile);
@@ -61,6 +63,7 @@ public class ProfileController extends HttpServlet {
 			user.setPhoneNo(phoneNo);
 			user.setAddress(address);
 			user.setUser_id(userID);
+			user.setType(type);
 			
 			session.setAttribute("user", user);
 			
@@ -71,7 +74,7 @@ public class ProfileController extends HttpServlet {
 			e.printStackTrace();
 		}		
 		return mv;
-	}	
+	}
 	
 	
 	@RequestMapping("/wallet/{user_id}")

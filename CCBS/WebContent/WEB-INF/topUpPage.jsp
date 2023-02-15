@@ -101,6 +101,13 @@ a.link:hover {
 </head>
 
 <body style="background: black">
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+	%>
 	<header class="site-header .collapse.navbar-collapse">
 		<div class="site-container">
 			<a href="#" id="branding"></a><i

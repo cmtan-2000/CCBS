@@ -23,9 +23,32 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="<c:url value='/resources/images/CCBS.ico' /> ">
 <title>Movie Seat Booking</title>
-</head>
-<body>
+<style>
+* {
+	color: white;
+}
 
+.seat {
+	background: #898989;
+}
+</style>
+</head>
+<body style="background: black;">
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+		if (userRole != "user") {
+	%>
+	<script>
+		alert("not authorized");
+		history.go(-1);
+	</script>
+	<%
+		}
+	%>
 	<script type="text/javascript">
 		function addSelectedSeat(seatValue, price) {
 			var oriVal = document.getElementById("seat").value;
@@ -56,11 +79,13 @@
 
 	<form action="/CCBS/movie/seatBooking/submit" method="get">
 		<!-- 	Seats: -->
-		<input type="hidden" id="seat" name="seat" value="<c:out value="${seatSelected}"/>">
-		<input type="hidden" name="movieId" value="<c:out value="${movieId}"/>">
+		<input type="hidden" id="seat" name="seat"
+			value="<c:out value="${seatSelected}"/>"> <input
+			type="hidden" name="movieId" value="<c:out value="${movieId}"/>">
 		<input type="hidden" name="userId" value="<c:out value="${userId}"/>">
-		<input type="hidden" name="scheduleId" value="<c:out value="${scheduleId}"/>">
-		<input type="hidden" name="priceId" value="<c:out value="${priceId}"/>">
+		<input type="hidden" name="scheduleId"
+			value="<c:out value="${scheduleId}"/>"> <input type="hidden"
+			name="priceId" value="<c:out value="${priceId}"/>">
 
 		<div class="showcase__submit">
 			<div class="center__showcase">
@@ -114,7 +139,7 @@
 		data-bs-target="#exampleModal">Hall Condition</button>
 
 	<!-- Modal -->
-	 <div class="modal fade" id="exampleModal" tabindex="-1"
+	<div class="modal fade" id="exampleModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -144,7 +169,7 @@
 				</div>
 			</div>
 		</div>
-	</div> 
+	</div>
 
 	<p class="text">
 		You have selected <span id="count"> <c:choose>
