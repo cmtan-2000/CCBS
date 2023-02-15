@@ -57,6 +57,21 @@ p, span, small, h1, h2, h3, h4, h5 {
 </head>
 
 <body style="background: black;">
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+		if (userRole != "user") {
+	%>
+	<script>
+		alert("not authorized");
+		history.go(-1);
+	</script>
+	<%
+		}
+	%>
 	<jsp:include page="header3.jsp"></jsp:include>
 	<div class="container">
 		<div class="float-right watch-movie-button mt-5">

@@ -89,6 +89,13 @@ public class LoginController extends HttpServlet {
 					System.out.println("Set User_ID: " + user.getUser_id());
 				}
 			}
+			session.setAttribute("loggedIn", true);
+			String userRole = "";
+			if(type == 1) userRole = "admin"; 
+			if(type == 2) userRole = "company"; 
+			if(type == 3) userRole = "user"; 
+			session.setAttribute("userRole", userRole);
+			System.out.println("done");
 		}
 		catch(SQLException ex) {
 			ex.printStackTrace();

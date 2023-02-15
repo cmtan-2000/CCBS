@@ -68,6 +68,21 @@ td[colspan='4'] {
 </style>
 </head>
 <body>
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+		if (userRole != "company") {
+	%>
+	<script>
+		alert("not authorized");
+		history.go(-1);
+	</script>
+	<%
+		}
+	%>
 	<div style="color: #BBCFD0;">
 		<button class="btn btn-primary font-weight-bold rounded-pill right" onclick="toggleDialog('addFoodAndBeverageDialog')">
 			<i class="fas fa-plus"></i> Add Food and Beverage

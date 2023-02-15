@@ -43,6 +43,13 @@
     </style>
 </head>
 <body class="background">
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+	%>
 	<div class="page-wrapper">
         <div class="container">
             <h1 class="title">Checkout</h1>

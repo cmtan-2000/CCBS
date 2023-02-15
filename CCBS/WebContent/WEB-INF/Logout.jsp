@@ -36,6 +36,13 @@
 </style>
 </head>
 <body class="background">
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+	%>
     <div class="page-wrapper">
         <div class="wrapper">
             <h1 class="header-logout">You have logged out.</h1>

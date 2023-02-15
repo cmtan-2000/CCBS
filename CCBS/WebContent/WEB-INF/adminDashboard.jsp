@@ -191,7 +191,22 @@ body {
 
 </head>
 
-<body style="overflow: auto;">
+<body style="overflow: auto;background:black; color: white;">
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+		if (userRole != "admin") {
+	%>
+	<script>
+		alert("not authorized");
+		history.go(-1);
+	</script>
+	<%
+		}
+	%>
 	<jsp:include page="header1.jsp"></jsp:include>
 	<div class="company__header">
 		<a class="btn btn-primary right mt-5" href="/CCBS/admin/salesReport">Generate
@@ -299,7 +314,7 @@ body {
 	<!-- All related Model -->
 	<div class="w-100">
 		<div class="container mt-5">
-			<div class="card shadow mt-3">
+			<div class="card shadow mt-3" style="background: #272727">
 				<div class="card-body">
 					<p class="font-weight-bold card-title" style="font-size: 21;">
 						TGV</p>

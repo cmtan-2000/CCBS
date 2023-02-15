@@ -15,6 +15,21 @@
 	crossorigin="anonymous">
 </head>
 <body class="background">
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+		if (userRole != "user") {
+	%>
+	<script>
+		alert("not authorized");
+		history.go(-1);
+	</script>
+	<%
+		}
+	%>
     <div class="page-wrapper">
         <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
             <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />

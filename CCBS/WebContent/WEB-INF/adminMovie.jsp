@@ -167,6 +167,21 @@ function onAddMovie(){
 
 </script>
 <body>
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+		if (userRole != "acmin") {
+	%>
+	<script>
+		alert("not authorized");
+		history.go(-1);
+	</script>
+	<%
+		}
+	%>
 	<jsp:include page="header1.jsp"></jsp:include>
 	<div class="company__header">
         <img src="images/GSC-Cinema-Logo.png" style="width: 210px;"'>

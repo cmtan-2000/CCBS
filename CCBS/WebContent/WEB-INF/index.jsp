@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="model.FAB"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +40,14 @@
 }
 </style>
 </head>
-<body>
+<body style="background: black;">
+	<%
+		Object auth = session.getAttribute("loggedIn");
+		Object userRole = session.getAttribute("userRole");
+		String redirectURL = "login";
+		if (auth == null)
+			response.sendRedirect(redirectURL);
+	%>
 	<jsp:include page="header2.jsp"></jsp:include>
 	<div class="modal-backdrop" id="backdrop"></div>
 

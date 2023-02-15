@@ -80,7 +80,7 @@ public class MovieController extends HttpServlet {
 	}
 
 	@PostMapping("/company/movie/create") //create+update in insertMovieModal.jsp
-	public String cCreate(@RequestParam Map<String, String> req) {
+	public String cCreateUpdate(@RequestParam Map<String, String> req) {
 		try {
 			if(req.get("formType").equals("create")) movDAO.add(req);
 			else movDAO.update(req, Integer.parseInt(req.get("id")));
