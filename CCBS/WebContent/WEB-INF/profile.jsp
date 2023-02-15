@@ -174,7 +174,7 @@ a.link:hover {
 						<td width="17%" colspan="3">Date of Birth</td>
 						<td width="60%">
 							<c:if test="${user.type==1 || user.type==2}">-</c:if>
-							<c:if test="${user.type==3}"><c:out value="${user.type}"/></c:if>
+							<c:if test="${user.type==3}"><c:out value="${user.getDob()}"/></c:if>
 						</td>
 					</tr>
 					<tr>
@@ -193,7 +193,7 @@ a.link:hover {
 					</tr>
 				</table>
 			</div>
-
+			<a class="btn btn-primary" href="/CCBS/profile/editProfile">Edit profile</a>	
 		</div>
 	</div>
 </body>
