@@ -114,6 +114,10 @@ public class LoginController extends HttpServlet {
 		ModelAndView mav = new ModelAndView("adminDashboard");
 		BranchDAO branchDAO = new BranchDAO();
 		mav.addObject("branchHall", branchDAO.getBranchHall());
+		HallDAO halldao = new HallDAO();
+		List<Hall> hallPendList = halldao.getAllPending();
+		
+		mav.addObject("hallPendList", hallPendList);
 		return mav;
 	}
 

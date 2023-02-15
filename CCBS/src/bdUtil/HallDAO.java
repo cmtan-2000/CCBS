@@ -20,6 +20,18 @@ import model.Hall;
 
 public class HallDAO {
 	JdbcTemplate jdbct = new JdbcTemplate(getDataSource());
+		
+	public int updateHall(int hall_id, String status) {
+		String sql = "update `hall` set hall_status = '"+status+"' where hall_id = "+hall_id+" ";
+		int rowAffected = jdbct.update(sql);
+		return rowAffected;
+	}
+	
+	public List<Hall> getAllPending(){
+		String sql = "select * from hall where hall_status= 'Pending' ";
+		List<Hall> hall = jdbct.query(sql, new BeanPropertyRowMapper<Hall>(Hall.class));
+		return hall;
+	}
 	
 	public Hall findById(int id) {
 		String sql = "select * from hall where hall_id=?";
@@ -62,7 +74,7 @@ public class HallDAO {
 	
 	public int add (Hall hall, InputStream pic) {
 	
-		String hallSql = "insert into `hall` (`brch_id`, `hall_type`, `seat_type`, `air_cond`, `sound_sys`, `image`, `hall_condition`, `hall_status` ) values (?,?,?,?,?,?,?,?,)";
+		String hallSql = "insert into `hall` (`brch_id`, `hall_type`, `seat_type`, `air_cond`, `sound_sys`, `image`, `hall_condition`, `hall_status` ) values (?,?,?,?,?,?,?,?)";
 		Object args[] =  {	hall.getBrch_id(),	hall.getHall_type(), hall.getSeat_type(), hall.getAir_cond(), hall.getSound_sys(), hall.getImage(), hall.getHall_condition(), hall.getHall_status()};
 		
 		int rowAffected = jdbct.update(hallSql, new PreparedStatementSetter() {
