@@ -19,7 +19,6 @@ public class BranchController {
 	BranchDAO brchDAO = new BranchDAO();
 	
 	@RequestMapping("/add")
-	@ResponseBody()
 	protected String add(@RequestParam Map<String, String> req) {
 		
 		Branch brch = new Branch();
@@ -38,8 +37,10 @@ public class BranchController {
 		brch.setState(state);
 		
 		int rw = brchDAO.add(brch);
-				
-		return "this is from add - Branch... row affected :" + rw;
+		
+		return "redirect:/company";
+		
+//		return "this is from add - Branch... row affected :" + rw;
 	}
 
 	@RequestMapping("/index")
