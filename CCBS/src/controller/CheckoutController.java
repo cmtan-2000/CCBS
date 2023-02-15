@@ -452,18 +452,14 @@ public class CheckoutController {
 					System.out.println("total price: " + totalPrice);
 					System.out.println("amount: " + amount);
 					System.out.println("leftoverAmount: " + leftoverAmount);
+					
+					String sql2 = "update `profile` set amount = ? where user_id = ?";
+					PreparedStatement ps2 = con.prepareStatement(sql2);
+					ps2.setDouble(1, leftoverAmount);
+					ps2.setInt(2, user_id);
+					ps2.executeUpdate();
 				}
 			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		}
-
-		try {
-			String sql2 = "update `profile` set amount = ? where user_id = ?";
-			PreparedStatement ps2 = con.prepareStatement(sql2);
-			ps2.setDouble(1, leftoverAmount);
-			ps2.setInt(2, user_id);
-			ps2.executeUpdate();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
