@@ -1,5 +1,7 @@
 package bdUtil;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -7,14 +9,41 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import model.Branch;
 
 public class BranchDAO {
 	JdbcTemplate jdbct = new JdbcTemplate(getDataSource());
+	
+	@RequestMapping("/test")
+	public List<Branch> getCompanyBranch(int userid){
+		String sql = "select * from branch where user_id = ?";
+		
+		List<Branch> results =  jdbct.query(sql,new Object[] {userid},  new RowMapper<Branch>() {
 
+			@Override
+			public Branch mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				Branch branch = new Branch();
+				branch.setBrch_id(rs.getInt("brch_id"));
+				branch.setUser_id(rs.getInt("user_id"));
+				branch.setBrch_name(rs.getString("brch_name"));
+				branch.setBrch_addr(rs.getString("brch_addr"));
+				branch.setBrch_post(rs.getString("brch_post"));
+				branch.setBrch_city(rs.getString("brch_city"));
+				branch.setState(rs.getString("state"));
+				return branch;
+			}
+			
+		});
+		System.out.println(results);
+		return results;
+	}
+	
 	public List<Branch> getAll() {
 		String sql = "select * from branch";
 		List<Branch> movieList = jdbct.query(sql, new BeanPropertyRowMapper<Branch>(Branch.class));
