@@ -72,10 +72,8 @@ public class RegisterController extends HttpServlet {
     		ps.setString(9, securityAns);
     		ps.setBlob(10, fileContent);
     		
-    		
-    		
     		ps.executeUpdate();
-    		System.out.print("insert success");
+    		System.out.println("insert success");
     		
     	}
     	catch(SQLException ex) {
