@@ -6,7 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Dashboard</title>
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="<c:url value="resources/css/style.css"></c:url>">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -193,10 +193,13 @@ body {
 
 <body style="overflow: auto;">
 	<jsp:include page="header1.jsp"></jsp:include>
-	<div class="company__header">
-		<a class="btn btn-primary right mt-5" href="/CCBS/admin/salesReport">Generate
+	<div class="" style="display:flex; justify-content: flex-end; align-items: center">
+			<button class="btn btn-primary" style="margin-right: 20px"
+			 data-bs-toggle="modal" data-bs-target="#requestModal">
+			<i class="fas fa-plus"></i> Request List</button>
+	
+		<a class="btn btn-primary" href="/CCBS/admin/salesReport">Generate
 			Sales Report</a>
-
 	</div>
 
 	<!-- All related Model  -->
@@ -322,6 +325,52 @@ body {
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" id="requestModal" tabindex="-1"
+		aria-labelledby="requestModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="requestModalLabel">Add Branch</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>	
+				</div>
+				<div class="modal-body">
+					<form action="./branch/add" method="post">
+						<div class="form-group">
+								<c:forEach items="${ hallPendList }" var="hall" varStatus="loop">
+									<div class=" <c:out value="${ hall.getHall_id() }"/>" style="display: flex;
+									justify-content: space-between; margin-bottom: 10px" >
+										 Hall <c:out value="${ hall.getHall_id() }"></c:out>
+										<div class="wrap" style="    justify-content: space-around;display: flex;width: 50%">
+											<form action="">
+												<input type="hidden" name="hall_id" value="${hall.getHall_id()}">
+												<button type="submit">View</button>
+											</form>
+											
+											<form action="./hall/approve">
+												<input type="hidden" name="hall_id" value="${hall.getHall_id()}">
+												<button type="submit">Approve</button>
+											</form>
+											<form action="./hall/reject">
+												<input type="hidden" name="hall_id" value="${hall.getHall_id()}">
+												<button type="submit">Reject</button>
+											</form>
+										</div>
+									</div>
+								</c:forEach>				
+						</div>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
 
 </body>
 </html>

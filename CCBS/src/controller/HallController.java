@@ -51,6 +51,20 @@ public class HallController {
 		return "redirect:/company";
 	}
 	
+	@RequestMapping("/approve")
+	protected String approve(@RequestParam Map<String, String> req) {
+		int hall_id = Integer.parseInt(req.get("hall_id"));
+		int rowAffected = hallDAO.updateHall(hall_id, "Approved");
+		return "redirect:/admin";
+	}
+	
+	@RequestMapping("/reject")
+	protected String reject(@RequestParam Map<String, String> req) {
+		int hall_id = Integer.parseInt(req.get("hall_id"));
+		int rowAffected = hallDAO.updateHall(hall_id, "Rejected");
+		return "redirect:/admin";
+	}
+	
 	@PostMapping("/deleteHall")
 	@ResponseBody()
 	protected ModelAndView delete(@RequestParam Map<String, String> req) {
