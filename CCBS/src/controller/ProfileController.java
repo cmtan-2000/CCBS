@@ -38,6 +38,7 @@ public class ProfileController extends HttpServlet {
 		Blob photoFile = null;
 		String name = "", phoneNo="", address="";
 		java.sql.Date dob = null;
+		int type = 0;
 		
 		try {
 			Connection con = DBConnect.openconnection();
@@ -54,6 +55,7 @@ public class ProfileController extends HttpServlet {
 				dob = rs.getDate("dob");
 				phoneNo = rs.getString("phoneNo");
 				address = rs.getString("address");
+				type = rs.getInt("type");
 			}
 			user.setName(name);
 			user.setPhotoFile(photoFile);
@@ -61,6 +63,7 @@ public class ProfileController extends HttpServlet {
 			user.setPhoneNo(phoneNo);
 			user.setAddress(address);
 			user.setUser_id(userID);
+			user.setType(type);
 			
 			session.setAttribute("user", user);
 			
@@ -78,7 +81,7 @@ public class ProfileController extends HttpServlet {
     protected ModelAndView viewWallet(@PathVariable("user_id") int userID, HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
     	ModelAndView mv = new ModelAndView("topUpPage");
     	
-    	Double amount = 0.00;
+    	double amount = 0.00;
     	
     	try {
     		Connection con = DBConnect.openconnection();

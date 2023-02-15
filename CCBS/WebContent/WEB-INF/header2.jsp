@@ -44,7 +44,7 @@
 			<ul class="menu">
 				<li class="menu-profile menu-item" style="color: white"><a href="/CCBS/profile/${user.getUser_id()}"
 					class="link">COMPANY</a></li>
-				<li class="menu-item current menu-item"><a href="index.jsp"
+				<li class="menu-item current menu-item"><a href="<c:url value='/company'/>"
 					class="link">Home</a></li>
 				<li class="menu-item"><a href="<c:url value='/logout'/>" class="link">Sign Out</a></li>
 			</ul>

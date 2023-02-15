@@ -112,7 +112,7 @@ a.link:hover {
 </head>
 
 <body class="background">
-<header class="site-header .collapse.navbar-collapse">
+	<header class="site-header .collapse.navbar-collapse">
 		<div class="site-container">
 			<a href="#" id="branding"></a><i
 				class="fa-solid fa-film fa-2x cinema-logo"></i>
@@ -122,12 +122,32 @@ a.link:hover {
 
 		<nav class="main-navigation">
 			<ul class="menu">
-				<li class="menu-profile current menu-item" style="color: white"><a href="/CCBS/profile/${user.getUser_id()}"
-					class="link">CUSTOMER</a></li>
-				<li class="menu-item menu-item"><a href="<c:url value='/'/>"
-					class="link">Home</a></li>
-				<li class="menu-item"><a href="/CCBS/wallet/${user.getUser_id()}"
-					class="link">Top Up</a></li>
+				
+				<li class="menu-profile current menu-item" style="color: white">
+					<a href="/CCBS/profile/${user.getUser_id()}" class="link">
+						<c:if test="${user.type==1}">ADMIN</c:if>
+						<c:if test="${user.type==2}">COMPANY</c:if>
+						<c:if test="${user.type==3}">CUSTOMER</c:if>
+					</a>
+				</li>
+				<li class="menu-item menu-item">
+					<c:if test="${user.type==1}">
+						<a href="<c:url value='/admin'/>" class="link">Home</a>
+					</c:if>
+					<c:if test="${user.type==2}">
+						<a href="<c:url value='/company'/>" class="link">Home</a>
+					</c:if>
+					<c:if test="${user.type==3}">
+						<a href="<c:url value='/'/>" class="link">Home</a>
+					</c:if>
+				</li>
+				
+				<c:if test="${user.type==3}">
+					<li class="menu-item">
+						<a href="/CCBS/wallet/${user.getUser_id()}" class="link">Top Up</a>
+					</li>
+				</c:if>
+				
 				<li class="menu-item"><a href="<c:url value='/logout'/>" class="link">Sign Out</a></li>
 			</ul>
 		</nav>
@@ -152,15 +172,24 @@ a.link:hover {
 					</tr>
 					<tr>
 						<td width="17%" colspan="3">Date of Birth</td>
-						<td width="60%"><c:out value="${user.dob}" /></td>
+						<td width="60%">
+							<c:if test="${user.type==1 || user.type==2}">-</c:if>
+							<c:if test="${user.type==3}"><c:out value="${user.type}"/></c:if>
+						</td>
 					</tr>
 					<tr>
 						<td width="17%" colspan="3">Phone no</td>
-						<td width="60%"><c:out value="${user.phoneNo}" /></td>
+						<td width="60%">
+							<c:if test="${user.type==1 || user.type==2}">-</c:if>
+							<c:if test="${user.type==3}"><c:out value="${user.phoneNo}"/></c:if>
+						</td>
 					</tr>
 					<tr>
 						<td width="17%" colspan="3">Address</td>
-						<td width="60%"><c:out value="${user.address}" /></td>
+						<td width="60%">
+							<c:if test="${user.type==1 || user.type==2}">-</c:if>
+							<c:if test="${user.type==3}"><c:out value="${user.address}"/></c:if>
+						</td>
 					</tr>
 				</table>
 			</div>

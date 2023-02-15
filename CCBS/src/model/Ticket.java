@@ -5,7 +5,6 @@ import java.sql.Date;
 public class Ticket {
 	private String movieName;
 	private Date showDate;
-	private Date ticketDate;
 	private String showTime;
 	private String movieType;
 	private Double moviePrice;
@@ -22,7 +21,28 @@ public class Ticket {
 	private String comboName;
 	private double comboPrice;
 	private int comboAmount;
+	private int foodID;
+	private int drinkID;
+	private int comboID;
 	
+	public int getFoodID() {
+		return foodID;
+	}
+	public void setFoodID(int foodID) {
+		this.foodID = foodID;
+	}
+	public int getDrinkID() {
+		return drinkID;
+	}
+	public void setDrinkID(int drinkID) {
+		this.drinkID = drinkID;
+	}
+	public int getComboID() {
+		return comboID;
+	}
+	public void setComboID(int comboID) {
+		this.comboID = comboID;
+	}
 	public String getComboName() {
 		return comboName;
 	}
@@ -40,12 +60,6 @@ public class Ticket {
 	}
 	public void setComboAmount(int comboAmount) {
 		this.comboAmount = comboAmount;
-	}
-	public Date getTicketDate() {
-		return ticketDate;
-	}
-	public void setTicketDate(Date ticketDate) {
-		this.ticketDate = ticketDate;
 	}
 	
 	public int getSeatCount() {

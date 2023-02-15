@@ -80,13 +80,13 @@ public class LoginController extends HttpServlet {
 				if(username.equals(rs.getString("username")) && password.equals(rs.getString("password"))) {	
 					//check user type
 					type = rs.getInt("type");
+					System.out.print("Type: " + type);
 					user_id = rs.getInt("user_id");
 					System.out.println("Type: " + rs.getInt("type"));
 					System.out.println("User_ID: " + rs.getInt("user_id"));
 					user.setType(type);
 					user.setUser_id(user_id);
 					session.setAttribute("user", user);
-					System.out.println("Set User_ID: " + user.getUser_id());
 				}
 			}
 		}

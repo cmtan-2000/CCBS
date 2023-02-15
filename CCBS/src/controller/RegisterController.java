@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import bdUtil.DBConnect;
+import model.User;
 
 @Controller
 public class RegisterController extends HttpServlet {
@@ -50,6 +51,7 @@ public class RegisterController extends HttpServlet {
     	String securityAns = request.getParameter("securityAns");
     	InputStream fileContent = photoFile.getInputStream(); //insert image
     	int type = 3; //customer
+    	User user = new User();
     	
     	java.sql.Date dob = Date.valueOf(request.getParameter("dob"));  //convert date into sql date
 
@@ -69,6 +71,8 @@ public class RegisterController extends HttpServlet {
     		ps.setString(8, securityQ);
     		ps.setString(9, securityAns);
     		ps.setBlob(10, fileContent);
+    		
+    		
     		
     		ps.executeUpdate();
     		System.out.print("insert success");

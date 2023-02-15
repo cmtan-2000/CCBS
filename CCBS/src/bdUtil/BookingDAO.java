@@ -39,7 +39,7 @@ public class BookingDAO {
 
 	public DataSource getDataSource() {
 		DataSource ds = null;
-		String dbURL = "jdbc:mysql://localhost:3306/ccbs";
+		String dbURL = "jdbc:mysql://localhost:3307/ccbs";
 		String username = "root";
 		String password = "";
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,10 +38,10 @@
 
             <h1 style="color: yellow; margin-bottom: 30px;">Make payment</h1>
 			
-            <h5>Total amount to pay: RM${ticket.totalPrice}</h5>
+            <h5>Total amount to pay: RM<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${ticket.getTotalPrice()}" /></h5>
             <p> <input type="text" class="form-control" placeholder="Enter amount"> </p>
 
-			<a class="btn btn-success float-end mt-4" href="<c:url value='/checkout/makePayment/${user.user_id}'/>" role="button">Submit</a>
+			<a class="btn btn-success float-end mt-4" href="<c:url value='/checkout/makePayment/${user.getUser_id()}'/>" role="button">Submit</a>
         </div>
     </div>
 </body>
