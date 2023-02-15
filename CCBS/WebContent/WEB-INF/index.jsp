@@ -117,7 +117,6 @@
 						<td colspan="4"><b class="snack-title"> <c:out
 									value="${ branch.getBrch_name() }">
 								</c:out> <c:out value="${branch.getBrch_id()}"></c:out></b></td>
-
 					</tr>
 
 					<c:forEach items="${ hallList }" var="hall" varStatus="loop">
